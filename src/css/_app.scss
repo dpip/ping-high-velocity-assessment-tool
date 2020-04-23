@@ -1,0 +1,250 @@
+/*
+ *******************
+ * PAGE MAIN STYLE *
+ *******************
+*/
+
+body {
+    overflow-x: hidden;
+    color: #2E4355;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 100%;
+}
+
+header {
+  nav {
+    min-height: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .top-nav__logo {
+          display: block;
+      width: 75px;
+      height: 75px;
+    }
+  }
+}
+
+main {
+  overflow: hidden;
+  .main-banner {
+    background: $gray;
+    a {
+      color: $navy;
+      text-decoration: underline;
+    }
+    span {
+      font-weight: bold;
+    }
+  }
+  // .col-options {
+
+  // }
+  // .col-values {
+
+  // }
+}
+
+footer {
+  min-height: 100px;
+  background: $navy;
+  position: sticky;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .footer__logo {
+    height: 58px;
+    width: 58px;
+    margin-right: 24px;
+    overflow: hidden;
+    display: inline-block;
+  }
+}
+
+.disclaimer {
+  font-style: italic;
+  font-size: 12px;
+}
+
+// Range Slider
+$range-width: 100% !default;
+
+$range-handle-color: $shade-10 !default;
+$range-handle-color-hover: $slate !default;
+$range-handle-size: 16px !default;
+
+$range-track-color: $shade-1 !default;
+$range-track-height: 4px !default;
+
+$range-label-color: $shade-10 !default;
+$range-label-width: 60px !default;
+
+.range-slider {
+  width: $range-width;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  width: calc(100% - (#{$range-label-width + 13px}));
+  height: $range-track-height;
+  border-radius: 5px;
+  background: $range-track-color;
+  outline: none;
+  padding: 0;
+  margin: 5px 0px 5px 0px;
+
+  // Range Handle
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-webkit-slider-thumb {
+    background: $range-handle-color-hover;
+  }
+
+  &::-moz-range-thumb {
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border: 0;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-moz-range-thumb {
+    background: $range-handle-color-hover;
+  }
+  
+  // Focus state
+  &:focus {
+    
+    &::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px $shade-0,
+                  0 0 0 6px $slate;
+    }
+  }
+}
+
+
+// Range Label
+// .range-slider__value {
+//   display: inline-block;
+//   position: relative;
+//   width: $range-label-width;
+//   color: $shade-0;
+//   line-height: 20px;
+//   text-align: center;
+//   border-radius: 3px;
+//   background: $range-label-color;
+//   padding: 5px 10px;
+//   margin-left: 8px;
+
+//   &:after {
+//     position: absolute;
+//     top: 8px;
+//     left: -7px;
+//     width: 0;
+//     height: 0;
+//     border-top: 7px solid transparent;
+//     border-right: 7px solid $range-label-color;
+//     border-bottom: 7px solid transparent;
+//     content: '';
+//   }
+// }
+
+
+// Firefox Overrides
+::-moz-range-track {
+    background: $range-track-color;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer { 
+  border: 0; 
+}
+
+.form-control {
+  // width: calc(100% - 73px);
+  border-radius: 2px !important;
+  // -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  position: relative;
+}
+.region-wrap {
+  position: relative !important;
+  width: calc(100% - 73px);
+  .test {
+    position: absolute;
+    right: 8px;
+    top: 46px;
+    display: none;
+  }
+}
+
+#value-bar {
+  width: 100%;
+  height: 30px;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  .fill {
+    height: 100%;
+    display: flex;
+    flex: 0.01;
+  }
+  .productivity {
+    background-color: $navy;
+    flex: 0.25;
+  }
+  .security {
+    background-color: $red;
+    flex: 0.25;
+  }
+  .agility {
+    background-color: $slate;
+    flex: 0.5;
+  }
+}
+
+#toggle-advanced {
+  color: $blue;
+  font-weight: 500;
+  text-decoration: none;
+  height: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: calc(100% - 73px);
+
+
+  span {
+    // margin-left: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+}
+
