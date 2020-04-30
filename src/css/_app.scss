@@ -32,7 +32,7 @@ header {
 main {
   overflow: hidden;
   .main-banner {
-    background: $gray;
+    background: #EDEDED;
     &.results {
       background: $navy;
       color: #fff;
@@ -372,6 +372,7 @@ footer {
   display: flex;
   .footer-inner {
     display: flex;
+
   .footer-bottom__left {
     width: 50%;
     display: flex;
@@ -384,14 +385,18 @@ footer {
     }
   }
   .footer-bottom__right {
-    width: 50%;
+    min-width: 50%;
+    min-height: 54px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     .footer__bottom-links {
       list-style: none;
       display: flex;
-      margin: 0px 40px 0px 0px;
+      justify-content: center;
+      align-items: center;
+      margin: 0px 16px 0px 0px;
+      padding-left: 0px;
       li {
         margin-right: 16px;
         font-size: 12px;
@@ -401,16 +406,144 @@ footer {
         color: white;
         text-decoration: none;
         -webkit-font-smoothing: auto;
+        min-height: 54px;
+        opacity: 1;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
     .footer__social {
       display: flex;
+      text-align: right;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-family: "proxima-nova", helvetica, arial, sans-serif;
+      font-weight: 400;
+      .footer__tagline {
+        -webkit-font-smoothing: auto;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+      }
       ul {
         list-style: none;
         display: flex;
-        margin: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 16px;
+        padding-left: 0px;
+        li {
+          min-width: 18px;
+          margin: 0px 0px 0px 8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 1em;
+            opacity: 1;
+            transition: all .25s ease-in-out;
+            min-height: 54px;
+            display: flex;
+          justify-content: center;
+          align-items: center;
+            &:hover {
+              opacity: 0.75;
+            }
+          }
+        }
       }
     }
   }
 }
 }
+
+.value-categories {
+  display: flex;
+  margin: 16px 0px 0px 2px;
+  .category {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 8px;
+    min-width: 80px;
+    cursor: pointer;
+    p {
+      margin-bottom: 0px;
+      position: relative;
+        i {
+          font-size: 10px;
+          border-radius: 100%;
+          width: 14px;
+          height: 14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 0px;
+          right: -18px;
+        }
+    }
+    &.productivity {
+      color: $navy;
+      border-left: 2px solid $navy;
+      padding-right: 16px;
+      i {
+          color: $navy;
+          font-size: 10px;
+          border-radius: 100%;
+          border: 1px solid $navy;
+      }
+    }
+    &.security {
+      color: $red;
+      margin-left: 16px;
+      border-left: 2px solid $red;
+      padding-right: 16px;
+      i {
+          color: $red;
+          font-size: 10px;
+          border-radius: 100%;
+          border: 1px solid $red;
+      }
+    }
+    &.agility {
+      color: $slate;
+      margin-left: 16px;
+      border-left: 2px solid $slate;
+      padding-right: 16px;
+      i {
+          color: $slate;
+          font-size: 10px;
+          border-radius: 100%;
+          border: 1px solid $slate;
+      }
+    }
+    span {
+      font-weight: 600;
+      margin-bottom: -5px;
+    }
+  }
+}
+
+.tooltip .tooltip-inner {
+  background-color: $gray;
+  color: $navy;
+  border-radius: 2px !important;
+}
+
+.tooltip.show {
+    opacity: 1;
+    color: $navy;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow:before, .bs-tooltip-top .arrow:before {
+    top: 0;
+    border-width: .4rem .4rem 0;
+    border-top-color: $gray;
+    color: $navy;
+}
+

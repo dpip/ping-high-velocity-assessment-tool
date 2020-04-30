@@ -42,4 +42,7 @@ $('#assessment-cta').on('click', function () {
 $(document).ready(function () {
     addAll();
     rangeSlider();
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 });
