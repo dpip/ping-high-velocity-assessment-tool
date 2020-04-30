@@ -256,7 +256,7 @@ input::-moz-focus-outer {
 }
 
 #results-wrap {
-  display: none;
+  // display: none;
   background: #F5F6F9;
   .nav-tabs {
     border-bottom: none;
@@ -304,6 +304,9 @@ input::-moz-focus-outer {
               background-color: #fff;
             }
           }
+          svg {
+            fill: $navy !important;
+          }
         }
         &#security-tab {
           .active-tab-bar {
@@ -312,6 +315,9 @@ input::-moz-focus-outer {
               background-color: #fff;
             }
           }
+          svg {
+          fill: $red !important;
+        }
         }
         &#agility-tab {
           .active-tab-bar {
@@ -320,13 +326,14 @@ input::-moz-focus-outer {
               background-color: #fff;
             }
           }
+          svg {
+          fill: $slate !important;
+        }
         }
         .tab-label {
           color: $navy;
         }
-        svg {
-          // fill: $navy !important;
-        }
+        
       }
     }
     .active-tab-bar {
@@ -350,9 +357,9 @@ input::-moz-focus-outer {
   }
   .tab-pane {
     background: #fff;
-    p {
-      padding-top: 30px;
-    }
+    // p {
+    //   padding-top: 30px;
+    // }
   }
 }
 
@@ -533,11 +540,14 @@ footer {
   background-color: $gray;
   color: $navy;
   border-radius: 2px !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  padding: 16px;
 }
 
 .tooltip.show {
     opacity: 1;
     color: $navy;
+    // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .bs-tooltip-auto[x-placement^=top] .arrow:before, .bs-tooltip-top .arrow:before {
@@ -545,5 +555,61 @@ footer {
     border-width: .4rem .4rem 0;
     border-top-color: $gray;
     color: $navy;
+    // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
+#toggle-advanced {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // width: calc(100% - 73px);
+  
+  #tog-d {
+    width: 28px; 
+    height: 28px;
+    transform: rotate(0deg);
+    transition: all 0.25s ease-in-out;
+  }
+}
+#toggle-advanced[aria-expanded='true'] > #tog-d {
+    transform: scale(1.25) rotate(180deg);
+}
+
+#assessment-wrap {
+  display: none;
+}
+
+
+// #productivity {
+//   .test2 {
+//     display: flex;
+//     // width: fit-content;
+//     // float: left;
+//   }
+//   #toggle-advanced {
+//     display: flex !important;
+//     justify-content: flex-start;
+//   }
+//   #tog-d {
+//     margin-right: 16px;
+//   }
+// }
+.results-toggle-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // margin: 0px 30px 0px 30px;
+  padding-top: 30px;
+}
+.results-tab-content {
+  border-bottom: 1px solid $gray;
+}
+
+#results-wrap {
+  .tab-pane {
+    // display: none;
+    // margin-left: 30px;
+    // margin-right: 30px;
+    padding: 0px 40px 0px 40px;
+  }
+}

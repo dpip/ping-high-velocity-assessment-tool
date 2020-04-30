@@ -114,38 +114,9 @@
             <input class="range-slider__range form-control-range" type="range" value="500" min="0" max="5000">
             <span class="range-slider__value">0</span>
           </div>
-          <p>
-            <a id="toggle-advanced" data-toggle="collapse" href="#advanced-dropdown" role="button" aria-expanded="false"
-              aria-controls="collapseExample">
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="15.672" height="16.096" viewBox="0 0 15.672 16.096">
-                  <defs>
-                    <style>
-                      .a {
-                        fill: #2b80c3;
-                      }
-                    </style>
-                  </defs>
-                  <g transform="translate(-2.413 -2.04)">
-                    <path class="a"
-                      d="M16.587,10.526V9.644l1.107-.969a1.153,1.153,0,0,0,.219-1.47L16.553,4.9a1.163,1.163,0,0,0-1.366-.519l-1.4.473a6.543,6.543,0,0,0-.755-.432l-.294-1.453a1.153,1.153,0,0,0-1.153-.928h-2.7a1.153,1.153,0,0,0-1.153.928L7.438,4.421a6.618,6.618,0,0,0-.761.432l-1.372-.5a1.153,1.153,0,0,0-.369-.035,1.153,1.153,0,0,0-1,.576L2.578,7.205a1.153,1.153,0,0,0,.236,1.447l1.09,1v.882l-1.09.969a1.153,1.153,0,0,0-.236,1.47l1.361,2.306a1.163,1.163,0,0,0,1.366.519l1.4-.473a6.543,6.543,0,0,0,.755.432l.294,1.453a1.153,1.153,0,0,0,1.153.928h2.721a1.153,1.153,0,0,0,1.153-.928l.294-1.453a6.618,6.618,0,0,0,.761-.432l1.4.473a1.163,1.163,0,0,0,1.366-.519l1.314-2.306a1.153,1.153,0,0,0-.236-1.447ZM15.555,14.7l-1.977-.669a5.108,5.108,0,0,1-1.562.905l-.409,2.07H8.885l-.409-2.047a5.4,5.4,0,0,1-1.557-.905L4.936,14.7,3.576,12.394,5.144,11.01a5.131,5.131,0,0,1,0-1.8L3.576,7.782,4.936,5.476l1.977.669a5.108,5.108,0,0,1,1.562-.905l.409-2.07h2.721l.409,2.047a5.4,5.4,0,0,1,1.557.905l1.983-.646,1.361,2.306L15.348,9.165a5.131,5.131,0,0,1,0,1.8l1.568,1.424Z"
-                      transform="translate(0 0)" />
-                    <path class="a"
-                      d="M13.459,16.918a3.459,3.459,0,1,1,3.459-3.459,3.424,3.424,0,0,1-3.459,3.459Zm0-5.765a2.254,2.254,0,1,0,1.646.66A2.254,2.254,0,0,0,13.459,11.153Z"
-                      transform="translate(-3.213 -3.371)" />
-                  </g>
-                </svg>
-                &nbsp;
-                Advanced Options</span>
-              <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
-                width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
-                <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
-                <title>Chevron down</title>
-              </svg>
-            </a>
-          </p>
+
           <div class="collapse" id="advanced-dropdown">
-            <div class="range-slider pt-3 pb-3 advanced-option">
+            <div id="advanced-option1" class="range-slider pt-3 pb-3 advanced-option">
               <label>Total APIs</label>
               <input class="range-slider__range form-control-range" type="range" value="500" min="0" max="5000">
               <span class="range-slider__value">0</span>
@@ -171,10 +142,39 @@
               <span class="range-slider__value">0</span>
             </div>
           </div>
+          <p>
+            <a id="toggle-advanced" data-toggle="collapse" href="#advanced-dropdown" role="button" aria-expanded="false"
+              aria-controls="collapseExample">
+              <span>
+                <svg id="advannced-icon" xmlns="http://www.w3.org/2000/svg" width="15.672" height="16.096"
+                  viewBox="0 0 15.672 16.096">
+                  <defs>
+                    <style>
+
+                    </style>
+                  </defs>
+                  <g transform="translate(-2.413 -2.04)">
+                    <path class="a" fill="#2b80c3"
+                      d="M16.587,10.526V9.644l1.107-.969a1.153,1.153,0,0,0,.219-1.47L16.553,4.9a1.163,1.163,0,0,0-1.366-.519l-1.4.473a6.543,6.543,0,0,0-.755-.432l-.294-1.453a1.153,1.153,0,0,0-1.153-.928h-2.7a1.153,1.153,0,0,0-1.153.928L7.438,4.421a6.618,6.618,0,0,0-.761.432l-1.372-.5a1.153,1.153,0,0,0-.369-.035,1.153,1.153,0,0,0-1,.576L2.578,7.205a1.153,1.153,0,0,0,.236,1.447l1.09,1v.882l-1.09.969a1.153,1.153,0,0,0-.236,1.47l1.361,2.306a1.163,1.163,0,0,0,1.366.519l1.4-.473a6.543,6.543,0,0,0,.755.432l.294,1.453a1.153,1.153,0,0,0,1.153.928h2.721a1.153,1.153,0,0,0,1.153-.928l.294-1.453a6.618,6.618,0,0,0,.761-.432l1.4.473a1.163,1.163,0,0,0,1.366-.519l1.314-2.306a1.153,1.153,0,0,0-.236-1.447ZM15.555,14.7l-1.977-.669a5.108,5.108,0,0,1-1.562.905l-.409,2.07H8.885l-.409-2.047a5.4,5.4,0,0,1-1.557-.905L4.936,14.7,3.576,12.394,5.144,11.01a5.131,5.131,0,0,1,0-1.8L3.576,7.782,4.936,5.476l1.977.669a5.108,5.108,0,0,1,1.562-.905l.409-2.07h2.721l.409,2.047a5.4,5.4,0,0,1,1.557.905l1.983-.646,1.361,2.306L15.348,9.165a5.131,5.131,0,0,1,0,1.8l1.568,1.424Z"
+                      transform="translate(0 0)" />
+                    <path class="a" fill="#2b80c3"
+                      d="M13.459,16.918a3.459,3.459,0,1,1,3.459-3.459,3.424,3.424,0,0,1-3.459,3.459Zm0-5.765a2.254,2.254,0,1,0,1.646.66A2.254,2.254,0,0,0,13.459,11.153Z"
+                      transform="translate(-3.213 -3.371)" />
+                  </g>
+                </svg>
+                &nbsp;
+                Advanced Options</span>
+              <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
+                width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
+                <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
+                <title>Chevron down</title>
+              </svg>
+            </a>
+          </p>
         </div>
         <div class="col col-values col-lg auto">
           <p>Total annual value added<sup>*</sup></p>
-          <h1 id="total-annual-value">$25,000,000</h1>
+          <h1 id="total-annual-value"></h1>
           <div id="value-bar">
             <div class="fill productivity"></div>
             <div class="fill security"></div>
@@ -182,7 +182,7 @@
           </div>
           <div class="value-categories">
             <div class="category productivity" data-toggle="tooltip" data-placement="top"
-              title="I'm baby bushwick put a bird on it pop-up portland occaecat. Selvage tote bag hashtag gochujang. Officia readymade pickled DIY woke lumbersexual meggings. Flexitarian pork belly austin, skateboard prism four dollar toast sunt vape fanny pack blog artisan aliqua ethical snackwave. Small batch green juice next level activated charcoal tote bag dolore fixie kale chips sunt bicycle rights pitchfork roof party.">
+              title="It adds up—all the hours employees spend struggling to access apps, entering and resetting passwords, and being locked out. Workforce identity solutions give employees time back to get more work done. Meanwhile, IT enjoys reduced helpdesk tickets and increased out-of-box integration and automation.">
               <p>
                 Productivity
                 <i class="fa fa-info" aria-hidden="true"></i>
@@ -190,7 +190,7 @@
               <span id="cat1">$5000</span>
             </div>
             <div class="category security" data-toggle="tooltip" data-placement="top"
-              title="I'm baby bushwick put a bird on it pop-up portland occaecat. Selvage tote bag hashtag gochujang. Officia readymade pickled DIY woke lumbersexual meggings. Flexitarian pork belly austin, skateboard prism four dollar toast sunt vape fanny pack blog artisan aliqua ethical snackwave. Small batch green juice next level activated charcoal tote bag dolore fixie kale chips sunt bicycle rights pitchfork roof party.">
+              title="The average cost of a data breach is $8.19M in the U.S. and $3.92M globally1. Workforce identity solutions reduce your risk of a breach by enabling multi-factor authentication, Zero Trust security posture, ease of management, a smaller attack surface and reduced shadow IT.">
               <p>
                 Security
                 <i class="fa fa-info" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
               <span id="cat2">$10000</span>
             </div>
             <div class="category agility" data-toggle="tooltip" data-placement="top"
-              title="I'm baby bushwick put a bird on it pop-up portland occaecat. Selvage tote bag hashtag gochujang. Officia readymade pickled DIY woke lumbersexual meggings. Flexitarian pork belly austin, skateboard prism four dollar toast sunt vape fanny pack blog artisan aliqua ethical snackwave. Small batch green juice next level activated charcoal tote bag dolore fixie kale chips sunt bicycle rights pitchfork roof party.">
+              title="Businesses don’t like to wait for IT. To be the champion of digital transformation, you have to enable business agility. Ping’s workforce identity solutions improve time to value for business applications and help your enterprise move faster by leveraging cloud, APIs, rapid integration, DevOps and automation.">
               <p>
                 Agility
                 <i class="fa fa-info" aria-hidden="true"></i>
@@ -320,9 +320,9 @@
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="productivity" role="tabpanel" aria-labelledby="home-tab">
+          <div class="tab-pane fade show active container" id="productivity" role="tabpanel" aria-labelledby="home-tab">
 
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod1" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -333,15 +333,17 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="prod1" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="prod1">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod2" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -352,15 +354,16 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="prod2" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="prod2">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod3" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -371,15 +374,16 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="prod3" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="prod3">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod4" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -390,15 +394,16 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="prod4" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="prod4">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod5" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -409,15 +414,16 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="prod5" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="prod5">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod6" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -428,8 +434,9 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="prod6" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="prod6">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -438,7 +445,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="profile-tab">
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec1" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -449,15 +456,16 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="sec1" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="sec1">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec2" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -468,15 +476,16 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="sec2" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="sec2">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec3" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -487,8 +496,9 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="sec3" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="sec3">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -497,7 +507,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <p>
+            <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#agil1" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
 
@@ -508,8 +518,9 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-            </p>
-            <div id="agil1" class="collapse">
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content" id="agil1">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
