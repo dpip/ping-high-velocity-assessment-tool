@@ -1,5 +1,5 @@
 {
-  "name": "html5_boilerplate_sass",
+  "name": "9329-ping-high-velocity-assessment-tool",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -9,11 +9,7 @@
     "build": "rm -rf build && cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "keywords": [],
-  "author": "Daniel Klose",
-  "contributors": {
-    "name": "Dugnist Alexey"
-  },
-  "license": "ISC OR GPL-3.0",
+  "author": "Daniel Pipkin",
   "devDependencies": {
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.26.0",
