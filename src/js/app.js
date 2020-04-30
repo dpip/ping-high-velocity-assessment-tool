@@ -33,8 +33,13 @@ let addAll = function () {
     $('#total-annual-value').html('$' + utils.commaSeparateNumber(sum));
 }
 
+$('#assessment-cta').on('click', function () {
+    $('#assessment-wrap').hide();
+    $('.main-banner').addClass('results');
+    $('#results-wrap').show();
+})
+
 $(document).ready(function () {
     addAll();
     rangeSlider();
-
 });
