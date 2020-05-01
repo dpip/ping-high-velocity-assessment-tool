@@ -279,7 +279,7 @@ input::-moz-focus-outer {
 }
 
 #results-wrap {
-  // display: none;
+  display: none;
   background: #F5F6F9;
   .nav-tabs {
     border-bottom: none;
@@ -585,7 +585,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // width: calc(100% - 73px);
   
   #tog-d {
     width: 28px; 
@@ -594,12 +593,11 @@ footer {
     transition: all 0.25s ease-in-out;
   }
 }
+.toggle-advanced-assessment {
+  width: calc(100% - 73px);
+}
 #toggle-advanced[aria-expanded='true'] > #tog-d {
     transform: scale(1.25) rotate(180deg);
-}
-
-#assessment-wrap {
-  display: none;
 }
 
 

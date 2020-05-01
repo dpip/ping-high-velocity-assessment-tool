@@ -37,6 +37,7 @@ $('#assessment-cta').on('click', function () {
     $('#assessment-wrap').hide();
     $('.main-banner').addClass('results');
     $('#results-wrap').show();
+    $('html, body').animate({ scrollTop: '0px' }, 500);
 })
 
 $(document).ready(function () {
