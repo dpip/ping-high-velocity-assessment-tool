@@ -19,13 +19,36 @@ header {
     min-height: 100px;
     height: 100px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+   
     .top-nav__logo {
           display: block;
       width: 75px;
       height: 75px;
     }
+    .button__schedule {
+      font-weight: 400;
+    cursor: pointer;
+    text-transform: uppercase;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 20px;
+    height: 36px;
+    color: #fff;
+    background-color: #2B80C3;
+    border: 1px solid #2B80C3;
+    font-size: 14px;
+    line-height: 36px;
+    -webkit-font-smoothing: auto;
+    text-decoration: none !important;
+    transition: all 0.15s ease-in-out;
+     border-radius: 2px;
+    &:hover {
+      color: #2B80C3;
+      background-color: #fff;
+    }
+}
   }
 }
 
@@ -648,8 +671,13 @@ footer {
   padding-bottom: 30px;
 }
 .last-tab {
-  border-bottom: 1px solid $navy;
+  border-top: 1px solid $navy;
+  margin-top: 24px;
 }
 .total-tab-content {
   border-bottom: 1px solid transparent;
+}
+
+.border-none {
+  border-bottom: none !important;
 }

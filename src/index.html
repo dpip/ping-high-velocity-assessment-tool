@@ -53,8 +53,10 @@
 
   <header>
 
-    <nav class="container">
+    <nav class="container container__nav">
       <a class="top-nav__logo" href="./"><img src="../../images/logo.svg"></a>
+      <a target="_self" class="button__schedule" href="https://www.pingidentity.com/en/company/demo.html">Schedule value
+        consultation</a>
     </nav>
 
   </header>
@@ -283,7 +285,7 @@
           </li>
           <li class="nav-item">
 
-            <a class="nav-link" id="agility-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+            <a class="nav-link" id="agility-tab" data-toggle="tab" href="#agility" role="tab" aria-controls="agility"
               aria-selected="false">
               <div class="tab-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="54.291" height="28.62" viewBox="0 0 54.291 28.62">
@@ -335,7 +337,7 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="prod1">
+            <div class="results-tab-content collapse" id="prod1">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -356,7 +358,7 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="prod2">
+            <div class="results-tab-content collapse" id="prod2">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -376,7 +378,7 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="prod3">
+            <div class="results-tab-content collapse" id="prod3">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -396,7 +398,7 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="prod4">
+            <div class="results-tab-content collapse" id="prod4">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -416,7 +418,7 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="prod5">
+            <div class="results-tab-content collapse" id="prod5">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
@@ -436,15 +438,15 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content last-tab" id="prod6">
+            <div class="results-tab-content collapse" id="prod6">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
                 employee and their
                 hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
                 sign-on (SSO) and
                 self-service password reset gives employees back all those hours for value-added work.</p>
             </div>
-            <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod6" role="button" aria-expanded="false"
+            <div class="results-toggle-top last-tab">
+              <a id="toggle-advanced" data-toggle="collapse" href="#prod7" role="button" aria-expanded="true"
                 aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
@@ -456,7 +458,7 @@
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content total-tab-content" id="prod6">
+            <div class="results-tab-content total-tab-content" id="prod7">
               <p>It adds up—all the hours employees spend struggling to access apps, entering and resetting passwords,
                 and being locked
                 out while waiting on tech support. Workforce identity solutions with single sign-on, self-service and
@@ -465,7 +467,7 @@
                 customization, and
                 increased out-of-box integration and automation.</p>
             </div>
-            <div class="total-value-per-category">
+            <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
               <h2>1,000,000</h2>
             </div>
@@ -480,16 +482,17 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Employees stop wasting time on passwords
+                IT security team mitigates password-related data breaches
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="sec1">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+            <div class="results-tab-content collapse" id="sec1">
+              <p>The average cost of a data breach in the U.S. is $8.19M and $3.92M globally,1 but yours isn’t an
+                average size business,
+                is it? 52% of data breaches are due to hacking, and of those, 80% are due to weak or compromised
+                passwords.2
+                Multi-factor authentication (MFA) can reduce password risk by 99.9%.3 Putter MFA everywhere is a
+                no-brainer.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec2" role="button" aria-expanded="false"
@@ -500,16 +503,17 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Employees stop wasting time on passwords
+                Employees have fewer chances to leak sensitive customer data
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="sec2">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+            <div class="results-tab-content collapse" id="sec2">
+              <p>Consumer data privacy and regulations are top of mind as more cases of data misuse come to light. 23%
+                of sensitive data
+                breaches are caused by internal employees,4 so they shouldn’t have access to everything just because
+                they’re on the
+                network. To mitigate risk, enforce least-privileged access and establish Zero Trust security for apps,
+                APIs and data.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec3" role="button" aria-expanded="false"
@@ -520,19 +524,47 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Employees stop wasting time on passwords
+                IT security staff spend more time boosting security posture
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="sec3">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+            <div class="results-tab-content collapse border-none" id="sec3">
+              <p>IAM and IT security professionals should be spending their time on projects that boost security. But
+                instead, they’re
+                wasting time on password resets, fulfilling onboarding and administration requests from app owners, and
+                customizing
+                legacy tools. Shifting to a solution that leverages automation and self-service lets IT spend that time
+                mitigating risks
+                instead.</p>
+            </div>
+            <div class="results-toggle-top last-tab">
+              <a id="toggle-advanced" data-toggle="collapse" href="#sec4" role="button" aria-expanded="true"
+                aria-controls="collapseExample">
+
+                <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
+                  width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
+                  <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
+                  <title>Chevron down</title>
+                </svg>
+                Total value from reducing security risk
+              </a>
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content total-tab-content" id="sec4">
+              <p>The average cost of a data breach is $8.19M in the US and $3.92M globally. Workforce identity solutions
+                reduce your risk
+                of data, application, or API breaches and regulatory fines by enabling MFA everywhere with passwordless
+                authentication
+                options, least-privileged access and Zero Trust principles, ease of management, a smaller attack
+                surface, and reduced
+                shadow IT.</p>
+            </div>
+            <div class="total-value-per-category pt-5">
+              <h2>Total annual value from IAM</h2>
+              <h2>1,000,000</h2>
             </div>
           </div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          <div class="tab-pane fade" id="agility" role="tabpanel" aria-labelledby="agility-tab">
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#agil1" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
@@ -542,21 +574,52 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Employees stop wasting time on passwords
+                New digital business tools get adopted rapidly
               </a>
               <h4>$5,000</h4>
             </div>
-            <div class="results-tab-content" id="agil1">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+            <div class="results-tab-content collapse" id="agil1">
+              <p>In the weeks it takes to onboard new resources like SaaS productivity tools and internal apps and APIs
+                to legacy
+                identity and access management (IAM), you’re missing out on potential value. Empower app teams with
+                self-service to
+                instantly integrate their own resources to IAM and give your workforce one-click access to the latest
+                productivity
+                tools.</p>
+            </div>
+            <div class="results-toggle-top last-tab">
+              <a id="toggle-advanced" data-toggle="collapse" href="#agil2" role="button" aria-expanded="true"
+                aria-controls="collapseExample">
+
+                <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
+                  width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
+                  <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
+                  <title>Chevron down</title>
+                </svg>
+                Total value from increased business agility
+              </a>
+              <h4>$5,000</h4>
+            </div>
+            <div class="results-tab-content total-tab-content" id="agil2">
+              <p>Your business is sick of waiting on IT. To slay the shadow IT monster and become the champion of
+                digital transformation,
+                you need to give the business instant gratification. Workforce identity solutions from Ping speed up
+                time to value for
+                business applications and help your organization outpace your competitors by leveraging cloud, APIs,
+                rapid integration,
+                DevOps and automation.</p>
+            </div>
+            <div class="total-value-per-category pt-5">
+              <h2>Total annual value from IAM</h2>
+              <h2>1,000,000</h2>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <!-- <script src="//app-sji.marketo.com/js/forms2/js/forms2.min.js"></script>
+    <form id="mktoForm_3445"></form>
+    <script>MktoForms2.loadForm("//app-sji.marketo.com", "671-MGJ-570", 3445);</script> -->
   </main>
 
   <!-- footer -->
