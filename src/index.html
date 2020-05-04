@@ -68,14 +68,17 @@
       <div class="container">
         <div class="row">
           <div class="main-banner_content col-lg-10 container pt-5 pb-5">
-            <h2 class="pb-4">Workforce IAM instant business value assessment</h2>
-            <p><a href="#" target="_blank">Workforce identity solutions</a> from Ping Identity make employees <span>more
-                productive</span>, your
-              company’s
-              critical
-              assets <span style="font-weight: bold;">more secure</span>, and your business <span>more agile</span>.</p>
-            <p><span>See the value for yourself</span>. Adjust the inputs, then get the full assessment to
-              understand where it’s coming from.</p>
+            <h2 class="pb-4">WORKFORCE IDENTITY <b>BUSINESS VALUE ASSESSMENT</b></h2>
+            <p>How to use this tool (values are set to a default sample):</p>
+            <ol style="padding-left: 20px;">
+              <li>Adjust the inputs to instantly see the impact on your business value.</li>
+              <li>Get your full report to understand where the value comes from.</li>
+              <li>Share the report with decision makers to make your business case.</li>
+            </ol>
+            <p>To see how you can make employees <span>more productive</span> , keep your company’s critical assets
+              <span>more secure</span> and make your business <span>more agile</span>, check out our <a
+                href="https://www.pingidentity.com/en/solutions/workforce-identity.html" target="_blank">workforce
+                identity solutions</a></p>
           </div>
           <div class="col-lg-2"></div>
         </div>
@@ -83,7 +86,7 @@
     </section>
     <section id="assessment-wrap" class="main-assessment container pt-5 pb-5">
       <div class="row">
-        <div class="col col-options col-lg-5">
+        <div class="col col-options col-sm-12 col-lg-5">
           <div class="region-wrap">
             <p>Region</p>
             <select class="form-control">
@@ -102,45 +105,52 @@
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Identities</label>
-            <input class="range-slider__range form-control-range" type="range" value="35000" min="0" max="3000000">
+            <input id="range-1" class="range-slider__range form-control-range" type="range" value="35000" min="0"
+              max="3000000">
             <span class="range-slider__value">0</span>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Revenue</label>
-            <input class="range-slider__range form-control-range" type="range" value="10000000" min="0"
+            <input id="range-2" class="range-slider__range form-control-range" type="range" value="10000000000" min="0"
               max="500000000000">
             <span class="range-slider__value">0</span>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Applications</label>
-            <input class="range-slider__range form-control-range" type="range" value="500" min="0" max="5000">
+            <input id="range-3" class="range-slider__range form-control-range" type="range" value="500" min="0"
+              max="5000">
             <span class="range-slider__value">0</span>
           </div>
 
           <div class="collapse" id="advanced-dropdown">
             <div id="advanced-option1" class="range-slider pt-3 pb-3 advanced-option">
               <label>Total APIs</label>
-              <input class="range-slider__range form-control-range" type="range" value="500" min="0" max="5000">
+              <input id="range-4" class="range-slider__range form-control-range" type="range" value="500" min="0"
+                max="5000">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Size of IAM Team</label>
-              <input class="range-slider__range form-control-range" type="range" value="6" min="0" max="30">
+              <input id="range-5" class="range-slider__range form-control-range" type="range" value="6" min="0"
+                max="30">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Total Existing IAM Tools</label>
-              <input class="range-slider__range form-control-range" type="range" value="8" min="0" max="30">
+              <input id="range-6" class="range-slider__range form-control-range" type="range" value="8" min="0"
+                max="30">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: IAM/IT Admin</label>
-              <input class="range-slider__range form-control-range" type="range" value="20" min="0" max="100">
+              <input id="range-7" class="range-slider__range form-control-range" type="range" value="32" min="0"
+                max="100">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: Across Organization</label>
-              <input class="range-slider__range form-control-range" type="range" value="32" min="0" max="100">
+              <input id="range-8" class="range-slider__range form-control-range" type="range" value="32" min="0"
+                max="100">
               <span class="range-slider__value">0</span>
             </div>
           </div>
@@ -211,12 +221,14 @@
           <br>
           <br>
           <p class="bold pb-2">Want to see where your business value comes from?</p>
-          <button id="assessment-cta" type="button" class="btn btn-primary">SEE YOUR FULL ASSESSMENT</button>
+          <button id="assessment-cta" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#launchresultsform">GET YOUR FULL REPORT</button>
           <br>
           <br>
-          <span class="disclaimer">*Figures provided in this assessment are estimates based on industry averages and
-            collective experiences of Ping
-            Identity customers and are not guaranteed.</span>
+          <span class="disclaimer"><sup>*</sup>Any results or figures provided through this assessment are estimates
+            only and in no
+            way a guarantee of actual results.
+            Use of this tool is subject to the terms of this disclaimer.</span>
         </div>
       </div>
     </section>
@@ -338,11 +350,11 @@
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="prod1">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+              <p>On average, employees spend 10.93 hours per year entering/resetting passwords1. Multiply that by
+                employee wages, and you
+                could be looking at MILLIONS of dollars. Federated single sign-on (SSO) and self-service password reset
+                keep employees
+                productive.</p>
             </div>
 
             <div class="results-toggle-top">
@@ -359,11 +371,11 @@
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="prod2">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+              <p>For thousands of password reset requests per year, there's an IT admin doing the work. But that task
+                can be easily
+                automated. Self-service password reset lets your IT security team focus on higher-value tasks, like
+                boosting security
+                posture.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod3" role="button" aria-expanded="false"
@@ -379,11 +391,11 @@
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="prod3">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+              <p>When app teams consume IT services, hours are wasted communicating and fulfilling requests. Delegated
+                admin and a
+                central operating portal for identity and access management can empower your business teams with
+                self-service app
+                onboarding and management.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod4" role="button" aria-expanded="false"
@@ -399,11 +411,11 @@
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="prod4">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+              <p>Customizations on legacy IAM tools use IT resources and make upgrades virtually impossible. Adopting an
+                identity
+                platform that is standards-based and already works with any app, any cloud and any directory
+                out-of-the-box lets IT
+                spend more time on high-value projects instead.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod5" role="button" aria-expanded="false"
@@ -419,11 +431,11 @@
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="prod5">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+              <p>You may have a fragile patchwork of siloed IAM systems. If so, it’s a nightmare to manage. When
+                mission-critical systems
+                lack support and are nearing end-of-life, it’s time to rationalize. A workforce authentication authority
+                does it all
+                with less maintenance.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod6" role="button" aria-expanded="false"
@@ -434,16 +446,20 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Employees aren’t interrupted with step-up authentication for low-risk activities
+                Employees aren't unnecessarily interrupted
               </a>
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="prod6">
-              <p>On average, employees spend 10.93 hours per year entering/resetting passwords. Multiply that by each
-                employee and their
-                hourly wage, and you could be looking at MILLIONS of dollars of lost productivity. Federated single
-                sign-on (SSO) and
-                self-service password reset gives employees back all those hours for value-added work.</p>
+              <p>Multi-factor authentication (MFA) reduces password-related data breaches by 99.99%2. But if you’re
+                using legacy MFA
+                tools, employees are interrupted every time they switch tasks. Smart, adaptive authentication only
+                triggers action for
+                high-risk activities.</p>
+              <ol>
+                <li>Ponemon 2019 State of Password and Authentication Security Behaviors Report</li>
+                <li>Microsoft Security Intelligence Report, 2018</li>
+              </ol>
             </div>
             <div class="results-toggle-top last-tab">
               <a id="toggle-advanced" data-toggle="collapse" href="#prod7" role="button" aria-expanded="true"
@@ -461,11 +477,9 @@
             <div class="results-tab-content total-tab-content" id="prod7">
               <p>It adds up—all the hours employees spend struggling to access apps, entering and resetting passwords,
                 and being locked
-                out while waiting on tech support. Workforce identity solutions with single sign-on, self-service and
-                intelligence give
-                employees time back to get more work done. Meanwhile, IT enjoys reduced help desk tickets and
-                customization, and
-                increased out-of-box integration and automation.</p>
+                out. Workforce identity solutions give employees time back to get more work done. Meanwhile, IT enjoys
+                reduced helpdesk
+                tickets and increased out-of-box integration and automation.</p>
             </div>
             <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
@@ -482,17 +496,15 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                IT security team mitigates password-related data breaches
+                IT security teams can mitigate data breaches
               </a>
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="sec1">
-              <p>The average cost of a data breach in the U.S. is $8.19M and $3.92M globally,1 but yours isn’t an
-                average size business,
-                is it? 52% of data breaches are due to hacking, and of those, 80% are due to weak or compromised
-                passwords.2
-                Multi-factor authentication (MFA) can reduce password risk by 99.9%.3 Putter MFA everywhere is a
-                no-brainer.</p>
+              <p>The average cost of a data breach in the U.S. is $8.19M and $3.92M globally.1 52% of data breaches are
+                due to hacking,
+                and 80% of those are due to weak passwords.2 Multi-factor authentication can reduce password risk by
+                99.9%.<sup>3</sup></p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec2" role="button" aria-expanded="false"
@@ -503,17 +515,16 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Employees have fewer chances to leak sensitive customer data
+                Employees stop sharing sensitive customer data
               </a>
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="sec2">
-              <p>Consumer data privacy and regulations are top of mind as more cases of data misuse come to light. 23%
-                of sensitive data
-                breaches are caused by internal employees,4 so they shouldn’t have access to everything just because
-                they’re on the
-                network. To mitigate risk, enforce least-privileged access and establish Zero Trust security for apps,
-                APIs and data.</p>
+              <p>Data privacy is top of mind. 23% of sensitive data breaches are caused by internal employees,4 so they
+                shouldn’t have
+                access to everything just because they’re on the network. To mitigate risk, enforce least-privileged
+                access and enable
+                Zero Trust security.</p>
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec3" role="button" aria-expanded="false"
@@ -524,18 +535,22 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                IT security staff spend more time boosting security posture
+                IT professionals can focus on security posture
               </a>
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse border-none" id="sec3">
-              <p>IAM and IT security professionals should be spending their time on projects that boost security. But
-                instead, they’re
-                wasting time on password resets, fulfilling onboarding and administration requests from app owners, and
-                customizing
-                legacy tools. Shifting to a solution that leverages automation and self-service lets IT spend that time
-                mitigating risks
-                instead.</p>
+              <p>IAM and IT security professionals want to focus on projects that boost security. Instead, they may have
+                to work on
+                administrative tasks like password resets and customizing legacy tools. Leveraging self-service,
+                automation, and
+                identity standards lets them stay security-focused.</p>
+              <ol>
+                <li>Ponemon 2019 Cost of a Data Breach Report</li>
+                <li>Verizon 2019 Data Breach Investigations Report</li>
+                <li>Microsoft Security Intelligence Report, 2018</li>
+                <li>Forrester Analytics Global Business Technographics Security Survey, 2019</li>
+              </ol>
             </div>
             <div class="results-toggle-top last-tab">
               <a id="toggle-advanced" data-toggle="collapse" href="#sec4" role="button" aria-expanded="true"
@@ -546,18 +561,17 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                Total value from reducing security risk
+                Total value from reduced security risk
               </a>
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content total-tab-content" id="sec4">
-              <p>The average cost of a data breach is $8.19M in the US and $3.92M globally. Workforce identity solutions
-                reduce your risk
-                of data, application, or API breaches and regulatory fines by enabling MFA everywhere with passwordless
-                authentication
-                options, least-privileged access and Zero Trust principles, ease of management, a smaller attack
-                surface, and reduced
-                shadow IT.</p>
+              <p>The average cost of a data breach is $8.19M in the U.S. and $3.92M globally<sup>1</sup>. Workforce
+                identity
+                solutions reduce your
+                risk of a breach by enabling multi-factor authentication, Zero Trust security posture, ease of
+                management, a smaller
+                attack surface and reduced shadow IT.</p>
             </div>
             <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
@@ -574,18 +588,15 @@
                   <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"></polygon>
                   <title>Chevron down</title>
                 </svg>
-                New digital business tools get adopted rapidly
+                New applications get adopted rapidly
               </a>
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content collapse" id="agil1">
-              <p>In the weeks it takes to onboard new resources like SaaS productivity tools and internal apps and APIs
-                to legacy
-                identity and access management (IAM), you’re missing out on potential value. Empower app teams with
-                self-service to
-                instantly integrate their own resources to IAM and give your workforce one-click access to the latest
-                productivity
-                tools.</p>
+              <p>In the weeks it takes to onboard new employee applications to legacy IAM, you’re missing out on
+                potential value. Speed
+                up application integration and give your workforce one-click access to the latest productivity tools.
+              </p>
             </div>
             <div class="results-toggle-top last-tab">
               <a id="toggle-advanced" data-toggle="collapse" href="#agil2" role="button" aria-expanded="true"
@@ -601,13 +612,11 @@
               <h4>$5,000</h4>
             </div>
             <div class="results-tab-content total-tab-content" id="agil2">
-              <p>Your business is sick of waiting on IT. To slay the shadow IT monster and become the champion of
-                digital transformation,
-                you need to give the business instant gratification. Workforce identity solutions from Ping speed up
-                time to value for
-                business applications and help your organization outpace your competitors by leveraging cloud, APIs,
-                rapid integration,
-                DevOps and automation.</p>
+              <p>Businesses don’t like to wait for IT. To be the champion of digital transformation, you have to enable
+                business agility.
+                Ping’s workforce identity solutions improve time to value for business applications and help your
+                enterprise move faster
+                by leveraging cloud, APIs, rapid integration, DevOps and automation.</p>
             </div>
             <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
@@ -617,9 +626,58 @@
         </div>
       </div>
     </section>
-    <!-- <script src="//app-sji.marketo.com/js/forms2/js/forms2.min.js"></script>
-    <form id="mktoForm_3445"></form>
-    <script>MktoForms2.loadForm("//app-sji.marketo.com", "671-MGJ-570", 3445);</script> -->
+    <!-- form below is gat to assessment report -->
+    <div class="modal fade" id="launchresultsform" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content pb-5">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLongTitle">Get your <strong>full assessment</strong></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <script src="//app-sji.marketo.com/js/forms2/js/forms2.min.js"></script>
+            <form id="mktoForm_3445"></form>
+            <script>MktoForms2.loadForm("//app-sji.marketo.com", "671-MGJ-570", 3445, function (form) {
+                // Add an onSuccess handler
+                form.onSuccess(function (values, followUpUrl) {
+                  // Get the form's jQuery element and hide it
+                  // This is annoying but marketo's jquery selectors only work for elements recognized by their own library - use vanilla instead
+                  form.getFormElem().hide();
+
+                  // Get modal element by ID
+                  var modal = document.getElementById('launchresultsform');
+
+                  // Remove active classes and trigger attributes
+                  modal.classList.remove('show');
+                  modal.setAttribute('aria-hidden', 'true');
+                  modal.setAttribute('style', 'display: none');
+
+                  var assessmentWrap = document.getElementById('assessment-wrap');
+                  var mainBanner = document.getElementsByClassName('main-banner');
+                  var resultsWrap = document.getElementById('results-wrap');
+
+                  assessmentWrap.setAttribute('style', 'display: none');
+                  // mainBanner.classList.addClass('results');
+                  resultsWrap.setAttribute('style', 'display: flex');
+                  document.body.classList.remove('modal-open');
+
+                  //Get the backdrop by ID
+                  var modalBackdrops = document.getElementsByClassName('modal-backdrop');
+
+                  // Target first item in DOM array and remove
+                  document.body.removeChild(modalBackdrops[0]);
+
+                  // Return false to prevent the submission handler from taking the lead to the follow up url
+                  return false;
+                });
+              });</script>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- footer -->
