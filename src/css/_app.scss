@@ -679,3 +679,12 @@ footer {
 .border-none {
   border-bottom: none !important;
 }
+
+.results-banner {
+  background-color: $navy !important;
+  color: #fff;
+  display: none;
+  a {
+    color: #fff !important;
+  }
+}

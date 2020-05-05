@@ -84,6 +84,25 @@
         </div>
       </div>
     </section>
+    <section class="main-banner results-banner container-fluid p-0">
+      <div class="container">
+        <div class="row">
+          <div class="main-banner_content col-lg-10 container pt-5 pb-5">
+            <h2 class="pb-4">WORKFORCE IDENTITY BUSINESS VALUE EXPLAINED</h2>
+            <p>This report uses enterprise assumptions and industry averages as a starting point to help you align
+              identity and access
+              management (IAM) initiatives with business goals.</p>
+
+            <p>We can help tailor this business case to your specific enterprise. Your next step is to meet with Ping
+              Identity experts
+              so you can internally champion <strong><a
+                  href="https://www.pingidentity.com/en/solutions/workforce-identity.html" target="_blank">workforce
+                  identity transformation.</a></strong></p>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </section>
     <!-- assessment section below -->
     <section id="assessment-wrap" class="main-assessment container pt-5 pb-5">
       <div class="row">
@@ -663,10 +682,13 @@
 
                   var assessmentWrap = document.getElementById('assessment-wrap');
                   var mainBanner = document.getElementsByClassName('main-banner');
+                  var resultsBanner = document.getElementsByClassName('results-banner');
                   var resultsWrap = document.getElementById('results-wrap');
 
+
                   assessmentWrap.setAttribute('style', 'display: none');
-                  // mainBanner.classList.addClass('results');
+                  mainBanner[0].setAttribute('style', 'display: none');
+                  resultsBanner[0].setAttribute('style', 'display: block');
                   resultsWrap.setAttribute('style', 'display: flex');
                   document.body.classList.remove('modal-open');
 
