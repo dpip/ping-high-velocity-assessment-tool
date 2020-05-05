@@ -84,6 +84,7 @@
         </div>
       </div>
     </section>
+    <!-- assessment section below -->
     <section id="assessment-wrap" class="main-assessment container pt-5 pb-5">
       <div class="row">
         <div class="col col-options col-sm-12 col-lg-5">
@@ -105,52 +106,52 @@
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Identities</label>
-            <input id="range-1" class="range-slider__range form-control-range" type="range" value="35000" min="0"
-              max="3000000">
+            <input id="range-0" class="range-slider__range form-control-range" type="range" step="5000" value="35000"
+              min="0" max="3000000">
             <span class="range-slider__value">0</span>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Revenue</label>
-            <input id="range-2" class="range-slider__range form-control-range" type="range" value="10000000000" min="0"
-              max="500000000000">
+            <input id="range-1" class="range-slider__range form-control-range" type="range" step="100000"
+              value="10000000000" min="0" max="500000000000">
             <span class="range-slider__value">0</span>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Applications</label>
-            <input id="range-3" class="range-slider__range form-control-range" type="range" value="500" min="0"
-              max="5000">
+            <input id="range-2" class="range-slider__range form-control-range" type="range" step="100" value="500"
+              min="0" max="5000">
             <span class="range-slider__value">0</span>
           </div>
 
           <div class="collapse" id="advanced-dropdown">
             <div id="advanced-option1" class="range-slider pt-3 pb-3 advanced-option">
               <label>Total APIs</label>
-              <input id="range-4" class="range-slider__range form-control-range" type="range" value="500" min="0"
-                max="5000">
+              <input id="range-3" class="range-slider__range form-control-range" type="range" step="100" value="500"
+                min="0" max="5000">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Size of IAM Team</label>
-              <input id="range-5" class="range-slider__range form-control-range" type="range" value="6" min="0"
+              <input id="range-4" class="range-slider__range form-control-range" type="range" step="1" value="6" min="0"
                 max="30">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Total Existing IAM Tools</label>
-              <input id="range-6" class="range-slider__range form-control-range" type="range" value="8" min="0"
+              <input id="range-5" class="range-slider__range form-control-range" type="range" step="1" value="8" min="0"
                 max="30">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: IAM/IT Admin</label>
-              <input id="range-7" class="range-slider__range form-control-range" type="range" value="32" min="0"
-                max="100">
+              <input id="range-6" class="range-slider__range form-control-range" type="range" step="2" value="32"
+                min="0" max="100">
               <span class="range-slider__value">0</span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: Across Organization</label>
-              <input id="range-8" class="range-slider__range form-control-range" type="range" value="32" min="0"
-                max="100">
+              <input id="range-7" class="range-slider__range form-control-range" type="range" step="2" value="32"
+                min="0" max="100">
               <span class="range-slider__value">0</span>
             </div>
           </div>
@@ -199,7 +200,7 @@
                 Productivity
                 <i class="fa fa-info" aria-hidden="true"></i>
               </p>
-              <span id="cat1">$5000</span>
+              <div id="cat1"></div>
             </div>
             <div class="category security" data-toggle="tooltip" data-placement="top"
               title="The average cost of a data breach is $8.19M in the U.S. and $3.92M globally1. Workforce identity solutions reduce your risk of a breach by enabling multi-factor authentication, Zero Trust security posture, ease of management, a smaller attack surface and reduced shadow IT.">
@@ -207,7 +208,7 @@
                 Security
                 <i class="fa fa-info" aria-hidden="true"></i>
               </p>
-              <span id="cat2">$10000</span>
+              <span id="cat2"></span>
             </div>
             <div class="category agility" data-toggle="tooltip" data-placement="top"
               title="Businesses don’t like to wait for IT. To be the champion of digital transformation, you have to enable business agility. Ping’s workforce identity solutions improve time to value for business applications and help your enterprise move faster by leveraging cloud, APIs, rapid integration, DevOps and automation.">
@@ -215,7 +216,7 @@
                 Agility
                 <i class="fa fa-info" aria-hidden="true"></i>
               </p>
-              <span id="cat3">$1000000</span>
+              <span id="cat3"></span>
             </div>
           </div>
           <br>
@@ -232,6 +233,7 @@
         </div>
       </div>
     </section>
+    <!-- results section below -->
     <section id="results-wrap" class="container-fluid p-0">
       <div class="container pt-4">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -632,7 +634,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content pb-5">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLongTitle">Get your <strong>full assessment</strong></h3>
+            <h3 class="modal-title" id="exampleModalLongTitle">Get your <strong>full report</strong></h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -669,6 +671,9 @@
 
                   // Target first item in DOM array and remove
                   document.body.removeChild(modalBackdrops[0]);
+
+                  // send to top of results
+                  window.scrollTo(0, 0);
 
                   // Return false to prevent the submission handler from taking the lead to the follow up url
                   return false;
