@@ -41,18 +41,20 @@ const utils = {
         return (((a * 10) * 0.416) * 0.296) * 0.999;
     }, s1: function (a) {
         return (a * 0.04) * 0.9;
-    }, s2: function (a, b, c, d, e) {
+    }, s2: function (a, b, c, d) {
         let step1 = ((a * 147) / 60);
-        let step2 = ((b + c) * 12);
+        let step2 = Number(((b + c) * 12));
         let step3 = (c * 6);
         let step4 = (d * 500);
         let step5 = (step1 + step2 + step3 + step4);
-        let step6 = (step4 / 2000);
+        let step6 = Number(c / 2000);
         let step7 = Math.min(step5, step6) * 10;
         let step8 = (step7 * 0.1);
+        let step9 = (step7 * step8)
 
-        return (step7 * step8);
-
+        return step9;
+    }, agilityBasic: function (a, b, c) {
+        return;
     }
 };
 

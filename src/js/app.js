@@ -17,13 +17,18 @@ let rangeSlider = function () {
         range.on('input', function () {
             let id = utils.parseNumber($(this).attr('id'));
             let updatedValue = Number(this.value);
+            let sum = $('#total-annual-value');
             $(this).next(value).html(utils.commaSeparateNumber(this.value));
-            // addAll();
             rangeValues[id] = updatedValue;
-            console.log('from slider', updatedValue);
-            $('#cat1').html('$' + `${calcProductivity(rangeValues)}`);
-            $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
 
+            $('#cat1').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
+            $('#cat2').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
+            $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
+
+            // $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
+            // console.log(calcSecurity(rangeValues));
+            console.log('from slider hello world', calcSecurity(rangeValues));
+            $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
         });
 
     });
@@ -31,13 +36,17 @@ let rangeSlider = function () {
     value.each(function () {
         let value = $(this).prev().attr('value');
         let id = $(this).prev().attr('id');
+        let sum = $('#total-annual-value');
 
         $(this).html(utils.commaSeparateNumber(value));
-        // addAll();
         rangeValues.push(Number(value));
 
-        $('#cat1').html('$' + `${calcProductivity(rangeValues)}`);
-        $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
+        $('#cat1').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
+        $('#cat2').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
+        $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
+
+        console.log('from slider hello world', calcSecurity(rangeValues));
+        $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
     });
 };
 
@@ -52,47 +61,45 @@ let calcProductivity = function (rangeValues) {
     // console.log('from calc', r);
     let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
 
-    return utils.commaSeparateNumber(sumProductivity);
+    return sumProductivity;
 }
 
 let calcSecurity = function (rangeValues) {
     let r = rangeValues;
-    // let s0 = utils.securityBasic(r[0], r[3], r[4], r[2], r[5]);
 
+    let s0 = utils.securityBasic(r[3]);
+    let s1 = utils.s1(r[1]);
+    let s2 = utils.s2(r[0], r[3], r[4], r[5]);
+
+    let sumSecurity = Number(Math.round(s0 + s1 + s2));
+
+    // let s2 = utils.s2(r[0], r[0], r[0], r[0]);
+    // console.log('hello', s0, s1, s2);
+
+    return sumSecurity;
+}
+
+let calcAgility = function (rangeValues) {
+    let r = rangeValues;
+    let a0 = utils.s1(r[2]);
+    let a1 = utils.s1(r[3]);
     // console.log('from calc', r);
-    // let sumProductivity = Number(s0 + s1 + s2, s3, s4, s5);
+    let sumAgility = Number(Math.round(((a0 + a1) * 1.2) * a1) * 4560);
 
-    // return utils.commaSeparateNumber(sumSecurity);
+    return sumAgility;
 }
 
-// let calcAgility = function (rangeValues) {
-//     let r = rangeValues;
-//     let p0 = utils.productivityBasic(r[0], r[7])
-//     let p1 = utils.p1(r[0], r[7]);
-//     let p2 = utils.p2(r[2], r[3], r[6], r[7]);
-//     let p3 = utils.p3(r[2], r[6]);
-//     let p4 = utils.p4(r[6], r[5]);
-//     let p5 = utils.p5(r[0], r[7]);
-//     // console.log('from calc', r);
-//     let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
 
-//     return utils.commaSeparateNumber(sumProductivity);
-// }
-
-let addAll = function () {
-    let sum = 0
-    $('.range-slider__range').each(function () {
-        sum += isNaN(this.value) || $.trim(this.value) === '' ? 0 : parseFloat(this.value);
-    });
-    $('#total-annual-value').html('$' + utils.commaSeparateNumber(sum));
-
+let calcAll = function () {
+    return (calcProductivity(rangeValues) + calcSecurity(rangeValues) + calcAgility(rangeValues));
 }
+
 
 $(document).ready(function () {
 
     rangeSlider();
-    addAll();
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
+
 });
