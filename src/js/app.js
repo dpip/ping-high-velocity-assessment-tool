@@ -9,7 +9,7 @@ let rangeValues = [];
 let activeCurrency = 0;
 let currencies = [{
     'type': 'us',
-    'dataBreach': 819000,
+    'dataBreach': 8190000,
     'securityBreach': 0.07
 },
 {
@@ -90,18 +90,19 @@ let calcProductivity = function (rangeValues) {
 
 let calcSecurity = function (rangeValues) {
     let r = rangeValues;
-    let basicRef = currencies[activeCurrency].dataBreach * 10;
+    let basicRef = currencies[activeCurrency].dataBreach;
 
-    let s0 = utils.securityBasic(currencies[activeCurrency].dataBreach);
-    let s1 = utils.s1(r[1], currencies[activeCurrency].securityBreach);
-    let s2 = utils.s2(r[0], r[3], r[4], r[2], r[5], r[4], basicRef);
+    let s0 = Math.round(utils.securityBasic(Number(currencies[activeCurrency].dataBreach)));
+    let s1 = Math.round(utils.s1(r[1], Number(currencies[activeCurrency].securityBreach)));
+    let s2 = Math.round(utils.s2(r[0], r[3], r[4], r[2], r[5], r[4], Number(basicRef)));
 
-    let sumSecurity = Number(Math.round(s0 + s1 + s2));
+    let sumSecurity = (s0 + s1) + s2;
 
-    // let s2 = utils.s2(r[0], r[0], r[0], r[0]);
-    console.log('INDIVIDUAL SECURITY CALC:::', s0, s1, s2);
+    // let s2 = utils.s2(r[0], r[0], r[0], r[0]);s0
+    console.log("individual functions security:::", s0, s1, s2);
+    console.log('TOTAL SUM OF SECURITY:::', sumSecurity);
 
-    return sumSecurity;
+    return Number(Math.round(sumSecurity));
 }
 
 let calcAgility = function (rangeValues) {

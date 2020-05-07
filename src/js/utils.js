@@ -41,18 +41,27 @@ const utils = {
     }, s1: function (a, b) {
         return ((a * 0.04) * 0.057868) * b;
     }, s2: function (a, b, c, d, e, f, g) {
-        let step1 = ((a * 147) / 60);
-        let step2 = ((b + c) * 12);
-        let step3 = (d * 6);
-        let step4 = (e * 500);
-        let step5 = (step1 + step2 + step3 + step4);
-        let step6 = (step5 / 2000);
+        let step1 = Number(((a * 147) / 60));
+        let step2 = Number(((b + c) * 12));
+        let step3 = Number((d * 6));
+        let step4 = Number((e * 500));
+        let step5 = Number((step1 + step2 + step3 + step4));
+        let step6 = Number((step5 / 2000));
         // correct until step 7
-        let step7 = Math.min(step5, step6);
-        let step8 = (g * 0.1);
-        let step9 = (step7 * step8);
-        console.log('step8', step9);
-        return step9;
+        // let step7 = Math.min(step5, step6);
+        let step7 = Number(7);
+        let step8 = Number((g * 0.1));
+        let step9 = Number((step7 * step8));
+        console.log('step1', step1);
+        console.log('step2', step2);
+        console.log('step3', step3);
+        console.log('step4', step4);
+        console.log('step5', step5);
+        console.log('step6', step6);
+        console.log('step7', step7);
+        console.log('step8', step8);
+        console.log('step9', step9);
+        return Number(step9);
     }, agilityBasic: function (a, b) {
         return (((a + b) * 1.2) * 3800);
     }
