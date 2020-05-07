@@ -240,19 +240,25 @@ input::-moz-focus-outer {
   .fill {
     height: 100%;
     display: flex;
-    flex: 0.01;
+    // flex: 0.01;
   }
-  .productivity {
+  #fill-productivity {
     background-color: $navy;
-    flex: 0.25;
+    // flex: 0.25;
+    width: 25%;
+    transition: all 0.15s ease-in-out;
   }
-  .security {
+  #fill-security {
     background-color: $red;
-    flex: 0.25;
+    // flex: 0.25;
+    width: 25%;
+    transition: all 0.15s ease-in-out;
   }
-  .agility {
+  #fill-agility {
     background-color: $slate;
-    flex: 0.5;
+    // flex: 0.5;
+    width: 50%;
+    transition: all 0.15s ease-in-out;
   }
 }
 

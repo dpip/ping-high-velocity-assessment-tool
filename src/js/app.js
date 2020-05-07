@@ -56,6 +56,7 @@ let rangeSlider = function () {
             // console.log(calcSecurity(rangeValues));
             // console.log('from slider::: Range', calcSecurity(rangeValues));
             $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
+            fillBar();
         });
 
     });
@@ -78,6 +79,7 @@ let rangeSlider = function () {
 
         // console.log('from slider::: VAlUE', calcSecurity(rangeValues));
         $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
+        fillBar();
     });
 };
 
@@ -98,6 +100,7 @@ let calcProductivity = function (rangeValues) {
 
     let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
 
+    // fillBar();
 
     return sumProductivity;
 }
@@ -125,6 +128,8 @@ let calcAgility = function (rangeValues) {
     // console.log('from calc', r);
     let sumAgility = a0;
 
+    console.log("A0 here", a0);
+
     return sumAgility;
 }
 
@@ -133,6 +138,15 @@ let calcAll = function () {
     return (calcProductivity(rangeValues) + calcSecurity(rangeValues) + calcAgility(rangeValues));
 }
 
+let fillBar = function () {
+    let p = calcProductivity(rangeValues) / calcAll() * 100;
+    let r = calcSecurity(rangeValues) / calcAll() * 100;
+    let a = calcAgility(rangeValues) / calcAll() * 100;
+    $('#fill-productivity').css({ 'width': p + '%' });
+    $('#fill-security').css({ 'width': r + '%' });
+    $('#fill-agility').css({ 'width': a + '%' });
+    // return (a / calcAll() * 100);
+}
 
 $(document).ready(function () {
 
@@ -144,5 +158,6 @@ $(document).ready(function () {
         activeCurrency = Number(this.value);
         console.log('Active Currency::: ', currencies[activeCurrency].type);
     });
+    // fillBar();
 
 });
