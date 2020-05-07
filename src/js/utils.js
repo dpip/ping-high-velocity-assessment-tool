@@ -25,7 +25,6 @@ const utils = {
     }, parseNumber: function (str) {
         return Number(str.split('-')[1]);
     }, productivityBasic: function (a, b) {
-        // console.log('from utils', Number(Math.round(a * b * 10.93 * 0.9947643979)));
         return Number(Math.round(((a * b) * 10.93) * 0.9947643979));
     }, p1: function (a, b) {
         return Number(Math.round((a * 7.35) * (b * 0.3333333333333)));
@@ -39,22 +38,23 @@ const utils = {
         return (Number((a * 12.5) * 0.95) * b);
     }, securityBasic: function (a) {
         return (((a * 10) * 0.416) * 0.296) * 0.999;
-    }, s1: function (a) {
-        return (a * 0.04) * 0.9;
-    }, s2: function (a, b, c, d) {
+    }, s1: function (a, b) {
+        return ((a * 0.04) * 0.057868) * b;
+    }, s2: function (a, b, c, d, e, f, g) {
         let step1 = ((a * 147) / 60);
-        let step2 = Number(((b + c) * 12));
-        let step3 = (c * 6);
-        let step4 = (d * 500);
+        let step2 = ((b + c) * 12);
+        let step3 = (d * 6);
+        let step4 = (e * 500);
         let step5 = (step1 + step2 + step3 + step4);
-        let step6 = Number(c / 2000);
-        let step7 = Math.min(step5, step6) * 10;
-        let step8 = (step7 * 0.1);
-        let step9 = (step7 * step8)
-
+        let step6 = (step5 / 2000);
+        // correct until step 7
+        let step7 = Math.min(step5, step6);
+        let step8 = (g * 0.1);
+        let step9 = (step7 * step8);
+        console.log('step8', step9);
         return step9;
-    }, agilityBasic: function (a, b, c) {
-        return;
+    }, agilityBasic: function (a, b) {
+        return (((a + b) * 1.2) * 3800);
     }
 };
 

@@ -6,6 +6,30 @@ import utils from './utils.js';
 import '../css/style.scss';
 
 let rangeValues = [];
+let activeCurrency = 0;
+let currencies = [{
+    'type': 'us',
+    'dataBreach': 819000,
+    'securityBreach': 0.07
+},
+{
+    'type': 'uk',
+    'dataBreach': 3920000,
+    'securityBreach': 0.07
+
+},
+{
+    'type': 'au',
+    'dataBreach': 3920000,
+    'securityBreach': 0.07
+},
+{
+    'type': 'eu',
+    'dataBreach': 3920000,
+    'securityBreach': 0.07
+
+}];
+
 
 let rangeSlider = function () {
     let r = rangeValues;
@@ -27,7 +51,7 @@ let rangeSlider = function () {
 
             // $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
             // console.log(calcSecurity(rangeValues));
-            console.log('from slider hello world', calcSecurity(rangeValues));
+            // console.log('from slider::: Range', calcSecurity(rangeValues));
             $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
         });
 
@@ -45,7 +69,7 @@ let rangeSlider = function () {
         $('#cat2').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
         $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
 
-        console.log('from slider hello world', calcSecurity(rangeValues));
+        // console.log('from slider::: VAlUE', calcSecurity(rangeValues));
         $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
     });
 };
@@ -66,25 +90,25 @@ let calcProductivity = function (rangeValues) {
 
 let calcSecurity = function (rangeValues) {
     let r = rangeValues;
+    let basicRef = currencies[activeCurrency].dataBreach * 10;
 
-    let s0 = utils.securityBasic(r[3]);
-    let s1 = utils.s1(r[1]);
-    let s2 = utils.s2(r[0], r[3], r[4], r[5]);
+    let s0 = utils.securityBasic(currencies[activeCurrency].dataBreach);
+    let s1 = utils.s1(r[1], currencies[activeCurrency].securityBreach);
+    let s2 = utils.s2(r[0], r[3], r[4], r[2], r[5], r[4], basicRef);
 
     let sumSecurity = Number(Math.round(s0 + s1 + s2));
 
     // let s2 = utils.s2(r[0], r[0], r[0], r[0]);
-    // console.log('hello', s0, s1, s2);
+    console.log('INDIVIDUAL SECURITY CALC:::', s0, s1, s2);
 
     return sumSecurity;
 }
 
 let calcAgility = function (rangeValues) {
     let r = rangeValues;
-    let a0 = utils.s1(r[2]);
-    let a1 = utils.s1(r[3]);
+    let a0 = utils.agilityBasic(r[2], r[3]);
     // console.log('from calc', r);
-    let sumAgility = Number(Math.round(((a0 + a1) * 1.2) * a1) * 4560);
+    let sumAgility = a0;
 
     return sumAgility;
 }
@@ -99,7 +123,11 @@ $(document).ready(function () {
 
     rangeSlider();
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    $('select').on('change', function () {
+        activeCurrency = Number(this.value);
+        console.log('Active Currency::: ', currencies[activeCurrency].type);
     });
 
 });
