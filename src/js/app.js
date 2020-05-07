@@ -27,7 +27,6 @@ let currencies = [{
     'type': 'eu',
     'dataBreach': 3920000,
     'securityBreach': 0.07
-
 }];
 
 
@@ -49,6 +48,10 @@ let rangeSlider = function () {
             $('#cat2').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
             $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
 
+
+            $('#results-productivity').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
+            $('#results-security').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
+            $('#results-agility').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
             // $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
             // console.log(calcSecurity(rangeValues));
             // console.log('from slider::: Range', calcSecurity(rangeValues));
@@ -69,6 +72,10 @@ let rangeSlider = function () {
         $('#cat2').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
         $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
 
+        $('#results-productivity').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
+        $('#results-security').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
+        $('#results-agility').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
+
         // console.log('from slider::: VAlUE', calcSecurity(rangeValues));
         $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
     });
@@ -82,8 +89,15 @@ let calcProductivity = function (rangeValues) {
     let p3 = utils.p3(r[2], r[6]);
     let p4 = utils.p4(r[6], r[5]);
     let p5 = utils.p5(r[0], r[7]);
-    // console.log('from calc', r);
+
+    $('#r-productivity-1').html('$' + `${utils.commaSeparateNumber(p1)}`);
+
+
+    console.log('individual results', p0);
+
+
     let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
+
 
     return sumProductivity;
 }

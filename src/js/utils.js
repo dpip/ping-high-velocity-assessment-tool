@@ -52,15 +52,15 @@ const utils = {
         let step7 = Number(7);
         let step8 = Number((g * 0.1));
         let step9 = Number((step7 * step8));
-        console.log('step1', step1);
-        console.log('step2', step2);
-        console.log('step3', step3);
-        console.log('step4', step4);
-        console.log('step5', step5);
-        console.log('step6', step6);
-        console.log('step7', step7);
-        console.log('step8', step8);
-        console.log('step9', step9);
+        // console.log('step1', step1);
+        // console.log('step2', step2);
+        // console.log('step3', step3);
+        // console.log('step4', step4);
+        // console.log('step5', step5);
+        // console.log('step6', step6);
+        // console.log('step7', step7);
+        // console.log('step8', step8);
+        // console.log('step9', step9);
         return Number(step9);
     }, agilityBasic: function (a, b) {
         return (((a + b) * 1.2) * 3800);
