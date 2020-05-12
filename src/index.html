@@ -128,52 +128,52 @@
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Identities</label>
             <input id="range-0" class="range-slider__range form-control-range" type="range" step="5000" value="35000"
-              min="0" max="3000000">
+              min="500" max="3000000">
             <span class="range-slider__value">0</span>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Revenue</label>
             <input id="range-1" class="range-slider__range form-control-range" type="range" step="100000"
-              value="10000000000" min="0" max="500000000000">
+              value="10000000000" min="500000" max="500000000000">
             <span class="range-slider__value">0</span>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Applications</label>
             <input id="range-2" class="range-slider__range form-control-range" type="range" step="100" value="500"
-              min="0" max="5000">
-            <span class="range-slider__value">0</span>
+              min="100" max="5000">
+            <span class="range-slider__value"></span>
           </div>
 
           <div class="collapse" id="advanced-dropdown">
             <div id="advanced-option1" class="range-slider pt-3 pb-3 advanced-option">
               <label>Total APIs</label>
               <input id="range-3" class="range-slider__range form-control-range" type="range" step="100" value="500"
-                min="0" max="5000">
-              <span class="range-slider__value">0</span>
+                min="100" max="5000">
+              <span class="range-slider__value"></span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Size of IAM Team</label>
-              <input id="range-4" class="range-slider__range form-control-range" type="range" step="1" value="7" min="0"
+              <input id="range-4" class="range-slider__range form-control-range" type="range" step="1" value="7" min="1"
                 max="30">
-              <span class="range-slider__value">0</span>
+              <span class="range-slider__value"></span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Total Existing IAM Tools</label>
-              <input id="range-5" class="range-slider__range form-control-range" type="range" step="1" value="8" min="0"
+              <input id="range-5" class="range-slider__range form-control-range" type="range" step="1" value="8" min="1"
                 max="30">
-              <span class="range-slider__value">0</span>
+              <span class="range-slider__value"></span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: IAM/IT Admin</label>
-              <input id="range-6" class="range-slider__range form-control-range" type="range" step="2" value="32"
-                min="0" max="100">
-              <span class="range-slider__value">0</span>
+              <input id="range-6" class="range-slider__range form-control-range" name="hourly1" type="range" step="2" value="32"
+                min="20" max="100">
+              <span class="range-slider__value"></span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: Across Organization</label>
-              <input id="range-7" class="range-slider__range form-control-range" type="range" step="2" value="32"
-                min="0" max="100">
-              <span class="range-slider__value">0</span>
+              <input id="range-7" class="range-slider__range form-control-range" name="hourly2" type="range" step="2" value="32"
+                min="20" max="100">
+              <span class="range-slider__value"></span>
             </div>
           </div>
           <p>
@@ -360,10 +360,10 @@
         </ul>
         <div class="tab-content pb-4" id="myTabContent">
           <div class="tab-pane fade show active container" id="productivity" role="tabpanel" aria-labelledby="home-tab">
-            <div id="collapse-all" class="pb-4 pt-4 collapse-all">Collapse all</div>
+            <div id="collapse-all" class="pb-4 pt-4">Collapse all</div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod1" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -384,7 +384,7 @@
 
             <div class="results-toggle-top">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod2" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -404,7 +404,7 @@
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod3" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -424,7 +424,7 @@
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod4" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -444,7 +444,7 @@
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod5" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -464,7 +464,7 @@
             </div>
             <div class="results-toggle-top">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod6" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -489,7 +489,7 @@
             </div>
             <div class="results-toggle-top last-tab">
               <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod7" role="button"
-                aria-expanded="true" aria-controls="collapseExample">
+                 aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -682,6 +682,7 @@
                   // Get modal element by ID
                   var modal = document.getElementById('launchresultsform');
 
+                  document.getElementsByTagName("body")[0].classList.remove('modal-open');
                   // Remove active classes and trigger attributes
                   modal.classList.remove('show');
                   modal.setAttribute('aria-hidden', 'true');
@@ -691,13 +692,14 @@
                   var mainBanner = document.getElementsByClassName('main-banner');
                   var resultsBanner = document.getElementsByClassName('results-banner');
                   var resultsWrap = document.getElementById('results-wrap');
+                  var buttonSchedule = document.getElementsByClassName('button__schedule');
 
 
                   assessmentWrap.setAttribute('style', 'display: none');
                   mainBanner[0].setAttribute('style', 'display: none');
                   resultsBanner[0].setAttribute('style', 'display: block');
                   resultsWrap.setAttribute('style', 'display: flex');
-                  document.body.classList.remove('modal-open');
+                  buttonSchedule[0].setAttribute('style', 'display: flex');
 
                   //Get the backdrop by ID
                   var modalBackdrops = document.getElementsByClassName('modal-backdrop');
