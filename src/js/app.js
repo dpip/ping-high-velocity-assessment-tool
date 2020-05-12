@@ -9,22 +9,26 @@ let rangeValues = [];
 let activeCurrency = 0;
 let currencies = [{
     'type': 'us',
+    'currencySymbol': '$',
     'dataBreach': 8190000,
     'securityBreach': 0.07
 },
 {
     'type': 'uk',
+    'currencySymbol': '£',
     'dataBreach': 3920000,
     'securityBreach': 0.07
 
 },
 {
     'type': 'au',
+    'currencySymbol': '$',
     'dataBreach': 3920000,
     'securityBreach': 0.07
 },
 {
     'type': 'eu',
+    'currencySymbol': '€',
     'dataBreach': 3920000,
     'securityBreach': 0.07
 }];
@@ -49,13 +53,14 @@ let rangeSlider = function () {
             $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
 
 
-            $('#results-productivity').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
-            $('#results-security').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
-            $('#results-agility').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
+            $('.annual-productivity').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
+            $('.annual-security').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
+            $('.annual-agility').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
             // $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
             // console.log(calcSecurity(rangeValues));
             // console.log('from slider::: Range', calcSecurity(rangeValues));
             $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
+            $('#results-total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
             fillBar();
         });
 
@@ -73,12 +78,13 @@ let rangeSlider = function () {
         $('#cat2').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
         $('#cat3').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
 
-        $('#results-productivity').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
-        $('#results-security').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
-        $('#results-agility').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
+        $('.annual-productivity').html('$' + `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`);
+        $('.annual-security').html('$' + `${utils.commaSeparateNumber(calcSecurity(rangeValues))}`);
+        $('.annual-agility').html('$' + `${utils.commaSeparateNumber(calcAgility(rangeValues))}`);
 
         // console.log('from slider::: VAlUE', calcSecurity(rangeValues));
         $('#total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
+        $('.results-total-annual-value').html('$' + utils.commaSeparateNumber(calcAll()));
         fillBar();
     });
 };
@@ -92,7 +98,12 @@ let calcProductivity = function (rangeValues) {
     let p4 = utils.p4(r[6], r[5]);
     let p5 = utils.p5(r[0], r[7]);
 
+    $('#r-productivity-0').html('$' + `${utils.commaSeparateNumber(p0)}`);
     $('#r-productivity-1').html('$' + `${utils.commaSeparateNumber(p1)}`);
+    $('#r-productivity-2').html('$' + `${utils.commaSeparateNumber(p2)}`);
+    $('#r-productivity-3').html('$' + `${utils.commaSeparateNumber(p3)}`);
+    $('#r-productivity-4').html('$' + `${utils.commaSeparateNumber(p4)}`);
+    $('#r-productivity-5').html('$' + `${utils.commaSeparateNumber(p5)}`);
 
 
     console.log('individual results', p0);
@@ -109,9 +120,14 @@ let calcSecurity = function (rangeValues) {
     let r = rangeValues;
     let basicRef = currencies[activeCurrency].dataBreach;
 
+
     let s0 = Math.round(utils.securityBasic(Number(currencies[activeCurrency].dataBreach)));
     let s1 = Math.round(utils.s1(r[1], Number(currencies[activeCurrency].securityBreach)));
     let s2 = Math.round(utils.s2(r[0], r[3], r[4], r[2], r[5], r[4], Number(basicRef)));
+
+    $('#r-security-0').html('$' + `${utils.commaSeparateNumber(s0)}`);
+    $('#r-security-1').html('$' + `${utils.commaSeparateNumber(s1)}`);
+    $('#r-security-2').html('$' + `${utils.commaSeparateNumber(s2)}`);
 
     let sumSecurity = (s0 + s1) + s2;
 
@@ -125,7 +141,10 @@ let calcSecurity = function (rangeValues) {
 let calcAgility = function (rangeValues) {
     let r = rangeValues;
     let a0 = utils.agilityBasic(r[2], r[3]);
-    // console.log('from calc', r);
+
+    $('#results-agility').html('$' + `${utils.commaSeparateNumber(a0)}`);
+    // $('#r-agility-1').html('$' + `${utils.commaSeparateNumber(s1)}`);
+
     let sumAgility = a0;
 
     console.log("A0 here", a0);
@@ -136,6 +155,7 @@ let calcAgility = function (rangeValues) {
 
 let calcAll = function () {
     return (calcProductivity(rangeValues) + calcSecurity(rangeValues) + calcAgility(rangeValues));
+    setParams();
 }
 
 let fillBar = function () {
@@ -145,8 +165,19 @@ let fillBar = function () {
     $('#fill-productivity').css({ 'width': p + '%' });
     $('#fill-security').css({ 'width': r + '%' });
     $('#fill-agility').css({ 'width': a + '%' });
+    // setParams();
     // return (a / calcAll() * 100);
 }
+
+let setParams = function () {
+    let loc = location.href;
+    loc += loc.indexOf("?") === -1 ? "?" : "&";
+    location.href = loc + "ts=true";
+
+    return false;
+}
+
+// setParams();
 
 $(document).ready(function () {
 
@@ -158,6 +189,16 @@ $(document).ready(function () {
         activeCurrency = Number(this.value);
         console.log('Active Currency::: ', currencies[activeCurrency].type);
     });
-    // fillBar();
+    $('#collapse-all').on('click', function () {
+        if ($(this).hasClass('collapse-all')) {
+            $(this).removeClass('collapse-all');
+            $('.results-tab-content').removeClass('collapse');
+            $('.toggle-advanced').attr("aria-expanded", "true");
+        } else {
+            $(this).addClass('collapse-all');
+            $('.results-tab-content').addClass('collapse');
+            $('.toggle-advanced').attr("aria-expanded", "false");
+        }
+    });
 
 });

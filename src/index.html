@@ -250,7 +250,9 @@
           <span class="disclaimer"><sup>*</sup>Any results or figures provided through this assessment are estimates
             only and in no
             way a guarantee of actual results.
-            Use of this tool is subject to the terms of this disclaimer.</span>
+            Use of this tool is subject to the terms of <a target="_blank"
+              href="https://www.pingidentity.com/en/legal/workforce-identity-business-value-assessment-disclaimer.html">this
+              disclaimer</a>.</span>
         </div>
       </div>
     </section>
@@ -282,7 +284,7 @@
               </div>
               <div class="tab-label">
                 <p>Productivity</p>
-                <h4 id="results-productivity">5,000</h4>
+                <h4 class="annual-productivity"></h4>
               </div>
               <div class="active-tab-bar"></div>
               <div class="active-tab-bar-bottom"></div>
@@ -312,7 +314,7 @@
               </div>
               <div class="tab-label">
                 <p>Security</p>
-                <h4 id="results-security">5,000</h4>
+                <h4 class="annual-security"></h4>
               </div>
               <div class="active-tab-bar"></div>
               <div class="active-tab-bar-bottom"></div>
@@ -349,7 +351,7 @@
               </div>
               <div class="tab-label">
                 <p>Agility</p>
-                <h4 id="results-agility">5,000</h4>
+                <h4 class="annual-agility"></h4>
               </div>
               <div class="active-tab-bar"></div>
               <div class="active-tab-bar-bottom"></div>
@@ -358,10 +360,10 @@
         </ul>
         <div class="tab-content pb-4" id="myTabContent">
           <div class="tab-pane fade show active container" id="productivity" role="tabpanel" aria-labelledby="home-tab">
-
+            <div id="collapse-all" class="pb-4 pt-4 collapse-all">Collapse all</div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod1" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod1" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -370,9 +372,9 @@
                 </svg>
                 Employees stop wasting time on passwords
               </a>
-              <h4 id="r-productivity-1">$5,000</h4>
+              <h4 id="r-productivity-0"></h4>
             </div>
-            <div class="results-tab-content collapse" id="prod1">
+            <div class="results-tab-content show" id="prod1">
               <p>On average, employees spend 10.93 hours per year entering/resetting passwords1. Multiply that by
                 employee wages, and you
                 could be looking at MILLIONS of dollars. Federated single sign-on (SSO) and self-service password reset
@@ -381,8 +383,8 @@
             </div>
 
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod2" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod2" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -391,9 +393,9 @@
                 </svg>
                 IT spends less time resetting passwords
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-productivity-1"></h4>
             </div>
-            <div class="results-tab-content collapse" id="prod2">
+            <div class="results-tab-content show" id="prod2">
               <p>For thousands of password reset requests per year, there's an IT admin doing the work. But that task
                 can be easily
                 automated. Self-service password reset lets your IT security team focus on higher-value tasks, like
@@ -401,8 +403,8 @@
                 posture.</p>
             </div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod3" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod3" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -411,9 +413,9 @@
                 </svg>
                 IT and app teams don't waste time on IAM service requests
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-productivity-2"></h4>
             </div>
-            <div class="results-tab-content collapse" id="prod3">
+            <div class="results-tab-content show" id="prod3">
               <p>When app teams consume IT services, hours are wasted communicating and fulfilling requests. Delegated
                 admin and a
                 central operating portal for identity and access management can empower your business teams with
@@ -421,8 +423,8 @@
                 onboarding and management.</p>
             </div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod4" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod4" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -431,9 +433,9 @@
                 </svg>
                 IT spends less time on IAM customizations
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-productivity-3"></h4>
             </div>
-            <div class="results-tab-content collapse" id="prod4">
+            <div class="results-tab-content show" id="prod4">
               <p>Customizations on legacy IAM tools use IT resources and make upgrades virtually impossible. Adopting an
                 identity
                 platform that is standards-based and already works with any app, any cloud and any directory
@@ -441,8 +443,8 @@
                 spend more time on high-value projects instead.</p>
             </div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod5" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod5" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -451,9 +453,9 @@
                 </svg>
                 IT manages and maintains fewer IAM tools
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-productivity-4"></h4>
             </div>
-            <div class="results-tab-content collapse" id="prod5">
+            <div class="results-tab-content show" id="prod5">
               <p>You may have a fragile patchwork of siloed IAM systems. If so, it’s a nightmare to manage. When
                 mission-critical systems
                 lack support and are nearing end-of-life, it’s time to rationalize. A workforce authentication authority
@@ -461,8 +463,8 @@
                 with less maintenance.</p>
             </div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod6" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod6" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -471,9 +473,9 @@
                 </svg>
                 Employees aren't unnecessarily interrupted
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-productivity-5"></h4>
             </div>
-            <div class="results-tab-content collapse" id="prod6">
+            <div class="results-tab-content show" id="prod6">
               <p>Multi-factor authentication (MFA) reduces password-related data breaches by 99.99%<sup>2</sup>. But if
                 you’re
                 using legacy MFA
@@ -486,8 +488,8 @@
               </ol>
             </div>
             <div class="results-toggle-top last-tab">
-              <a id="toggle-advanced" data-toggle="collapse" href="#prod7" role="button" aria-expanded="true"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#prod7" role="button"
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -496,9 +498,9 @@
                 </svg>
                 Total value from increased productivity
               </a>
-              <h4>$5,000</h4>
+              <h3 class="annual-productivity"></h3>
             </div>
-            <div class="results-tab-content total-tab-content" id="prod7">
+            <div class="results-tab-content show total-tab-content" id="prod7">
               <p>It adds up—all the hours employees spend struggling to access apps, entering and resetting passwords,
                 and being locked
                 out. Workforce identity solutions give employees time back to get more work done. Meanwhile, IT enjoys
@@ -507,13 +509,14 @@
             </div>
             <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
-              <h2>1,000,000</h2>
+
+              <h2 class="results-total-annual-value"></h2>
             </div>
           </div>
           <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="profile-tab">
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#sec1" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#sec1" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -522,9 +525,9 @@
                 </svg>
                 IT security teams can mitigate data breaches
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-security-0"></h4>
             </div>
-            <div class="results-tab-content collapse" id="sec1">
+            <div class="results-tab-content show" id="sec1">
               <p>The average cost of a data breach in the U.S. is $8.19M and $3.92M globally.<sup>1</sup> 52% of data
                 breaches are
                 due to hacking,
@@ -533,8 +536,8 @@
                 99.9%.<sup>3</sup></p>
             </div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#sec2" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#sec2" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -543,9 +546,9 @@
                 </svg>
                 Employees stop sharing sensitive customer data
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-security-1"></h4>
             </div>
-            <div class="results-tab-content collapse" id="sec2">
+            <div class="results-tab-content show" id="sec2">
               <p>Data privacy is top of mind. 23% of sensitive data breaches are caused by internal
                 employees,<sup>4</sup> so they
                 shouldn’t have
@@ -554,8 +557,8 @@
                 Zero Trust security.</p>
             </div>
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#sec3" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#sec3" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -564,9 +567,9 @@
                 </svg>
                 IT professionals can focus on security posture
               </a>
-              <h4>$5,000</h4>
+              <h4 id="r-security-2"></h4>
             </div>
-            <div class="results-tab-content collapse border-none" id="sec3">
+            <div class="results-tab-content show border-none" id="sec3">
               <p>IAM and IT security professionals want to focus on projects that boost security. Instead, they may have
                 to work on
                 administrative tasks like password resets and customizing legacy tools. Leveraging self-service,
@@ -580,8 +583,8 @@
               </ol>
             </div>
             <div class="results-toggle-top last-tab">
-              <a id="toggle-advanced" data-toggle="collapse" href="#sec4" role="button" aria-expanded="true"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#sec4" role="button"
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -590,9 +593,9 @@
                 </svg>
                 Total value from reduced security risk
               </a>
-              <h4>$5,000</h4>
+              <h4 class="annual-security"></h4>
             </div>
-            <div class="results-tab-content total-tab-content" id="sec4">
+            <div class="results-tab-content show total-tab-content" id="sec4">
               <p>The average cost of a data breach is $8.19M in the U.S. and $3.92M globally<sup>1</sup>. Workforce
                 identity
                 solutions reduce your
@@ -602,13 +605,14 @@
             </div>
             <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
-              <h2>1,000,000</h2>
+
+              <h2 class="results-total-annual-value"></h2>
             </div>
           </div>
           <div class="tab-pane fade" id="agility" role="tabpanel" aria-labelledby="agility-tab">
             <div class="results-toggle-top">
-              <a id="toggle-advanced" data-toggle="collapse" href="#agil1" role="button" aria-expanded="false"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#agil1" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -617,17 +621,17 @@
                 </svg>
                 New applications get adopted rapidly
               </a>
-              <h4>$5,000</h4>
+              <h2 class="annual-agility"></h2>
             </div>
-            <div class="results-tab-content collapse" id="agil1">
+            <div class="results-tab-content show" id="agil1">
               <p>In the weeks it takes to onboard new employee applications to legacy IAM, you’re missing out on
                 potential value. Speed
                 up application integration and give your workforce one-click access to the latest productivity tools.
               </p>
             </div>
             <div class="results-toggle-top last-tab">
-              <a id="toggle-advanced" data-toggle="collapse" href="#agil2" role="button" aria-expanded="true"
-                aria-controls="collapseExample">
+              <a id="toggle-advanced" class="toggle-advanced" data-toggle="collapse" href="#agil2" role="button"
+                aria-expanded="true" aria-controls="collapseExample">
 
                 <svg id="tog-d" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                   width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" stroke="#2b80c3" fill="#2b80c3">
@@ -636,9 +640,9 @@
                 </svg>
                 Total value from increased business agility
               </a>
-              <h4>$5,000</h4>
+              <h2 class="annual-agility"></h2>
             </div>
-            <div class="results-tab-content total-tab-content" id="agil2">
+            <div class="results-tab-content show total-tab-content" id="agil2">
               <p>Businesses don’t like to wait for IT. To be the champion of digital transformation, you have to enable
                 business agility.
                 Ping’s workforce identity solutions improve time to value for business applications and help your
@@ -647,7 +651,8 @@
             </div>
             <div class="total-value-per-category pt-5">
               <h2>Total annual value from IAM</h2>
-              <h2>1,000,000</h2>
+
+              <h2 class="results-total-annual-value"></h2>
             </div>
           </div>
         </div>
