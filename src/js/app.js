@@ -90,6 +90,7 @@ let rangeSlider = function () {
           utils.commaSeparateNumber(calcAll())
       );
     });
+    fillBar();
   });
 
   value.each(function () {
@@ -241,7 +242,6 @@ let calcAll = function () {
     calcSecurity(rangeValues) +
     calcAgility(rangeValues)
   );
-  setParams();
 };
 
 let fillBar = function () {
@@ -251,6 +251,8 @@ let fillBar = function () {
   $("#fill-productivity").css({ width: p + "%" });
   $("#fill-security").css({ width: r + "%" });
   $("#fill-agility").css({ width: a + "%" });
+
+
   // setParams();
   // return (a / calcAll() * 100);
 };
