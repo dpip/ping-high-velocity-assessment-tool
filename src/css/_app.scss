@@ -553,7 +553,9 @@ footer {
   color: $navy;
   border-radius: 2px !important;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  padding: 16px;
+  padding: 20px;
+  text-align: left;
+  min-width: 250px;
 }
 
 .tooltip.show {
@@ -569,6 +571,14 @@ footer {
     color: $navy;
     // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
+.bs-tooltip-auto[x-placement^=bottom] .arrow:before, .bs-tooltip-top .arrow:before {
+  top: 0;
+  border-width: .4rem .4rem 0;
+  border-bottom-color: $gray;
+  color: $navy;
+  // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
 
 #toggle-advanced {
   display: flex;

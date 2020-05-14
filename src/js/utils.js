@@ -1,7 +1,14 @@
 const utils = {
-  utilTest: function () {
-    console.log("utils ready");
-  },
+  encodeData: function(data) {
+    //Format object items to be query string params
+    let paramsData = Object.keys(data)
+        .map(function(key) {
+            return [key, data[key]].map(encodeURIComponent).join("=");
+        })
+        .join("&");
+
+    return paramsData;
+},
   sortByKey: function (array, key) {
     return Array.sort(function (a, b) {
       let x = a[key];
