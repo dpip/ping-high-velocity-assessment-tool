@@ -5,6 +5,8 @@ import "bootstrap";
 import utils from "./utils.js";
 import "../css/style.scss";
 
+let w = window.location;
+
 let rangeValues = [];
 let activeCurrency = 0;
 let currencies = [
@@ -37,6 +39,11 @@ let currencies = [
     hourlyWage: 50,
   },
 ];
+
+let productivityResults;
+let securityResults;
+let agilityResults
+
 
 let rangeSlider = function () {
   let r = rangeValues;
@@ -78,9 +85,7 @@ let rangeSlider = function () {
         `${currencies[activeCurrency].currencySymbol}` +
           `${utils.commaSeparateNumber(calcAgility(rangeValues))}`
       );
-      // $('#cat2').html('$' + `${calcSecurity(rangeValues)}`);
-      // console.log(calcSecurity(rangeValues));
-      // console.log('from slider::: Range', calcSecurity(rangeValues));
+      
       $("#total-annual-value").html(
         `${currencies[activeCurrency].currencySymbol}` +
           utils.commaSeparateNumber(calcAll())
@@ -95,8 +100,6 @@ let rangeSlider = function () {
 
   value.each(function () {
     let value = $(this).prev().attr("value");
-    let id = $(this).prev().attr("id");
-    let sum = $("#total-annual-value");
 
     $(this).html(utils.commaSeparateNumber(value));
     rangeValues.push(Number(value));
@@ -149,6 +152,8 @@ let calcProductivity = function (rangeValues) {
   let p4 = utils.p4(r[6], r[5]);
   let p5 = utils.p5(r[0], r[7]);
 
+  productivityResults = [p0, p1, p2, p3, p4, p5];
+
   $("#r-productivity-0").html(
     `${currencies[activeCurrency].currencySymbol}` +
       `${utils.commaSeparateNumber(p0)}`
@@ -174,11 +179,9 @@ let calcProductivity = function (rangeValues) {
       `${utils.commaSeparateNumber(p5)}`
   );
 
-  console.log("individual results", p0);
+  console.log("results array prod", productivityResults);
 
   let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
-
-  // fillBar();
 
   return sumProductivity;
 };
@@ -257,15 +260,20 @@ let fillBar = function () {
   // return (a / calcAll() * 100);
 };
 
-let setParams = function () {
-  let loc = location.href;
-  loc += loc.indexOf("?") === -1 ? "?" : "&";
-  location.href = loc + "ts=true";
 
-  return false;
-};
+let setParams = function (w) {
+  if (w.search.indexOf("aa_campaign") == -1) {
+      window.location = w + (w.search.indexOf("?") == -1 ? "?" : "&") + productivityResults;
+  }
+}
 
-// setParams();
+let updateParams = function () {
+  
+}
+
+let searchForParams = function () {
+
+}
 
 $(document).ready(function () {
   rangeSlider();
@@ -287,19 +295,25 @@ $(document).ready(function () {
       activeCurrency
     );
   });
-  $("#collapse-all").on("click", function () {
+  let readToggle = function (content) {
+    console.log('innerhtml', content.html());
+    if (content.html() === 'Collapse all') {
+      content.html('Expand all');
+    } else {
+      content.html('Collapse all');
+    }
+  }
+  $(".collapse-toggle").on("click", function () {
+    readToggle($(this));
     if ($(this).hasClass("collapse-all")) {
       $(this).removeClass("collapse-all");
       $(".results-tab-content").removeClass("collapse");
       $(".results-tab-content").addClass("show");
-      $(this).html("Expand all");
       $(".toggle-advanced").attr("aria-expanded", "true");
     } else {
-      // $(this).addClass('collapse-all');
       $(this).addClass("collapse-all");
       $(".results-tab-content").removeClass("show");
       $(".results-tab-content").addClass("collapse");
-      $(this).html("Collapse all");
       $(".toggle-advanced").attr("aria-expanded", "false");
     }
   });

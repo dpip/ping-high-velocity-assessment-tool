@@ -678,8 +678,10 @@ footer {
   }
 }
 
-#collapse-all {
+.collapse-toggle {
   cursor: pointer;
+  color: #2b80c3;
+  font-weight: 400;
 }
 
 .bold {
@@ -688,4 +690,10 @@ footer {
 
 #total-annual-value {
   font-size: 3rem;
+}
+
+.citation-sm {
+  font-size: 11px;
+  margin-left: 24px;
+  padding-bottom: 30px;
 }
