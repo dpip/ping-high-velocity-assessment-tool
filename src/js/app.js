@@ -40,9 +40,9 @@ let currencies = [
   },
 ];
 
-let productivityResults;
-let securityResults;
-let agilityResults
+let productivityResults = [utils.productivityBasic, utils.p1, utils.p2, utils.p3, utils.p4, utils.p5];
+let securityResults = [utils.securityBasic, utils.s1, utils.s2];
+let agilityResults = [utils.agilityBasic];
 
 
 let rangeSlider = function () {
@@ -200,6 +200,8 @@ let calcSecurity = function (rangeValues) {
     utils.s2(r[0], r[3], r[4], r[2], r[5], r[4], Number(basicRef))
   );
 
+  securityResults = [s0, s1, s2];
+
   $("#r-security-0").html(
     `${currencies[activeCurrency].currencySymbol}` +
       `${utils.commaSeparateNumber(s0)}`
@@ -232,6 +234,8 @@ let calcAgility = function (rangeValues) {
   );
   // $('#r-agility-1').html('$' + `${utils.commaSeparateNumber(s1)}`);
 
+  agilityResults = [a0];  
+
   let sumAgility = a0;
 
   console.log("A0 here", a0);
@@ -261,18 +265,11 @@ let fillBar = function () {
 };
 
 
-let setParams = function (w) {
-  if (w.search.indexOf("aa_campaign") == -1) {
-      window.location = w + (w.search.indexOf("?") == -1 ? "?" : "&") + productivityResults;
-  }
-}
-
-let updateParams = function () {
-  
-}
-
-let searchForParams = function () {
-
+let init = function() {
+  let catArray = [...productivityResults, ...securityResults, ...agilityResults]
+  let data = window.document.location.hash = utils.encodeData(catArray);
+  window.history.pushState(null, "", window.location.href.replace("#", '?results:' + `${data}`));
+  console.log('category array', catArray);
 }
 
 $(document).ready(function () {
@@ -280,12 +277,14 @@ $(document).ready(function () {
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
   });
-  $("select").on("change", function () {
+  
+
+  $("select").on("input change", function () {
     activeCurrency = Number(this.value);
     $(".currency-symbol").html(`${currencies[activeCurrency].currencySymbol}`);
     $("#range-6, #range-7").attr(
       "value",
-      currencies[activeCurrency].hourlyWage
+      Number(currencies[activeCurrency].hourlyWage)
     );
 
     rangeSlider();
@@ -317,4 +316,19 @@ $(document).ready(function () {
       $(".toggle-advanced").attr("aria-expanded", "false");
     }
   });
+
+  if (window.location.href.indexOf("results:") > -1) {
+      // //Initialize results
+      // results.init();
+      // //Show the graph
+      // results.showFinal();
+      console.log('RESULTS DETECTED');
+  } else if(window.location.href.indexOf("assessment:") > -1) {
+    console.log('NO RESULTS DETECTED');
+  } else {
+    window.history.pushState("object or string", "Title", "/");
+    init();
+    return false;
+  }
+
 });
