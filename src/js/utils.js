@@ -45,10 +45,10 @@ const utils = {
     return Number(a * 12.5 * 0.95) * b;
   },
   securityBasic: function (a) {
-    return Number(a * 10 * 0.416 * 0.296 * 0.999);
+    return a * 10 * 0.416 * 0.296 * 0.999;
   },
   s1: function (a, b) {
-    return Number(a * 0.04 * 0.057868 * b);
+    return a * 0.04 * 0.057868 * b;
   },
   s2: function (a, b, c, d, e, f, g) {
     let step1 = Number((a * 147) / 60);

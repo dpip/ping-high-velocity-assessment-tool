@@ -141,6 +141,7 @@ let rangeSlider = function () {
     );
   });
   fillBar();
+  // init();
 };
 
 let calcProductivity = function (rangeValues) {
@@ -151,8 +152,6 @@ let calcProductivity = function (rangeValues) {
   let p3 = utils.p3(r[2], r[6]);
   let p4 = utils.p4(r[6], r[5]);
   let p5 = utils.p5(r[0], r[7]);
-
-  productivityResults = [p0, p1, p2, p3, p4, p5];
 
   $("#r-productivity-0").html(
     `${currencies[activeCurrency].currencySymbol}` +
@@ -183,6 +182,8 @@ let calcProductivity = function (rangeValues) {
 
   let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
 
+  productivityResults = [p0, p1, p2, p3, p4, p5];
+  // init();
   return sumProductivity;
 };
 
@@ -249,6 +250,7 @@ let calcAll = function () {
     calcSecurity(rangeValues) +
     calcAgility(rangeValues)
   );
+  // init();
 };
 
 let fillBar = function () {
@@ -263,6 +265,10 @@ let fillBar = function () {
   // setParams();
   // return (a / calcAll() * 100);
 };
+
+let test = function() {
+  console.log('TESTTTTTTTT');
+}
 
 
 let init = function() {
@@ -330,5 +336,5 @@ $(document).ready(function () {
     init();
     return false;
   }
-
+  // window.test = test();
 });
