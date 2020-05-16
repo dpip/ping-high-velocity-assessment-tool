@@ -53,10 +53,11 @@ let rangeSlider = function () {
     value = $(".range-slider__value");
 
   slider.each(function () {
+    
     range.on("input", function () {
       let id = utils.parseNumber($(this).attr("id"));
       let updatedValue = Number(this.value);
-      let sum = $("#total-annual-value");
+      range.val(updatedValue);
       $(this).next(value).html(utils.commaSeparateNumber(this.value));
       rangeValues[id] = updatedValue;
 
@@ -95,11 +96,13 @@ let rangeSlider = function () {
           utils.commaSeparateNumber(calcAll())
       );
     });
+    console.log('range val', range.val());
     fillBar();
   });
 
   value.each(function () {
     let value = $(this).prev().attr("value");
+    // range.val(updatedValue);
 
     $(this).html(utils.commaSeparateNumber(value));
     rangeValues.push(Number(value));
@@ -323,18 +326,17 @@ $(document).ready(function () {
     }
   });
 
-  if (window.location.href.indexOf("results:") > -1) {
-      // //Initialize results
-      // results.init();
-      // //Show the graph
-      // results.showFinal();
-      console.log('RESULTS DETECTED');
-  } else if(window.location.href.indexOf("assessment:") > -1) {
-    console.log('NO RESULTS DETECTED');
-  } else {
-    window.history.pushState("object or string", "Title", "/");
-    init();
-    return false;
-  }
-  // window.test = test();
+  // if (window.location.href.indexOf("results:") > -1) {
+  //     // //Initialize results
+  //     // results.init();
+  //     // //Show the graph
+  //     // results.showFinal();
+  //     console.log('RESULTS DETECTED');
+  // } else if(window.location.href.indexOf("assessment:") > -1) {
+  //   console.log('NO RESULTS DETECTED');
+  // } else {
+  //   window.history.pushState("object or string", "Title", "/");
+  //   init();
+  //   return false;
+  // }
 });
