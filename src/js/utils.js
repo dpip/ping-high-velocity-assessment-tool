@@ -23,7 +23,10 @@ const utils = {
     console.log(val);
     return val;
   },
-  parseNumber: function (str) {
+  parseNumber: function(str) {
+    return Number(str.split("-")[1]);
+  },
+  parseID: function(str) {
     return Number(str.split("-")[1]);
   },
   productivityBasic: function (a, b) {
@@ -66,6 +69,31 @@ const utils = {
   agilityBasic: function (a, b) {
     return (a + b) * 1.2 * 3800;
   },
+  getUrlVars: function() {
+    let vars = [],
+            hash;
+        let hashes = window.location.href
+            .slice(window.location.href.indexOf("?") + 1)
+            .split("&");
+        for (let i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split("=");
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+  },
+  convertNumbertoWords: function(labelValue) {
+    // Nine Zeroes for Billions
+      return Math.abs(Number(labelValue)) >= 1.0e9
+          ? Math.abs(Number(labelValue)) / 1.0e9 + "B"
+          : // Six Zeroes for Millions
+            Math.abs(Number(labelValue)) >= 1.0e6
+            ? Math.abs(Number(labelValue)) / 1.0e6 + "M"
+            : // Three Zeroes for Thousands
+              Math.abs(Number(labelValue)) >= 1.0e3
+              ? Math.abs(Number(labelValue)) / 1.0e3 + "K"
+              : Math.abs(Number(labelValue));
+  }
 };
 
 export default utils;
