@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 const utils = {
   encodeData: function(data) {
     //Format object items to be query string params
@@ -27,6 +29,11 @@ const utils = {
   },
   parseID: function(str) {
     return Number(str.split("-")[1]);
+  },
+  tooltip: function() {
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   },
   productivityBasic: function (a, b) {
     return Number(Math.round(a * b * 10.93 * 0.9947643979));

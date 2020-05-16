@@ -7,14 +7,12 @@ import currencies from "./currencies.js";
 import results from './results.js';
 import "../css/style.scss";
 
-let w = window.location;
-
 let rangeValues = [];
 let activeCurrency = 0;
 
-let productivityResults = [utils.productivityBasic, utils.p1, utils.p2, utils.p3, utils.p4, utils.p5];
-let securityResults = [utils.securityBasic, utils.s1, utils.s2];
-let agilityResults = [utils.agilityBasic];
+let productivityResults;
+let securityResults;
+let agilityResults;
 
 $(".range-slider__range").on("input change", function() {
   const sliderID = utils.parseID($(this).attr("id"));
@@ -27,28 +25,30 @@ $(".range-slider__range").on("input change", function() {
   setCategories();
   setEachAnnual();
 
-  $("#total-annual-value, #results-total-annual-value").html(
+  $("#total-annual-value, .results-total-annual-value").html(
     `${currencies[activeCurrency].currencySymbol}` +
       utils.commaSeparateNumber(calcAll())
   );
 
 });
-
 let setCategories = function() {
+  let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
   for(var i = 0; i < 3; i++) {
     $("#cat" + i).html(
       `${currencies[activeCurrency].currencySymbol}` +
-        `${utils.commaSeparateNumber(calcProductivity(rangeValues))}`
+        `${utils.commaSeparateNumber(totals[i])}`
     );
   }
 }
 
 let setEachAnnual = function() {
   let categories = ['productivity', 'security', 'agility'];
+  let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
+
   for(var i = 0; i < 3; i++) {
     $(".annual-" + categories[i]).html(
       `${currencies[activeCurrency].currencySymbol}` +
-        `${utils.commaSeparateNumber(calcAgility(rangeValues))}`
+        `${utils.commaSeparateNumber(totals[i])}`
     );
   }
 }
@@ -144,7 +144,7 @@ let calcAgility = function (rangeValues) {
 
   $("#results-agility").html(
     `${currencies[activeCurrency].currencySymbol}` +
-      `${utils.commaSeparateNumber(a0)}`
+      `${utils.commaSeparateNumber(agilityResults[0])}`
   );
 
   return sumAgility;
@@ -156,7 +156,6 @@ let calcAll = function () {
     calcSecurity(rangeValues) +
     calcAgility(rangeValues)
   );
-  // init();
 };
 
 let fillBar = function () {
@@ -180,19 +179,31 @@ let fillBar = function () {
 $(document).ready(function () {
 
   // set tooltip functionality
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
+  // $(function () {
+  //   $('[data-toggle="tooltip"]').tooltip();
+  // });
+
+  utils.tooltip();
   
   
   $("select").on("input change", function () {
     activeCurrency = Number(this.value);
     $(".currency-symbol").html(`${currencies[activeCurrency].currencySymbol}`);
+    $("#total-annual-value, .results-total-annual-value").html(
+      `${currencies[activeCurrency].currencySymbol}` +
+        utils.commaSeparateNumber(calcAll())
+    );
     $("#range-6, #range-7").attr(
       "value",
       Number(currencies[activeCurrency].hourlyWage)
     );
-    setInitialValues();
+    rangeValues[6] = Number(currencies[activeCurrency].hourlyWage);
+    rangeValues[7] = Number(currencies[activeCurrency].hourlyWage);
+    setCategories();
+    setEachAnnual();
+    fillBar();
+    // setInitialValues();
+    console.log(rangeValues);
   });
   let readToggle = function (content) {
     console.log('innerhtml', content.html());
