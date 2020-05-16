@@ -2,7 +2,7 @@ import utils from './utils.js'
 
 const results = {
     init: function() {
-        let urlParams = utils.getUrlVars();
+        utils.getUrlVars();
         
     },
     showFinal: function() {

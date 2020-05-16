@@ -29,7 +29,7 @@ $(".range-slider__range").on("input change", function() {
     `${currencies[activeCurrency].currencySymbol}` +
       utils.commaSeparateNumber(calcAll())
   );
-  fillBar();
+
 });
 let setCategories = function() {
   let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
@@ -121,8 +121,7 @@ let calcSecurity = function (rangeValues) {
   );
 
   securityResults = [s0, s1, s2];
-
-  console.log('security two function', Number(currencies[activeCurrency].dataBreach))
+  
 
   for(var i = 0; i < 3; i++) {
     $("#r-security-" + i).html(
@@ -171,19 +170,14 @@ let fillBar = function () {
 };
 
 
-// let init = function() {
-//   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
-//   let data = window.document.location.hash = utils.encodeData(catArray);
-//   window.history.pushState(null, "", window.location.href.replace("#", '?results:' + `${data}`));
-//   console.log('category array', catArray);
-// }
+let initResults = function() {
+  let catArray = [...productivityResults, ...securityResults, ...agilityResults]
+  let data = window.document.location.hash = utils.encodeData(catArray);
+  window.history.pushState(null, "", window.location.href.replace("#", '?results' + `${data}`));
+  console.log('category array', catArray);
+}
 
 $(document).ready(function () {
-
-  // set tooltip functionality
-  // $(function () {
-  //   $('[data-toggle="tooltip"]').tooltip();
-  // });
 
   utils.tooltip();
   
@@ -201,6 +195,9 @@ $(document).ready(function () {
     );
     rangeValues[6] = Number(currencies[activeCurrency].hourlyWage);
     rangeValues[7] = Number(currencies[activeCurrency].hourlyWage);
+    // last update that may have affected math below
+    setInitialValues();
+    // end
     setCategories();
     setEachAnnual();
     fillBar();
@@ -232,12 +229,15 @@ $(document).ready(function () {
 
   setInitialValues();
 
-  // if (window.location.href.indexOf("results") > -1) {
-  //     //Initialize results
-  //     results.init();
-  //     //Show the graph
-  //     results.showFinal();
-  // } else {
-  //   console.log('NO RESULTS DETECTED');
-  // }
+  if (window.location.href.indexOf("results") > -1) {
+      //Initialize results
+      results.init();
+      //Show the graph
+      results.showFinal();
+      console.log('RESULTS DETECTED');
+  } else {
+    console.log('NO RESULTS DETECTED');
+
+    initResults();
+  }
 });
