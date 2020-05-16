@@ -20,7 +20,6 @@ const utils = {
     while (/(\d+)(\d{3})/.test(val.toString())) {
       val = val.toString().replace(/(\d+)(\d{3})/, "$1" + "," + "$2");
     }
-    console.log(val);
     return val;
   },
   parseNumber: function(str) {
@@ -63,7 +62,6 @@ const utils = {
     let step7 = Math.min(step6, f);
     let step8 = Number(g * 0.1);
     let step9 = Number(step7 * step8);
-    console.log("STEP 7", step7);
     return Number(step9);
   },
   agilityBasic: function (a, b) {
