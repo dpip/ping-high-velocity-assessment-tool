@@ -29,7 +29,7 @@ $(".range-slider__range").on("input change", function() {
     `${currencies[activeCurrency].currencySymbol}` +
       utils.commaSeparateNumber(calcAll())
   );
-
+  fillBar();
 });
 let setCategories = function() {
   let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
@@ -121,6 +121,8 @@ let calcSecurity = function (rangeValues) {
   );
 
   securityResults = [s0, s1, s2];
+
+  console.log('security two function', Number(currencies[activeCurrency].dataBreach))
 
   for(var i = 0; i < 3; i++) {
     $("#r-security-" + i).html(
