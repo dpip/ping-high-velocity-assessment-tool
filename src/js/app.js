@@ -31,6 +31,7 @@ $(".range-slider__range").on("input change", function() {
   );
 
 });
+
 let setCategories = function() {
   let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
   for(var i = 0; i < 3; i++) {
@@ -229,15 +230,15 @@ $(document).ready(function () {
 
   setInitialValues();
 
-  if (window.location.href.indexOf("results") > -1) {
-      //Initialize results
-      results.init();
-      //Show the graph
-      results.showFinal();
-      console.log('RESULTS DETECTED');
-  } else {
-    console.log('NO RESULTS DETECTED');
+  // if (window.location.href.indexOf("results") > -1) {
+  //     //Initialize results
+  //     results.init();
+  //     //Show the graph
+  //     results.showFinal();
+  //     console.log('RESULTS DETECTED');
+  // } else {
+  //   console.log('NO RESULTS DETECTED');
 
-    initResults();
-  }
+  //   initResults();
+  // }
 });
