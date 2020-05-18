@@ -7,6 +7,7 @@ import currencies from "./currencies.js";
 import results from './results.js';
 import "../css/style.scss";
 
+let initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32];
 let rangeValues = [];
 let activeCurrency = 0;
 
@@ -29,6 +30,8 @@ $(".range-slider__range").on("input change", function() {
     `${currencies[activeCurrency].currencySymbol}` +
       utils.commaSeparateNumber(calcAll())
   );
+
+  fillBar();
 
 });
 
@@ -76,10 +79,12 @@ let setInitialValues = function () {
         );
         
       });
-      range.each(function () {
-        let value = $(this).prev().attr("value");
-        $(this).next(value).html(utils.commaSeparateNumber(this.value));
-      });
+
+      // for(var i; i < initialRangeValues.length; i++) {
+      //   let og = initialRangeValues[i];
+      //   $('#range-' + i).attr("value", og).slider('refresh');
+      //   console.log(initialRangeValues[i]);
+      // }
 
       fillBar();
 };
@@ -190,15 +195,40 @@ $(document).ready(function () {
       `${currencies[activeCurrency].currencySymbol}` +
         utils.commaSeparateNumber(calcAll())
     );
+    // $("#range-0").attr("value", Number(35000));
+    // $("#range-1").attr("value", Number(10000000000));
+    // $("#range-2").attr("value", Number(500));
+    // $("#range-3").attr("value", Number(500));
+    // $("#range-4").attr("value", Number(7));
+    // $("#range-5").attr("value", Number(8));
     $("#range-6, #range-7").attr(
       "value",
       Number(currencies[activeCurrency].hourlyWage)
     );
+
+    document.getElementById('range-0').value = 35000;
+    document.getElementById('range-1').value = 10000000000;
+    document.getElementById('range-2').value = 500;
+    document.getElementById('range-3').value = 500;
+    document.getElementById('range-4').value = 7;
+    document.getElementById('range-5').value = 8;
+    document.getElementById('range-6').value = Number(currencies[activeCurrency].hourlyWage);
+    document.getElementById('range-7').value = Number(currencies[activeCurrency].hourlyWage);
+    for(var i = 0; i < 6; i++) {
+      rangeValues[i] = initialRangeValues[i];
+      console.log(rangeValues[i]);
+    }
     rangeValues[6] = Number(currencies[activeCurrency].hourlyWage);
     rangeValues[7] = Number(currencies[activeCurrency].hourlyWage);
+
     // last update that may have affected math below
-    setInitialValues();
+    // setInitialValues();
     // end
+      let value = $(".range-slider__value");
+      value.each(function () {
+        let value = $(this).prev().attr("value");
+        $(this).html(utils.commaSeparateNumber(value));
+      });
     setCategories();
     setEachAnnual();
     fillBar();
