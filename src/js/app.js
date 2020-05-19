@@ -176,12 +176,12 @@ let fillBar = function () {
 };
 
 
-let initResults = function() {
-  let catArray = [...productivityResults, ...securityResults, ...agilityResults]
-  let data = window.document.location.hash = utils.encodeData(catArray);
-  window.history.pushState(null, "", window.location.href.replace("#", '?results' + `${data}`));
-  console.log('category array', catArray);
-}
+// let initResults = function() {
+//   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
+//   let data = window.document.location.hash = utils.encodeData(catArray);
+//   window.history.pushState(null, "", window.location.href.replace("#", '?results' + `${data}`));
+//   console.log('category array', catArray);
+// }
 
 $(document).ready(function () {
 
