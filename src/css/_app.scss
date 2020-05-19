@@ -271,7 +271,8 @@ input::-moz-focus-outer {
 
 #results-wrap {
   // when testing resultss comment out display
-  display: none;
+  // display: none;
+  display: none !important;
   background: #F5F6F9;
   .nav-tabs {
     border-bottom: none;
