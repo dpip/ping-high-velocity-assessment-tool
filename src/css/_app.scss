@@ -116,6 +116,9 @@ $range-label-width: 60px !default;
 
 .range-slider {
   width: $range-width;
+  label {
+    font-weight: 500;
+  }
 }
 
 .range-slider__range {
@@ -275,7 +278,7 @@ input::-moz-focus-outer {
 
 #results-wrap {
   // when testing resultss comment out display
-  display: none;
+  // display: none;
   background: #F5F6F9;
   .nav-tabs {
     border-bottom: none;
@@ -495,7 +498,7 @@ footer {
     align-items: flex-start;
     justify-content: center;
     padding-left: 8px;
-    min-width: 80px;
+    min-width: 150px;
     cursor: pointer;
     p {
       margin-bottom: 0px;
@@ -699,6 +702,7 @@ footer {
   cursor: pointer;
   color: #2b80c3;
   font-weight: 400;
+  width: fit-content;
 }
 
 .bold {
@@ -708,6 +712,7 @@ footer {
 #total-annual-value {
   font-size: 3rem;
   min-height: 3rem;
+  font-weight: 700;
 }
 
 .citation-sm {
