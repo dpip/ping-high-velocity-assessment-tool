@@ -15,12 +15,18 @@ let productivityResults;
 let securityResults;
 let agilityResults;
 
-$(".range-slider__range").on("input change", function() {
+
+$(".range-slider__range, .amount").on("input change", function() {
   const sliderID = utils.parseID($(this).attr("id"));
+  // const valID = utils.parseID($(this).attr("id"));
   let updatedValue = Number(this.value),
       value = $(".range-slider__value");
   
-  $(this).next(value).html(utils.commaSeparateNumber(this.value));
+  $('#val' + sliderID).html(utils.commaSeparateNumber(this.value));
+  // $(this).closest(value).html(utils.commaSeparateNumber(this.value));
+  // console.log($(this).closest('.range-slider__value'));
+  // $(this).find('.range-slider__value')
+  // console.log($(this).find('.range-slider__value').html());
   rangeValues[sliderID] = updatedValue;
 
   setCategories();
@@ -30,7 +36,7 @@ $(".range-slider__range").on("input change", function() {
     `${currencies[activeCurrency].currencySymbol}` +
       utils.commaSeparateNumber(calcAll())
   );
-
+  // console.log(sliderID);
   fillBar();
 
 });
@@ -79,12 +85,6 @@ let setInitialValues = function () {
         );
         
       });
-
-      // for(var i; i < initialRangeValues.length; i++) {
-      //   let og = initialRangeValues[i];
-      //   $('#range-' + i).attr("value", og).slider('refresh');
-      //   console.log(initialRangeValues[i]);
-      // }
 
       fillBar();
 };
@@ -195,25 +195,29 @@ $(document).ready(function () {
       `${currencies[activeCurrency].currencySymbol}` +
         utils.commaSeparateNumber(calcAll())
     );
-    // $("#range-0").attr("value", Number(35000));
-    // $("#range-1").attr("value", Number(10000000000));
-    // $("#range-2").attr("value", Number(500));
-    // $("#range-3").attr("value", Number(500));
-    // $("#range-4").attr("value", Number(7));
-    // $("#range-5").attr("value", Number(8));
-    $("#range-6, #range-7").attr(
+    
+    $("#range6, #range7").attr(
       "value",
       Number(currencies[activeCurrency].hourlyWage)
     );
 
-    document.getElementById('range-0').value = 35000;
-    document.getElementById('range-1').value = 10000000000;
-    document.getElementById('range-2').value = 500;
-    document.getElementById('range-3').value = 500;
-    document.getElementById('range-4').value = 7;
-    document.getElementById('range-5').value = 8;
-    document.getElementById('range-6').value = Number(currencies[activeCurrency].hourlyWage);
-    document.getElementById('range-7').value = Number(currencies[activeCurrency].hourlyWage);
+    document.getElementById('range0').value = 35000;
+    document.getElementById('range1').value = 10000000000;
+    document.getElementById('range2').value = 500;
+    document.getElementById('range3').value = 500;
+    document.getElementById('range4').value = 7;
+    document.getElementById('range5').value = 8;
+    document.getElementById('range6').value = Number(currencies[activeCurrency].hourlyWage);
+    document.getElementById('range7').value = Number(currencies[activeCurrency].hourlyWage);
+
+    document.getElementById('amount0').value = 35000;
+    // document.getElementById('amount1').value = 10000000000;
+    // document.getElementById('amount2').value = 500;
+    // document.getElementById('amount3').value = 500;
+    // document.getElementById('amount4').value = 7;
+    // document.getElementById('amount5').value = 8;
+    // document.getElementById('amount6').value = Number(currencies[activeCurrency].hourlyWage);
+    // document.getElementById('amount7').value = Number(currencies[activeCurrency].hourlyWage);
     for(var i = 0; i < 6; i++) {
       rangeValues[i] = initialRangeValues[i];
       console.log(rangeValues[i]);
@@ -257,8 +261,105 @@ $(document).ready(function () {
       $(".toggle-advanced").attr("aria-expanded", "false");
     }
   });
+  // $('input.number').keyup(function(event) {
+
+  //   // skip for arrow keys
+  //   if(event.which >= 37 && event.which <= 40) return;
+  
+  //   // format number
+  //   $(this).val(function(index, value) {
+  //     return value
+  //     .replace(/\D/g, "")
+  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  //     ;
+  //   });
+  // });
 
   setInitialValues();
+
+
+  $('.amount').on('input', function() {
+      if (Number($(this).val().length) > Number($(this).attr('max').length)) {
+        
+        let v = $(this).val();
+        let s = $('.range-slider__value').range;
+        v = Number($(this).val().slice(0, $(this).attr('max').length));
+        $('.range-slider__value').html(utils.commaSeparateNumber(v));
+        console.log("yeap", $(this).attr('max').length, v)
+      } else {
+        console.log("nerp", $(this).val().length, $(this).attr('max').length);
+      }
+        // object.value = object.value.slice(0, object.max.length)
+  })
+
+  $('.amount').on('keypress', function(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        let valID = utils.parseID($(this).attr("id"));
+        key = String.fromCharCode (key);
+        var regex = /[0-9]|\./;
+        if ( !regex.test(key) ) {
+          theEvent.returnValue = false;
+          if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+        if(evt.which == 13){
+          $(this).blur();
+          $(this).hide();   
+          $('#val' + valID).show(); 
+          $('#off' + valID).hide();
+          $('#edit' + valID).show();
+        }
+        if($(this).is(':focus')) {
+          console.log('focused');
+        } else {
+          // $(this).hide();
+        }
+      console.log('pressed', theEvent, key);
+})
+
+$('.icon-edit-off').on('click', function() {
+    let valID = utils.parseID($(this).attr("id"));
+      $('#amount' + valID).blur();
+      $('#amount' + valID).hide();   
+      $('#val' + valID).show(); 
+      $('#off' + valID).hide();
+      $('#edit' + valID).show();
+      console.log('clicked', '#amount' + valID);
+})
+
+$('.range-slider__value, .icon-edit').on('click', function(e) {
+  e.preventDefault();
+  let valID = utils.parseID($(this).attr("id"));
+  $('#val' + utils.parseID($(this).attr("id"))).hide();
+  $('#amount' + utils.parseID($(this).attr("id"))).show().focus();
+  $('#edit' + valID).hide();
+  $('#off' + valID).show();
+})
+
+$('.amount').on('focus click', function() {
+  $(this)[0].setSelectionRange(0, $(this).val().length);
+})
+
+// document.addEventListener("click", function (event) {
+//   if (event.target.className !== "amount") {
+//       $('.amount').hide();
+//       $('.range-slider__value').show();
+//   } 
+// });
+
+
+    
+  // function isNumeric (evt) {
+  //   var theEvent = evt || window.event;
+  //   var key = theEvent.keyCode || theEvent.which;
+  //   key = String.fromCharCode (key);
+  //   var regex = /[0-9]|\./;
+  //   if ( !regex.test(key) ) {
+  //     theEvent.returnValue = false;
+  //     if(theEvent.preventDefault) theEvent.preventDefault();
+  //   }
+  //   console.log('is executing');
+  // }
 
   // if (window.location.href.indexOf("results") > -1) {
   //     //Initialize results

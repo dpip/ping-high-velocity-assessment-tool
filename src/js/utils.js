@@ -25,10 +25,10 @@ const utils = {
     return val;
   },
   parseNumber: function(str) {
-    return Number(str.split("-")[1]);
+    return Number(str.slice(-1));
   },
   parseID: function(str) {
-    return Number(str.split("-")[1]);
+    return Number(str.slice(-1));
   },
   tooltip: function() {
     $(function () {

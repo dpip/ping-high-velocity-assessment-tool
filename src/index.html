@@ -106,7 +106,7 @@
     <!-- assessment section below -->
     <section id="assessment-wrap" class="main-assessment container pt-5 pb-5">
       <div class="row">
-        <div class="col col-options col-sm-12 col-lg-5">
+        <form class="col col-options col-sm-12 col-lg-5">
           <div class="region-wrap">
             <p>Region</p>
             <select class="form-control">
@@ -124,52 +124,83 @@
             </div>
           </div>
           <div class="range-slider pt-3 pb-3">
-            <label>Total Workforce Identities</label>
-            <input id="range-0" class="range-slider__range form-control-range" type="range" step="5000" value="35000"
-              min="500" max="3000000">
-            <span id="#-val" class="range-slider__value">0</span>
+              <label>Total Workforce Identities</label>
+              <input id="range0" class="range-slider__range form-control-range" type="range" step="5000" value="35000"
+              min="500" max="3000000" oninput="amount0.value=range0.value">
+              <p></p>
+              <div id="wrapper0" class="amount-wrapper">
+                <input id="amount0" class="amount" step="5000" value="35000"
+                min="500" max="3000000" pattern="\d*" maxlength="7" oninput="range0.value=amount0.value" />
+                <span id="val0" class="range-slider__value">0</span><svg id="edit0" class="icon-edit" focusable="false" preserveAspectRatio="xMidYMid meet" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect width="28" height="2" x="2" y="26"></rect><path d="M25.4,9c0.8-0.8,0.8-2,0-2.8c0,0,0,0,0,0l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0c0,0,0,0,0,0l-15,15V24h6.4L25.4,9z M20.4,4L24,7.6	l-3,3L17.4,7L20.4,4z M6,22v-3.6l10-10l3.6,3.6l-10,10H6z"></path><title>Edit</title></svg>
+                <span id="off0" class="icon-edit-off"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><path d="M30,28.6L3.4,2L2,3.4l10.1,10.1L4,21.6V28h6.4l8.1-8.1L28.6,30L30,28.6z M9.6,26H6v-3.6l7.5-7.5l3.6,3.6L9.6,26z"></path><path d="M29.4,6.2L29.4,6.2l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0l0,0l0,0l-8,8l1.4,1.4L20,8.4l3.6,3.6L20,15.6l1.4,1.4l8-8	C30.2,8.2,30.2,7,29.4,6.2L29.4,6.2z M25,10.6L21.4,7l3-3L28,7.6L25,10.6z"></path><title>Edit off</title></svg></span>
+              </div> 
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Revenue</label>
-            <input id="range-1" class="range-slider__range form-control-range" type="range" step="100000"
-              value="10000000000" min="500000" max="500000000000">
-            <span id="#-val" class="range-slider__value">0</span>
+            <input id="range1" class="range-slider__range form-control-range" type="range" step="100000"
+              value="10000000000" min="500000" max="500000000000" oninput="amount1.value=range1.value">
+              <p></p>
+              <div id="wrapper1" class="amount-wrapper">
+                <input id="amount1" class="amount" step="100000" 
+                value="10000000000" min="500000" max="500000000000" pattern="\d*" maxlength="12" oninput="range1.value=amount1.value" />
+                <span id="val1" class="range-slider__value">0</span><svg class="icon-edit" focusable="false" preserveAspectRatio="xMidYMid meet" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect width="28" height="2" x="2" y="26"></rect><path d="M25.4,9c0.8-0.8,0.8-2,0-2.8c0,0,0,0,0,0l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0c0,0,0,0,0,0l-15,15V24h6.4L25.4,9z M20.4,4L24,7.6	l-3,3L17.4,7L20.4,4z M6,22v-3.6l10-10l3.6,3.6l-10,10H6z"></path><title>Edit</title></svg>
+              </div>
           </div>
           <div class="range-slider pt-3 pb-3">
             <label>Total Workforce Applications</label>
-            <input id="range-2" class="range-slider__range form-control-range" type="range" step="100" value="500"
-              min="100" max="5000">
-            <span id="#-val" class="range-slider__value"></span>
+            <input id="range2" class="range-slider__range form-control-range" type="range" step="100" value="500"
+              min="100" max="5000" oninput="amount2.value=range2.value">
+              <p></p>
+              <div id="wrapper2" class="amount-wrapper">
+                <input id="amount2" class="amount"
+                step="100" value="500" min="100" max="5000" pattern="\d*" maxlength="4" oninput="range2.value=amount2.value" />
+                <span id="val2" class="range-slider__value">0</span>&nbsp;<svg class="icon-edit" focusable="false" preserveAspectRatio="xMidYMid meet" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect width="28" height="2" x="2" y="26"></rect><path d="M25.4,9c0.8-0.8,0.8-2,0-2.8c0,0,0,0,0,0l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0c0,0,0,0,0,0l-15,15V24h6.4L25.4,9z M20.4,4L24,7.6	l-3,3L17.4,7L20.4,4z M6,22v-3.6l10-10l3.6,3.6l-10,10H6z"></path><title>Edit</title></svg>
+              </div>
           </div>
 
           <div class="collapse" id="advanced-dropdown">
             <div id="advanced-option1" class="range-slider pt-3 pb-3 advanced-option">
               <label>Total APIs</label>
-              <input id="range-3" class="range-slider__range form-control-range" type="range" step="100" value="500"
-                min="100" max="5000">
-              <span id="#-val" class="range-slider__value"></span>
+              <input id="range3" class="range-slider__range form-control-range" type="range" step="100" value="500"
+                min="100" max="5000" oninput="amount3.value=range3.value">
+                <p></p>
+                <div id="wrapper3" class="amount-wrapper">
+                  <input id="amount3" class="amount"
+                  step="100" value="500" min="100" max="5000" pattern="\d*" maxlength="3" oninput="range3.value=amount3.value" />
+                  <span id="val3" class="range-slider__value">0</span>&nbsp;<svg class="icon-edit" focusable="false" preserveAspectRatio="xMidYMid meet" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect width="28" height="2" x="2" y="26"></rect><path d="M25.4,9c0.8-0.8,0.8-2,0-2.8c0,0,0,0,0,0l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0c0,0,0,0,0,0l-15,15V24h6.4L25.4,9z M20.4,4L24,7.6	l-3,3L17.4,7L20.4,4z M6,22v-3.6l10-10l3.6,3.6l-10,10H6z"></path><title>Edit</title></svg>
+                </div>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Size of Identity and Access Management (IAM) Team</label>
-              <input id="range-4" class="range-slider__range form-control-range" type="range" step="1" value="7" min="1"
-                max="30">
-              <span class="range-slider__value"></span>
+              <input id="range4" class="range-slider__range form-control-range" type="range" step="1" value="7" min="1"
+                max="30" oninput="amount4.value=range4.value">
+                <p></p>
+                <div id="wrapper4" class="amount-wrapper">
+                  <input id="amount4" class="amount"
+                  step="1" value="7" min="1" max="30" pattern="\d*" maxlength="2" oninput="range4.value=amount4.value" />
+                  <span id="val4" class="range-slider__value">0</span>&nbsp;<svg class="icon-edit" focusable="false" preserveAspectRatio="xMidYMid meet" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect width="28" height="2" x="2" y="26"></rect><path d="M25.4,9c0.8-0.8,0.8-2,0-2.8c0,0,0,0,0,0l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0c0,0,0,0,0,0l-15,15V24h6.4L25.4,9z M20.4,4L24,7.6	l-3,3L17.4,7L20.4,4z M6,22v-3.6l10-10l3.6,3.6l-10,10H6z"></path><title>Edit</title></svg>
+                </div>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Total IAM Tools to Rationalize</label>
-              <input id="range-5" class="range-slider__range form-control-range" type="range" step="1" value="8" min="1"
-                max="30">
-              <span id="#-val" class="range-slider__value"></span>
+              <input id="range5" class="range-slider__range form-control-range" type="range" step="1" value="8" min="1"
+                max="30" oninput="amount5.value=range5.value">
+                <p></p>
+                <div id="wrapper5" class="amount-wrapper">
+                  <input id="amount5" class="amount"
+                  step="1" value="8" min="1" max="30" pattern="\d*" maxlength="2" oninput="range5.value=amount5.value" />
+                  <span id="val5" class="range-slider__value">0</span>&nbsp;<svg class="icon-edit" focusable="false" preserveAspectRatio="xMidYMid meet" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect width="28" height="2" x="2" y="26"></rect><path d="M25.4,9c0.8-0.8,0.8-2,0-2.8c0,0,0,0,0,0l-3.6-3.6c-0.8-0.8-2-0.8-2.8,0c0,0,0,0,0,0l-15,15V24h6.4L25.4,9z M20.4,4L24,7.6	l-3,3L17.4,7L20.4,4z M6,22v-3.6l10-10l3.6,3.6l-10,10H6z"></path><title>Edit</title></svg>
+                </div>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: IAM/IT Admin</label>
-              <input id="range-6" class="range-slider__range form-control-range" autocomplete="off" name="hourly1" type="range" step="2" value="32"
+              <input id="range6" class="range-slider__range form-control-range" autocomplete="off" name="hourly1" type="range" step="2" value="32"
                 min="20" max="100">
               <span id="#-val" class="range-slider__value"></span>
             </div>
             <div class="range-slider pt-3 pb-3 advanced-option">
               <label>Average Hourly Wage: Across Organization</label>
-              <input id="range-7" class="range-slider__range form-control-range" autocomplete="off" name="hourly2" type="range" step="2" value="32"
+              <input id="range7" class="range-slider__range form-control-range" autocomplete="off" name="hourly2" type="range" step="2" value="32"
                 min="20" max="100">
               <span id="#-val" class="range-slider__value"></span>
             </div>
@@ -203,7 +234,7 @@
               </svg>
             </a>
           </p>
-        </div>
+        </form>
         <div class="col col-values col-lg auto">
           <p>Total annual value added<sup>*</sup></p>
           <h1 id="total-annual-value"></h1>

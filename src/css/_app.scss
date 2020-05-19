@@ -177,8 +177,12 @@ $range-label-width: 60px !default;
 
 
 .range-slider__value {
-  padding-top: 5px;
   font-weight: 400;
+  cursor: pointer !important;
+}
+
+svg {
+  cursor: pointer !important;
 }
 
 
@@ -710,4 +714,32 @@ footer {
   font-size: 11px;
   margin-left: 24px;
   padding-bottom: 30px;
+}
+
+.amount {
+  display: none;
+  cursor: pointer;
+}
+
+.amount-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+.icon-edit {
+  height: 100%;
+  margin-top: 2px;
+  margin-left: 5px;
+  fill: #2b80c3;
+}
+.icon-edit-off {
+  display: none;
+  cursor: pointer;
+  // background-color: red;
+  padding-left: 5px;
+  svg {
+    fill: #2b80c3;
+  }
 }
