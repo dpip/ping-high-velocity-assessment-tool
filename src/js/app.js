@@ -209,6 +209,15 @@ $(document).ready(function () {
     document.getElementById('range5').value = 8;
     document.getElementById('range6').value = Number(currencies[activeCurrency].hourlyWage);
     document.getElementById('range7').value = Number(currencies[activeCurrency].hourlyWage);
+
+    document.getElementById('amount0').value = 35000;
+    // document.getElementById('amount1').value = 10000000000;
+    // document.getElementById('amount2').value = 500;
+    // document.getElementById('amount3').value = 500;
+    // document.getElementById('amount4').value = 7;
+    // document.getElementById('amount5').value = 8;
+    // document.getElementById('amount6').value = Number(currencies[activeCurrency].hourlyWage);
+    // document.getElementById('amount7').value = Number(currencies[activeCurrency].hourlyWage);
     for(var i = 0; i < 6; i++) {
       rangeValues[i] = initialRangeValues[i];
       console.log(rangeValues[i]);
@@ -297,19 +306,34 @@ $(document).ready(function () {
           $(this).blur();
           $(this).hide();   
           $('#val' + valID).show(); 
+          $('#off' + valID).hide();
+          $('#edit' + valID).show();
         }
         if($(this).is(':focus')) {
           console.log('focused');
         } else {
-          $(this).hide();
+          // $(this).hide();
         }
       console.log('pressed', theEvent, key);
 })
 
-$('.range-slider__value').on('click', function(e) {
+$('.icon-edit-off').on('click', function() {
+    let valID = utils.parseID($(this).attr("id"));
+      $('#amount' + valID).blur();
+      $('#amount' + valID).hide();   
+      $('#val' + valID).show(); 
+      $('#off' + valID).hide();
+      $('#edit' + valID).show();
+      console.log('clicked', '#amount' + valID);
+})
+
+$('.range-slider__value, .icon-edit').on('click', function(e) {
   e.preventDefault();
-  $(this).hide();
+  let valID = utils.parseID($(this).attr("id"));
+  $('#val' + utils.parseID($(this).attr("id"))).hide();
   $('#amount' + utils.parseID($(this).attr("id"))).show().focus();
+  $('#edit' + valID).hide();
+  $('#off' + valID).show();
 })
 
 $('.amount').on('focus click', function() {

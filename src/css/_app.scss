@@ -177,7 +177,6 @@ $range-label-width: 60px !default;
 
 
 .range-slider__value {
-  padding-top: 50px !important;
   font-weight: 400;
   cursor: pointer !important;
 }
@@ -276,7 +275,7 @@ input::-moz-focus-outer {
 
 #results-wrap {
   // when testing resultss comment out display
-  // display: none;
+  display: none;
   background: #F5F6F9;
   .nav-tabs {
     border-bottom: none;
@@ -719,4 +718,28 @@ footer {
 
 .amount {
   display: none;
+  cursor: pointer;
+}
+
+.amount-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+.icon-edit {
+  height: 100%;
+  margin-top: 2px;
+  margin-left: 5px;
+  fill: #2b80c3;
+}
+.icon-edit-off {
+  display: none;
+  cursor: pointer;
+  // background-color: red;
+  padding-left: 5px;
+  svg {
+    fill: #2b80c3;
+  }
 }
