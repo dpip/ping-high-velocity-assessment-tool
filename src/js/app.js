@@ -79,7 +79,7 @@ let setInitialValues = function () {
         setCategories();
         setEachAnnual();
       
-        $("#total-annual-value, #results-total-annual-value").html(
+        $("#total-annual-value, .results-total-annual-value").html(
           `${currencies[activeCurrency].currencySymbol}` +
             utils.commaSeparateNumber(calcAll())
         );
