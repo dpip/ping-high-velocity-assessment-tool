@@ -211,13 +211,13 @@ $(document).ready(function () {
     document.getElementById('range7').value = Number(currencies[activeCurrency].hourlyWage);
 
     document.getElementById('amount0').value = 35000;
-    // document.getElementById('amount1').value = 10000000000;
-    // document.getElementById('amount2').value = 500;
-    // document.getElementById('amount3').value = 500;
-    // document.getElementById('amount4').value = 7;
-    // document.getElementById('amount5').value = 8;
-    // document.getElementById('amount6').value = Number(currencies[activeCurrency].hourlyWage);
-    // document.getElementById('amount7').value = Number(currencies[activeCurrency].hourlyWage);
+    document.getElementById('amount1').value = 10000000000;
+    document.getElementById('amount2').value = 500;
+    document.getElementById('amount3').value = 500;
+    document.getElementById('amount4').value = 7;
+    document.getElementById('amount5').value = 8;
+    document.getElementById('amount6').value = Number(currencies[activeCurrency].hourlyWage);
+    document.getElementById('amount7').value = Number(currencies[activeCurrency].hourlyWage);
     for(var i = 0; i < 6; i++) {
       rangeValues[i] = initialRangeValues[i];
       console.log(rangeValues[i]);
@@ -261,19 +261,21 @@ $(document).ready(function () {
       $(".toggle-advanced").attr("aria-expanded", "false");
     }
   });
-  // $('input.number').keyup(function(event) {
 
-  //   // skip for arrow keys
-  //   if(event.which >= 37 && event.which <= 40) return;
-  
-  //   // format number
-  //   $(this).val(function(index, value) {
-  //     return value
-  //     .replace(/\D/g, "")
-  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  //     ;
-  //   });
-  // });
+  $('.toggle-advanced').on('click', function() {
+    let sectionID = $(this).attr('id');
+      if($(this).parent().parent().find('.show').length - 1 === 0) {
+        console.log('yes', sectionID);
+        $('.ctrigger').html('Expand all')
+      } else if($(this).parent().parent().find('.show').length === 0 ) {
+        console.log('no', sectionID);
+        $('.ctrigger').html('Collapse all')
+      } else {
+        console.log('no', sectionID);
+        $('.ctrigger').html('Collapse all')
+      }
+      console.log('length', $(this).parent().parent().attr('id'))
+  });
 
   setInitialValues();
 
@@ -289,7 +291,6 @@ $(document).ready(function () {
       } else {
         console.log("nerp", $(this).val().length, $(this).attr('max').length);
       }
-        // object.value = object.value.slice(0, object.max.length)
   })
 
   $('.amount').on('keypress', function(evt) {
@@ -339,27 +340,18 @@ $('.range-slider__value, .icon-edit').on('click', function(e) {
 $('.amount').on('focus click', function() {
   $(this)[0].setSelectionRange(0, $(this).val().length);
 })
-
-// document.addEventListener("click", function (event) {
-//   if (event.target.className !== "amount") {
-//       $('.amount').hide();
-//       $('.range-slider__value').show();
-//   } 
-// });
-
-
     
-  // function isNumeric (evt) {
-  //   var theEvent = evt || window.event;
-  //   var key = theEvent.keyCode || theEvent.which;
-  //   key = String.fromCharCode (key);
-  //   var regex = /[0-9]|\./;
-  //   if ( !regex.test(key) ) {
-  //     theEvent.returnValue = false;
-  //     if(theEvent.preventDefault) theEvent.preventDefault();
-  //   }
-  //   console.log('is executing');
-  // }
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode (key);
+    var regex = /[0-9]|\./;
+    if ( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+    console.log('is executing');
+  }
 
   // if (window.location.href.indexOf("results") > -1) {
   //     //Initialize results
@@ -372,4 +364,43 @@ $('.amount').on('focus click', function() {
 
   //   initResults();
   // }
+  $('#assessment-cta').on('click', function(e) {
+    e.preventDefault();
+    let mkfields = [];
+    $('input[name^="cL"]').each(function(i, obj){
+      // console.log('btn selected:: inputs', i, obj);
+      mkfields.push(obj.name);
+
+      $('input[name=' + `${obj.name}`+ ']')
+      console.log($('input[name=' + `${obj.name}`+ ']'))
+    });
+    for(var i = 0; i < 8; i++) {
+      $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
+    }
+    $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues)));
+    $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
+    $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
+    $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
+    
+    console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
+  });
+  
+  $('.button__schedule').on('click', function(e) {
+    e.preventDefault();
+    let mkfields = [];
+    $('input[name^="cL"]').each(function(i, obj){
+      // console.log('btn selected:: inputs', i, obj);
+      mkfields.push(obj.name);
+
+      $('input[name=' + `${obj.name}`+ ']')
+      console.log($('input[name=' + `${obj.name}`+ ']'))
+    });
+    for(var i = 0; i < 8; i++) {
+      $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
+    }
+    $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues)));
+    $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
+    $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
+    $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
+      });
 });
