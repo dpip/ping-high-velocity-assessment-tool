@@ -239,43 +239,6 @@ $(document).ready(function () {
     // setInitialValues();
     console.log(rangeValues);
   });
-  let readToggle = function (content) {
-    console.log('innerhtml', content.html());
-    if (content.html() === 'Collapse all') {
-      content.html('Expand all');
-    } else {
-      content.html('Collapse all');
-    }
-  }
-  $(".collapse-toggle").on("click", function () {
-    readToggle($(this));
-    if ($(this).hasClass("collapse-all")) {
-      $(this).removeClass("collapse-all");
-      $(".results-tab-content").removeClass("collapse");
-      $(".results-tab-content").addClass("show");
-      $(".toggle-advanced").attr("aria-expanded", "true");
-    } else {
-      $(this).addClass("collapse-all");
-      $(".results-tab-content").removeClass("show");
-      $(".results-tab-content").addClass("collapse");
-      $(".toggle-advanced").attr("aria-expanded", "false");
-    }
-  });
-
-  $('.toggle-advanced').on('click', function() {
-    let sectionID = $(this).attr('id');
-      if($(this).parent().parent().find('.show').length - 1 === 0) {
-        console.log('yes', sectionID);
-        $('.ctrigger').html('Expand all')
-      } else if($(this).parent().parent().find('.show').length === 0 ) {
-        console.log('no', sectionID);
-        $('.ctrigger').html('Collapse all')
-      } else {
-        console.log('no', sectionID);
-        $('.ctrigger').html('Collapse all')
-      }
-      console.log('length', $(this).parent().parent().attr('id'))
-  });
 
   setInitialValues();
 
@@ -355,17 +318,6 @@ $('.amount').on('focus click', function() {
     console.log('is executing');
   }
 
-  // if (window.location.href.indexOf("results") > -1) {
-  //     //Initialize results
-  //     results.init();
-  //     //Show the graph
-  //     results.showFinal();
-  //     console.log('RESULTS DETECTED');
-  // } else {
-  //   console.log('NO RESULTS DETECTED');
-
-  //   initResults();
-  // }
   $('#assessment-cta').on('click', function(e) {
     e.preventDefault();
     let mkfields = [];
@@ -405,4 +357,68 @@ $('.amount').on('focus click', function() {
     $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
       });
+
+
+
+      // Results expand all colapse all functionality
+
+      // if there are no open tabs display expand all and toggle functionality of button to open all tabs
+      // otherwise display collapse all button and closing functionality for all tabs (based on parent wraper ID)
+
+      $('.tab-pane .toggle-advanced').mouseup(function() {
+        let catId = $(this).parent().parent().attr('id');
+
+        if($('#' + catId).find('.show').length !== 1) {
+          
+          $('#' + catId).find('.toggle-all').addClass('active');
+          $('#' + catId).find('.toggle-all').html('Collapse all');
+          console.log('show class exists', );
+        } else {
+          console.log('show class does not exist');
+          $('#' + catId).find('.toggle-all').removeClass('active');
+          $('#' + catId).find('.toggle-all').html('Expand all');
+        }
+      });
+
+      // Core toggle (collapse/expand) all functionality
+
+      $(".toggle-all").on("click", function () {
+
+        let toggleId = $(this).parent().attr("id");
+
+            if($(this).hasClass('active')) {
+              console.log('active')
+              $(this).html('Expand all');
+              $('#' + toggleId + ' > .results-tab-content').each(function() {
+                // console.log($(this))
+                $(this).removeClass('show').addClass('collapse');
+                console.log($(this));
+            })
+            $(this).toggleClass("active");
+            $(".toggle-advanced").attr("aria-expanded", "false");
+            } else {
+              console.log('no active')
+              $(this).html('Collapse all');
+              $('#' + toggleId + ' > .results-tab-content').each(function() {
+                // console.log($(this))
+                $(this).removeClass('collapse').addClass('show');
+                console.log($(this));
+            })
+            $(this).toggleClass("active");
+            $(".toggle-advanced").attr("aria-expanded", "true");
+            }
+       });
+
+        // if (window.location.href.indexOf("results") > -1) {
+        //     //Initialize results
+        //     results.init();
+        //     //Show the graph
+        //     results.showFinal();
+        //     console.log('RESULTS DETECTED');
+        // } else {
+        //   console.log('NO RESULTS DETECTED');
+
+        //   initResults();
+        // }
+
 });
