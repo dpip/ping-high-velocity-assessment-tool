@@ -39,6 +39,13 @@ $(".range-slider__range, .amount").on("input change", function() {
   // console.log(sliderID);
   fillBar();
 
+  if($(this).val().length === 0 || isNaN(updatedValue) === true) {
+    console.log('please enter value to continue');
+    $('#assessment-cta').attr('disabled', true);
+  } else {
+    $('#assessment-cta').attr('disabled', false);
+  }
+
 });
 
 let setCategories = function() {
