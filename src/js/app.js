@@ -42,6 +42,7 @@ $(".range-slider__range, .amount").on("input change", function() {
   if($(this).val().length === 0 || isNaN(updatedValue) === true) {
     console.log('please enter value to continue');
     $('#assessment-cta').attr('disabled', true);
+    alert('Please enter numerical value')
   } else {
     $('#assessment-cta').attr('disabled', false);
   }
