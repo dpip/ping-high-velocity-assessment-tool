@@ -342,6 +342,8 @@ $('.amount').on('focus click', function() {
 })
     
   function isNumeric (evt) {
+    evt.preventDefault();
+
     var theEvent = evt || window.event;
     var key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode (key);
