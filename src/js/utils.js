@@ -3,9 +3,10 @@ import $ from "jquery";
 const utils = {
   encodeData: function(data) {
     //Format object items to be query string params
+    let paramArray = ['TWI', 'TR', 'TWA', 'TA', 'SIAT', 'TEIAMT', 'AHWIAMTA', 'AHWO', 'TAVA', 'PVA', 'SVA', 'AVA']
     let paramsData = Object.keys(data)
         .map(function(key) {
-            return [key, data[key]].map(encodeURIComponent).join("=");
+            return [paramArray[key].toLowerCase(), data[key]].map(encodeURIComponent).join("=");
         })
         .join("&");
 
@@ -78,7 +79,7 @@ const utils = {
     let vars = [],
             hash;
         let hashes = window.location.href
-            .slice(window.location.href.indexOf("?") + 1)
+            .slice(window.location.href.indexOf("?"))
             .split("&");
         for (let i = 0; i < hashes.length; i++) {
             hash = hashes[i].split("=");

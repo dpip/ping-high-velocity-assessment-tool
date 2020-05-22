@@ -185,12 +185,12 @@ let fillBar = function () {
 };
 
 
-// let initResults = function() {
-//   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
-//   let data = window.document.location.hash = utils.encodeData(catArray);
-//   window.history.pushState(null, "", window.location.href.replace("#", '?results' + `${data}`));
-//   console.log('category array', catArray);
-// }
+let initResults = function() {
+  let catArray = [...productivityResults, ...securityResults, ...agilityResults]
+  let data = window.document.location.hash = utils.encodeData(catArray);
+  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`));
+  console.log('category array', catArray);
+}
 
 $(document).ready(function () {
 
@@ -344,6 +344,8 @@ $('.amount').on('focus click', function() {
     $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
     $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
+
+    initResults();
     
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
@@ -418,16 +420,19 @@ $('.amount').on('focus click', function() {
             }
        });
 
-        // if (window.location.href.indexOf("results") > -1) {
-        //     //Initialize results
-        //     results.init();
-        //     //Show the graph
-        //     results.showFinal();
-        //     console.log('RESULTS DETECTED');
-        // } else {
-        //   console.log('NO RESULTS DETECTED');
+       if (window.location.href.indexOf("?results") > -1) {
+        //Initialize results
+        results.init();
+        console.log('getting url vars', utils.getUrlVars())
+        //Show the graph
 
-        //   initResults();
-        // }
+        results.showFinal();
+        console.log('yes params')
+        console.log('RESULTS DETECTED');
+        } else {
+          console.log('NO RESULTS DETECTED');
+
+          
+        }
 
 });
