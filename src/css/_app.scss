@@ -889,3 +889,8 @@ textarea:focus, input:focus{
     display: none !important;
   }
  }
+
+ .validation-alert {
+   display: none;
+   color: $red;
+ }
