@@ -4,12 +4,19 @@ const utils = {
   encodeData: function(data) {
     //Format object items to be query string params
     let paramArray = ['TWI', 'TR', 'TWA', 'TA', 'SIAT', 'TEIAMT', 'AHWIAMTA', 'AHWO', 'TAVA', 'PVA', 'SVA', 'AVA']
+    paramArray.forEach(function(i) {
+       i.substr(i.indexOf("=") + 1)
+    })
+    
+    
     let paramsData = Object.keys(data)
         .map(function(key) {
+            console.log('HERE RIGHT HERE', [paramArray[key].toLowerCase(), data[key]][1])
             return [paramArray[key].toLowerCase(), data[key]].map(encodeURIComponent).join("=");
+            
         })
         .join("&");
-
+        
     return paramsData;
 },
   sortByKey: function (array, key) {
@@ -81,7 +88,7 @@ const utils = {
         let hashes = window.location.href
             .slice(window.location.href.indexOf("?"))
             .split("&");
-        for (let i = 0; i < hashes.length; i++) {
+        for (let i = 1; i < hashes.length; i++) {
             hash = hashes[i].split("=");
             vars.push(hash[0]);
             vars[hash[0]] = hash[1];

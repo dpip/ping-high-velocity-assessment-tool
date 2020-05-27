@@ -6,7 +6,7 @@ const results = {
         
     },
     showFinal: function() {
-        console.log('final results revealed', utils.productivityBasic);
+        console.log('final results revealed');
     }
 };
 

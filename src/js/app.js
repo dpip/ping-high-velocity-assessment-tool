@@ -188,6 +188,7 @@ let fillBar = function () {
 let initResults = function() {
   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
   let data = window.document.location.hash = utils.encodeData(catArray);
+  console.log('from utils array', utils.encodeData(catArray))
   window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`));
   console.log('category array', catArray);
 }
@@ -327,7 +328,7 @@ $('.amount').on('focus click', function() {
     console.log('is executing');
   }
 
-  $('#assessment-cta').on('click', function(e) {
+  $('#assessment-cta, .button__schedule').on('click', function(e) {
     e.preventDefault();
     let mkfields = [];
     $('input[name^="cL"]').each(function(i, obj){
@@ -350,24 +351,24 @@ $('.amount').on('focus click', function() {
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
   
-  $('.button__schedule').on('click', function(e) {
-    e.preventDefault();
-    let mkfields = [];
-    $('input[name^="cL"]').each(function(i, obj){
-      // console.log('btn selected:: inputs', i, obj);
-      mkfields.push(obj.name);
+  // $('.button__schedule').on('click', function(e) {
+  //   e.preventDefault();
+  //   let mkfields = [];
+  //   $('input[name^="cL"]').each(function(i, obj){
+  //     // console.log('btn selected:: inputs', i, obj);
+  //     mkfields.push(obj.name);
 
-      $('input[name=' + `${obj.name}`+ ']')
-      console.log($('input[name=' + `${obj.name}`+ ']'))
-    });
-    for(var i = 0; i < 8; i++) {
-      $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
-    }
-    $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues)));
-    $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
-    $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
-    $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
-      });
+  //     $('input[name=' + `${obj.name}`+ ']')
+  //     console.log($('input[name=' + `${obj.name}`+ ']'))
+  //   });
+  //   for(var i = 0; i < 8; i++) {
+  //     $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
+  //   }
+  //   $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues)));
+  //   $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
+  //   $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
+  //   $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
+  //     });
 
 
 
@@ -426,8 +427,8 @@ $('.amount').on('focus click', function() {
         console.log('getting url vars', utils.getUrlVars())
         //Show the graph
 
-        results.showFinal();
-        console.log('yes params')
+        // results.showFinal();
+        // console.log('yes params')
         console.log('RESULTS DETECTED');
         } else {
           console.log('NO RESULTS DETECTED');
