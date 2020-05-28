@@ -372,19 +372,21 @@ $('.amount').on('focus click', function() {
       // if there are no open tabs display expand all and toggle functionality of button to open all tabs
       // otherwise display collapse all button and closing functionality for all tabs (based on parent wraper ID)
 
-      $('.tab-pane .toggle-advanced').mouseup(function() {
+      $('.toggle-advanced').mouseup(function() {
         let catId = $(this).parent().parent().attr('id');
 
         if($('#' + catId).find('.show').length !== 1) {
           
           $('#' + catId).find('.toggle-all').addClass('active');
           $('#' + catId).find('.toggle-all').html('Collapse all');
+          // $(".toggle-advanced").attr("aria-expanded", "false");
           
           console.log('show class exists', );
         } else {
           console.log('show class does not exist');
           $('#' + catId).find('.toggle-all').removeClass('active');
           $('#' + catId).find('.toggle-all').html('Expand all');
+          // $(".toggle-advanced").attr("aria-expanded", "true");
         }
       });
 
@@ -426,7 +428,7 @@ $('.amount').on('focus click', function() {
         // utils.commaSeparateNumber()
         // $('.annual-productivity').html(productivityResults())
         // $('.annual-productivity').html('test')
-        console.log('each here', setCategories(),setEachAnnual())
+        console.log('RESULTS DETECTED', setCategories(),setEachAnnual())
         
 
         } else {
