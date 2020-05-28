@@ -197,10 +197,10 @@ let initResults = function() {
   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
   let data = window.document.location.hash = utils.encodeData(rangeValues);
   // console.log('from utils array', utils.encodeData(catArray))
-  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`));
+  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`)  + '&tava=' + calcAll(rangeValues));
   // need to set cat array on page
 
-  // console.log('category array', categoryTotals);
+  console.log('category array', calcAll(rangeValues));
 }
 
 $(document).ready(function () {
@@ -414,7 +414,7 @@ $('.amount').on('focus click', function() {
        });
 
        if (window.location.href.indexOf("?results&") > -1) {
-        let catArray = [...productivityResults, ...securityResults, ...agilityResults]
+        let catArray = [...productivityResults, ...securityResults, ...agilityResults, calcAll(rangeValues)]
         // results.init();
         // initResults();
         // console.log('RESULTS DETECTED',  utils.commaSeparateNumber(utils.setParams(catArray)[0]))
@@ -448,24 +448,27 @@ $('.amount').on('focus click', function() {
         setEachAnnual(initialParams);
         calcAll(initialParams);
 
+        
+        
+        function gt()
+        {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
         $("#total-annual-value, .results-total-annual-value").html(
           `${currencies[activeCurrency].currencySymbol}` +
-            utils.commaSeparateNumber(calcAll(initialParams))
+            utils.commaSeparateNumber(gt()["tava"])
         );
 
-
-        // $('#r-productivity-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[0]));
-        // $('#r-productivity-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[1]));
-        // $('#r-productivity-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[2]));
-        // $('#r-productivity-3').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[3]));
-        // $('#r-productivity-4').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[4]));
-        // $('#r-productivity-5').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[5]));
-        
-        // $('#r-security-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[6]));
-        // $('#r-security-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[7]));
-        // $('#r-security-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[8]));
-
-        // $('.annual-agility').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[9]));
+        console.log('GT', gt()["tava"]);
         
         } else {
           setCategories();
@@ -485,25 +488,6 @@ $('.amount').on('focus click', function() {
           console.log("finally bye", $(this));
       });
 
-    //   var getUrlParameter = function getUrlParameter(sParam) {
-    //     var sPageURL = window.location.search.substring(1),
-    //         sURLVariables = sPageURL.split('&'),
-    //         sParameterName,
-    //         i;
-    
-    //     for (i = 0; i < sURLVariables.length; i++) {
-    //         sParameterName = sURLVariables[i].split('=');
-    
-    //         if (sParameterName[0] === sParam) {
-    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-    //         }
-    //     }
-    // };
-    // console.log(utils.getUrlParameter('tr'))
-    // console.log(utils.getUrlParameter('twi'))
-    // getUrlParameter('twi');
-
-    // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.getUrlParameter('twi')));
 
     console.log('initial params total', utils.getUrlVars())
 
