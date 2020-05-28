@@ -33,7 +33,7 @@ $(".range-slider__range, .amount").on("input change", function() {
   rangeValues[sliderID] = updatedValue;
 
   setCategories();
-  setEachAnnual(rangeValues);
+  setEachAnnual(rangeValues, activeCurrency);
 
   $("#total-annual-value, .results-total-annual-value").html(
     `${currencies[activeCurrency].currencySymbol}` +
@@ -66,14 +66,14 @@ let setCategories = function() {
   }
 }
 
-let setEachAnnual = function(val) {
+let setEachAnnual = function(val, currency) {
 
   let categories = ['productivity', 'security', 'agility'];
   let totals = [calcProductivity(val), calcSecurity(val), calcAgility(val)];
   categoryTotals = totals;
   for(var i = 0; i < 3; i++) {
     $(".annual-" + categories[i]).html(
-      `${currencies[activeCurrency].currencySymbol}` +
+      `${currencies[currency].currencySymbol}` +
         `${utils.commaSeparateNumber(totals[i])}`
     );
   }
@@ -93,7 +93,7 @@ let setInitialValues = function () {
         rangeValues.push(Number(value));
 
         setCategories();
-        setEachAnnual(rangeValues);
+        setEachAnnual(rangeValues, activeCurrency);
       
         $("#total-annual-value, .results-total-annual-value").html(
           `${currencies[activeCurrency].currencySymbol}` +
@@ -255,7 +255,7 @@ $(document).ready(function () {
       });
       $("#val6, #val7").html(Number(currencies[activeCurrency].hourlyWage));
     setCategories();
-    setEachAnnual(rangeValues);
+    setEachAnnual(rangeValues, activeCurrency);
     fillBar();
     // setInitialValues();
     console.log(rangeValues);
@@ -442,10 +442,14 @@ $('.amount').on('focus click', function() {
 
         let initialParams = utils.getUrlVars();
 
+        let currencyParam = Number(gt()["region"]);
+
+        console.log('curency param', currencyParam)
+
         calcProductivity(initialParams);
         calcSecurity(initialParams);
         calcAgility(initialParams);
-        setEachAnnual(initialParams);
+        setEachAnnual(initialParams, activeCurrency);
         calcAll(initialParams);
 
         
@@ -463,24 +467,26 @@ $('.amount').on('focus click', function() {
             return vars;
         }
 
-        let currencyParam = Number(gt()["region"]);
+        
 
         $("#total-annual-value, .results-total-annual-value").html(
           `${currencies[currencyParam].currencySymbol}` +
             utils.commaSeparateNumber(gt()["tava"])
         );
-        for(var i = 0; i < 3; i++) {
-          $("#cat" + i).html(
-            `${currencies[currencyParam].currencySymbol}` +
-              `${utils.commaSeparateNumber(totals[i])}`
-          );
-        }
+        // for(var i = 0; i < 3; i++) {
+        //   $("#cat" + i).html(
+        //     `${currencies[currencyParam].currencySymbol}` +
+        //       `${utils.commaSeparateNumber(totals[i])}`
+        //   );
+        // }
+
+        setEachAnnual(rangeValues, currencyParam);
 
         console.log('CURRENCY PARAM', currencies[currencyParam].currencySymbol);
         
         } else {
           setCategories();
-        setEachAnnual(rangeValues);
+        // setEachAnnual(rangeValues, activeCurrency);
           initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32]
           
           console.log('NO RESULTS DETECTED');
