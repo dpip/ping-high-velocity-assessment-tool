@@ -344,7 +344,7 @@ $('.amount').on('focus click', function() {
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
   
-  $(document).on('click', '.button__schedule', function(e) {
+  $(document).on('click', '.button__schedule, .results-banner-schedule-link', function(e) {
     // e.preventDefault();
     console.log('clicked')
     $('input[name="FirstName"]').val(autoFill[0]);    
@@ -358,9 +358,9 @@ $('.amount').on('focus click', function() {
     let assessmentForm = $('#mktoForm_3445');
     // console.log('clicked assessment btn', $('#mktoForm_3445 input[name="FirstName"]').val());
     autoFill[0] = $('#mktoForm_3445 input[name="FirstName"]').val();    
-    autoFill[1] = $('input[name="LastName"]').val();
-    autoFill[2] = $('input[name="Email"]').val();
-    autoFill[3] = $('input[name="Phone"]').val();
+    autoFill[1] = $('#mktoForm_3445 input[name="LastName"]').val();
+    autoFill[2] = $('#mktoForm_3445 input[name="Email"]').val();
+    autoFill[3] = $('#mktoForm_3445 input[name="Phone"]').val();
     initResults();
     console.log('autofill form', autoFill)
   });
