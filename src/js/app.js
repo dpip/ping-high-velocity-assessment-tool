@@ -7,7 +7,7 @@ import currencies from "./currencies.js";
 import results from './results.js';
 import "../css/style.scss";
 
-let initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32];
+let initialRangeValues = [];
 let autoFill = [];
 let rangeValues = [];
 let activeCurrency = 0;
@@ -189,9 +189,11 @@ let fillBar = function () {
 let initResults = function() {
   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
   let data = window.document.location.hash = utils.encodeData(catArray);
-  console.log('from utils array', utils.encodeData(catArray))
+  // console.log('from utils array', utils.encodeData(catArray))
   window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`));
-  console.log('category array', catArray);
+  // need to set cat array on page
+
+  // console.log('category array', initialRangeValues[0]);
 }
 
 $(document).ready(function () {
@@ -336,9 +338,8 @@ $('.amount').on('focus click', function() {
     $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
     $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
-    // $('input[name="FirstName"]').val('robert'); here
     // CHANGE THIS BACK
-    // initResults();
+    initResults();
     
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
@@ -360,7 +361,7 @@ $('.amount').on('focus click', function() {
     autoFill[1] = $('input[name="LastName"]').val();
     autoFill[2] = $('input[name="Email"]').val();
     autoFill[3] = $('input[name="Phone"]').val();
-
+    initResults();
     console.log('autofill form', autoFill)
   });
 
@@ -415,20 +416,35 @@ $('.amount').on('focus click', function() {
             }
        });
 
-      //  if (window.location.href.indexOf("?results") > -1) {
-      //   //Initialize results
-      //   results.init();
-      //   console.log('getting url vars', utils.getUrlVars())
-      //   //Show the graph
+       if (window.location.href.indexOf("?results") > -1) {
+        let catArray = [...productivityResults, ...securityResults, ...agilityResults]
+        
+        //Initialize results
+        // results.init();
+        // initResults();
+        console.log('RESULTS DETECTED', utils.setParams(catArray))
+        // $('.annual-productivity').html(productivityResults())
+        // $('.annual-productivity').html('test')
+        console.log('each here', setCategories(),setEachAnnual())
+        
 
-      //   // results.showFinal();
-      //   // console.log('yes params')
-      //   console.log('RESULTS DETECTED');
-      //   } else {
-      //     console.log('NO RESULTS DETECTED');
-
+        } else {
+          setCategories();
+        setEachAnnual();
+          initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32]
           
-      //   }
+          console.log('NO RESULTS DETECTED');
+        }
+
+        $(document).on("focusout",".amount",function(){
+          let valID = utils.parseID($(this).attr("id"));
+          // $(this).blur();
+          $(this).hide();   
+          $('#val' + valID).show(); 
+          $('#off' + valID).hide();
+          $('#edit' + valID).show();
+          console.log("finally bye", $(this));
+      });
 
         
 

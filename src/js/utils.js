@@ -11,13 +11,30 @@ const utils = {
     
     let paramsData = Object.keys(data)
         .map(function(key) {
-            console.log('HERE RIGHT HERE', [paramArray[key].toLowerCase(), data[key]][1])
+            // console.log('HERE RIGHT HERE', [paramArray[key].toLowerCase(), data[key]][1])
             return [paramArray[key].toLowerCase(), data[key]].map(encodeURIComponent).join("=");
             
         })
         .join("&");
+        let paramsVal = Object.keys(data)
+        .map(function(key) {
+            return [paramArray[key].toLowerCase(), data[key]].map(encodeURIComponent).join("=");
+            
+        })
         
     return paramsData;
+},
+setParams: function(data) {    
+  let paramArray = ['TWI', 'TR', 'TWA', 'TA', 'SIAT', 'TEIAMT', 'AHWIAMTA', 'AHWO', 'TAVA', 'PVA', 'SVA', 'AVA']
+
+  let paramsData = Object.keys(data)
+      .map(function(key) {
+          console.log('HERE RIGHT HERE test', [paramArray[key].toLowerCase(), data[key]][1])
+          return [paramArray[key].toLowerCase(), data[key]][1];
+          
+      })
+      
+  return paramsData;
 },
   sortByKey: function (array, key) {
     return Array.sort(function (a, b) {
@@ -93,7 +110,7 @@ const utils = {
             vars.push(hash[0]);
             vars[hash[0]] = hash[1];
         }
-        console.log(vars);
+        console.log('from get url vars', vars, hash);
         return vars;
   },
   convertNumbertoWords: function(labelValue) {
