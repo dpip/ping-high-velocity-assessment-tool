@@ -197,7 +197,7 @@ let initResults = function() {
   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
   let data = window.document.location.hash = utils.encodeData(rangeValues);
   // console.log('from utils array', utils.encodeData(catArray))
-  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`)  + '&tava=' + calcAll(rangeValues));
+  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`)  + '&tava=' + calcAll(rangeValues) + '&region=' + activeCurrency);
   // need to set cat array on page
 
   console.log('category array', calcAll(rangeValues));
@@ -463,12 +463,20 @@ $('.amount').on('focus click', function() {
             return vars;
         }
 
+        let currencyParam = Number(gt()["region"]);
+
         $("#total-annual-value, .results-total-annual-value").html(
-          `${currencies[activeCurrency].currencySymbol}` +
+          `${currencies[currencyParam].currencySymbol}` +
             utils.commaSeparateNumber(gt()["tava"])
         );
+        for(var i = 0; i < 3; i++) {
+          $("#cat" + i).html(
+            `${currencies[currencyParam].currencySymbol}` +
+              `${utils.commaSeparateNumber(totals[i])}`
+          );
+        }
 
-        console.log('GT', gt()["tava"]);
+        console.log('CURRENCY PARAM', currencies[currencyParam].currencySymbol);
         
         } else {
           setCategories();
