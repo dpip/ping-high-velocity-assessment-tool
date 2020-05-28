@@ -379,6 +379,7 @@ $('.amount').on('focus click', function() {
           
           $('#' + catId).find('.toggle-all').addClass('active');
           $('#' + catId).find('.toggle-all').html('Collapse all');
+          
           console.log('show class exists', );
         } else {
           console.log('show class does not exist');
@@ -418,11 +419,11 @@ $('.amount').on('focus click', function() {
 
        if (window.location.href.indexOf("?results") > -1) {
         let catArray = [...productivityResults, ...securityResults, ...agilityResults]
-        
-        //Initialize results
         // results.init();
         // initResults();
-        console.log('RESULTS DETECTED', utils.setParams(catArray))
+        // console.log('RESULTS DETECTED',  utils.commaSeparateNumber(utils.setParams(catArray)[0]))
+        // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.setParams(catArray)[0]));
+        // utils.commaSeparateNumber()
         // $('.annual-productivity').html(productivityResults())
         // $('.annual-productivity').html('test')
         console.log('each here', setCategories(),setEachAnnual())
