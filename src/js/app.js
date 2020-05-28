@@ -16,6 +16,8 @@ let productivityResults;
 let securityResults;
 let agilityResults;
 
+let categoryTotals;
+
 
 $(".range-slider__range, .amount").on("input change", function() {
   const sliderID = utils.parseID($(this).attr("id"));
@@ -31,11 +33,11 @@ $(".range-slider__range, .amount").on("input change", function() {
   rangeValues[sliderID] = updatedValue;
 
   setCategories();
-  setEachAnnual();
+  setEachAnnual(rangeValues);
 
   $("#total-annual-value, .results-total-annual-value").html(
     `${currencies[activeCurrency].currencySymbol}` +
-      utils.commaSeparateNumber(calcAll())
+      utils.commaSeparateNumber(calcAll(rangeValues))
   );
   // console.log(sliderID);
   fillBar();
@@ -49,10 +51,13 @@ $(".range-slider__range, .amount").on("input change", function() {
     $('#assessment-cta').attr('disabled', false);
   }
 
+  console.log('range values', rangeValues)
+
 });
 
 let setCategories = function() {
   let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
+
   for(var i = 0; i < 3; i++) {
     $("#cat" + i).html(
       `${currencies[activeCurrency].currencySymbol}` +
@@ -61,10 +66,11 @@ let setCategories = function() {
   }
 }
 
-let setEachAnnual = function() {
-  let categories = ['productivity', 'security', 'agility'];
-  let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
+let setEachAnnual = function(val) {
 
+  let categories = ['productivity', 'security', 'agility'];
+  let totals = [calcProductivity(val), calcSecurity(val), calcAgility(val)];
+  categoryTotals = totals;
   for(var i = 0; i < 3; i++) {
     $(".annual-" + categories[i]).html(
       `${currencies[activeCurrency].currencySymbol}` +
@@ -87,11 +93,11 @@ let setInitialValues = function () {
         rangeValues.push(Number(value));
 
         setCategories();
-        setEachAnnual();
+        setEachAnnual(rangeValues);
       
         $("#total-annual-value, .results-total-annual-value").html(
           `${currencies[activeCurrency].currencySymbol}` +
-            utils.commaSeparateNumber(calcAll())
+            utils.commaSeparateNumber(calcAll(rangeValues))
         );
         
       });
@@ -167,18 +173,19 @@ let calcAgility = function (rangeValues) {
   return sumAgility;
 };
 
-let calcAll = function () {
+let calcAll = function (val) {
+
   return (
-    calcProductivity(rangeValues) +
-    calcSecurity(rangeValues) +
-    calcAgility(rangeValues)
+    calcProductivity(val) +
+    calcSecurity(val) +
+    calcAgility(val)
   );
 };
 
 let fillBar = function () {
-  let p = (calcProductivity(rangeValues) / calcAll()) * 100;
-  let r = (calcSecurity(rangeValues) / calcAll()) * 100;
-  let a = (calcAgility(rangeValues) / calcAll()) * 100;
+  let p = (calcProductivity(rangeValues) / calcAll(rangeValues)) * 100;
+  let r = (calcSecurity(rangeValues) / calcAll(rangeValues)) * 100;
+  let a = (calcAgility(rangeValues) / calcAll(rangeValues)) * 100;
   $("#fill-productivity").css({ width: p + "%" });
   $("#fill-security").css({ width: r + "%" });
   $("#fill-agility").css({ width: a + "%" });
@@ -188,12 +195,12 @@ let fillBar = function () {
 
 let initResults = function() {
   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
-  let data = window.document.location.hash = utils.encodeData(catArray);
+  let data = window.document.location.hash = utils.encodeData(rangeValues);
   // console.log('from utils array', utils.encodeData(catArray))
-  window.history.pushState(null, "", window.location.href.replace("#", '?results' + `${data}`));
+  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`));
   // need to set cat array on page
 
-  // console.log('category array', initialRangeValues[0]);
+  // console.log('category array', categoryTotals);
 }
 
 $(document).ready(function () {
@@ -206,7 +213,7 @@ $(document).ready(function () {
     $(".currency-symbol").html(`${currencies[activeCurrency].currencySymbol}`);
     $("#total-annual-value, .results-total-annual-value").html(
       `${currencies[activeCurrency].currencySymbol}` +
-        utils.commaSeparateNumber(calcAll())
+        utils.commaSeparateNumber(calcAll(rangeValues))
     );
     
     $("#range6, #range7").attr(
@@ -248,7 +255,7 @@ $(document).ready(function () {
       });
       $("#val6, #val7").html(Number(currencies[activeCurrency].hourlyWage));
     setCategories();
-    setEachAnnual();
+    setEachAnnual(rangeValues);
     fillBar();
     // setInitialValues();
     console.log(rangeValues);
@@ -308,19 +315,6 @@ $('.amount').on('focus click', function() {
   $(this)[0].setSelectionRange(0, $(this).val().length);
 })
     
-  // function isNumeric (evt) {
-  //   evt.preventDefault();
-
-  //   var theEvent = evt || window.event;
-  //   var key = theEvent.keyCode || theEvent.which;
-  //   key = String.fromCharCode (key);
-  //   var regex = /[0-9]|\./;
-  //   if ( !regex.test(key) ) {
-  //     theEvent.returnValue = false;
-  //     if(theEvent.preventDefault) theEvent.preventDefault();
-  //   }
-  //   console.log('is executing');
-  // }
 
   $('#assessment-cta').on('click', function(e) {
     e.preventDefault();
@@ -419,7 +413,7 @@ $('.amount').on('focus click', function() {
             }
        });
 
-       if (window.location.href.indexOf("?results") > -1) {
+       if (window.location.href.indexOf("?results&") > -1) {
         let catArray = [...productivityResults, ...securityResults, ...agilityResults]
         // results.init();
         // initResults();
@@ -442,28 +436,40 @@ $('.amount').on('focus click', function() {
         resultsWrap.setAttribute('style', 'display: flex');
         buttonSchedule[0].setAttribute('style', 'display: flex');
 
-        $('#r-productivity-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[0]));
-        $('#r-productivity-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[1]));
-        $('#r-productivity-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[2]));
-        $('#r-productivity-3').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[3]));
-        $('#r-productivity-4').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[4]));
-        $('#r-productivity-5').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[5]));
+        // set category results from url params
+
+        console.log('get url vars from app.js', utils.getUrlVars())
+
+        let initialParams = utils.getUrlVars();
+
+        calcProductivity(initialParams);
+        calcSecurity(initialParams);
+        calcAgility(initialParams);
+        setEachAnnual(initialParams);
+        calcAll(initialParams);
+
+        $("#total-annual-value, .results-total-annual-value").html(
+          `${currencies[activeCurrency].currencySymbol}` +
+            utils.commaSeparateNumber(calcAll(initialParams))
+        );
+
+
+        // $('#r-productivity-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[0]));
+        // $('#r-productivity-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[1]));
+        // $('#r-productivity-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[2]));
+        // $('#r-productivity-3').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[3]));
+        // $('#r-productivity-4').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[4]));
+        // $('#r-productivity-5').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[5]));
         
-        $('#r-security-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[6]));
-        $('#r-security-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[7]));
-        $('#r-security-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[8]));
+        // $('#r-security-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[6]));
+        // $('#r-security-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[7]));
+        // $('#r-security-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[8]));
 
-        $('.annual-agility').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[9]));
-
-        // console.log('from get url vars', utils.getUrlParameter(hash[0].match(/\d/g).join("")));
-
-
-        // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.getUrlParameter('twi')));
-
-
+        // $('.annual-agility').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[9]));
+        
         } else {
           setCategories();
-        setEachAnnual();
+        setEachAnnual(rangeValues);
           initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32]
           
           console.log('NO RESULTS DETECTED');
@@ -493,10 +499,12 @@ $('.amount').on('focus click', function() {
     //         }
     //     }
     // };
-    console.log(utils.getUrlParameter('tr'))
-    console.log(utils.getUrlParameter('twi'))
+    // console.log(utils.getUrlParameter('tr'))
+    // console.log(utils.getUrlParameter('twi'))
     // getUrlParameter('twi');
 
     // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.getUrlParameter('twi')));
+
+    console.log('initial params total', utils.getUrlVars())
 
 });

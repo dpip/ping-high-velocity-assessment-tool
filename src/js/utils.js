@@ -8,7 +8,6 @@ const utils = {
        i.substr(i.indexOf("=") + 1)
     })
     
-    
     let paramsData = Object.keys(data)
         .map(function(key) {
             // console.log('HERE RIGHT HERE', [paramArray[key].toLowerCase(), data[key]][1])
@@ -16,11 +15,6 @@ const utils = {
             
         })
         .join("&");
-        let paramsVal = Object.keys(data)
-        .map(function(key) {
-            return [paramArray[key].toLowerCase(), data[key]].map(encodeURIComponent).join("=");
-            
-        })
         
     return paramsData;
 },
@@ -106,7 +100,7 @@ setParams: function(data) {
         let hashes = window.location.href
             .slice(window.location.href.indexOf("?"))
             .split("&");
-        for (let i = 1; i < hashes.length; i++) {
+        for (let i = 1; i < 9; i++) {
             hash = hashes[i].split("=");
             vars.push(hash[0]);
             // vals.push(hash[0]);
