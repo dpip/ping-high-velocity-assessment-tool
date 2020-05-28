@@ -190,7 +190,7 @@ let initResults = function() {
   let catArray = [...productivityResults, ...securityResults, ...agilityResults]
   let data = window.document.location.hash = utils.encodeData(catArray);
   // console.log('from utils array', utils.encodeData(catArray))
-  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`));
+  window.history.pushState(null, "", window.location.href.replace("#", '?results' + `${data}`));
   // need to set cat array on page
 
   // console.log('category array', initialRangeValues[0]);
@@ -428,8 +428,19 @@ $('.amount').on('focus click', function() {
         // utils.commaSeparateNumber()
         // $('.annual-productivity').html(productivityResults())
         // $('.annual-productivity').html('test')
-        console.log('RESULTS DETECTED', setCategories(),setEachAnnual())
-        
+        console.log('RESULTS DETECTED', utils.getUrlVars());
+        let assessmentWrap = document.getElementById('assessment-wrap');
+        let mainBanner = document.getElementsByClassName('main-banner');
+        let resultsBanner = document.getElementsByClassName('results-banner');
+        let resultsWrap = document.getElementById('results-wrap');
+        let buttonSchedule = document.getElementsByClassName('button__schedule');
+
+
+        assessmentWrap.setAttribute('style', 'display: none');
+        mainBanner[0].setAttribute('style', 'display: none');
+        resultsBanner[0].setAttribute('style', 'display: block');
+        resultsWrap.setAttribute('style', 'display: flex');
+        buttonSchedule[0].setAttribute('style', 'display: flex');
 
         } else {
           setCategories();
@@ -449,6 +460,22 @@ $('.amount').on('focus click', function() {
           console.log("finally bye", $(this));
       });
 
-        
+      var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+    
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+    
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+    console.log(getUrlParameter('tr'))
+    console.log(getUrlParameter('twi'))
+    // getUrlParameter('twi');
 
 });

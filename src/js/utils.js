@@ -101,6 +101,7 @@ setParams: function(data) {
   },
   getUrlVars: function() {
     let vars = [],
+        vals = [],
             hash;
         let hashes = window.location.href
             .slice(window.location.href.indexOf("?"))
@@ -108,11 +109,26 @@ setParams: function(data) {
         for (let i = 1; i < hashes.length; i++) {
             hash = hashes[i].split("=");
             vars.push(hash[0]);
+            vals.push(utils.getUrlParameter(hash[0]));
             vars[hash[0]] = hash[1];
         }
-        console.log('from get url vars', vars, hash);
+        console.log('from get url vars', hash, vals);
         return vars;
   },
+  getUrlParameter: function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+},
   convertNumbertoWords: function(labelValue) {
     // Nine Zeroes for Billions
       return Math.abs(Number(labelValue)) >= 1.0e9
