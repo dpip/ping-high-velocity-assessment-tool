@@ -109,11 +109,16 @@ setParams: function(data) {
         for (let i = 1; i < hashes.length; i++) {
             hash = hashes[i].split("=");
             vars.push(hash[0]);
-            vals.push(utils.getUrlParameter(hash[0]));
+            // vals.push(hash[0]);
+            // vals.push(utils.getUrlParameter(hash[0]));
             vars[hash[0]] = hash[1];
+            // vals[hash[0]] = hash[1];
+            vals.push(utils.getUrlParameter(hash[0]));
+            // console.log('hashes', hash)
+            // console.log('from get url vars', utils.getUrlParameter(hash[0].match(/\d/g).join("")));
         }
-        console.log('from get url vars', hash, vals);
-        return vars;
+        console.log('from get url vars', vals);
+        return vals;
   },
   getUrlParameter: function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
@@ -125,7 +130,7 @@ setParams: function(data) {
         sParameterName = sURLVariables[i].split('=');
 
         if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]).match(/\d/g).join("");
         }
     }
 },

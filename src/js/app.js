@@ -339,7 +339,7 @@ $('.amount').on('focus click', function() {
     $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
     // CHANGE THIS BACK
-    initResults();
+    // initResults();
     
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
@@ -428,7 +428,7 @@ $('.amount').on('focus click', function() {
         // utils.commaSeparateNumber()
         // $('.annual-productivity').html(productivityResults())
         // $('.annual-productivity').html('test')
-        console.log('RESULTS DETECTED', utils.getUrlVars());
+
         let assessmentWrap = document.getElementById('assessment-wrap');
         let mainBanner = document.getElementsByClassName('main-banner');
         let resultsBanner = document.getElementsByClassName('results-banner');
@@ -441,6 +441,25 @@ $('.amount').on('focus click', function() {
         resultsBanner[0].setAttribute('style', 'display: block');
         resultsWrap.setAttribute('style', 'display: flex');
         buttonSchedule[0].setAttribute('style', 'display: flex');
+
+        $('#r-productivity-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[0]));
+        $('#r-productivity-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[1]));
+        $('#r-productivity-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[2]));
+        $('#r-productivity-3').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[3]));
+        $('#r-productivity-4').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[4]));
+        $('#r-productivity-5').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[5]));
+        
+        $('#r-security-0').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[6]));
+        $('#r-security-1').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[7]));
+        $('#r-security-2').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[8]));
+
+        $('.annual-agility').html('$' + utils.commaSeparateNumber(utils.getUrlVars()[9]));
+
+        // console.log('from get url vars', utils.getUrlParameter(hash[0].match(/\d/g).join("")));
+
+
+        // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.getUrlParameter('twi')));
+
 
         } else {
           setCategories();
@@ -460,22 +479,24 @@ $('.amount').on('focus click', function() {
           console.log("finally bye", $(this));
       });
 
-      var getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
+    //   var getUrlParameter = function getUrlParameter(sParam) {
+    //     var sPageURL = window.location.search.substring(1),
+    //         sURLVariables = sPageURL.split('&'),
+    //         sParameterName,
+    //         i;
     
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
+    //     for (i = 0; i < sURLVariables.length; i++) {
+    //         sParameterName = sURLVariables[i].split('=');
     
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    };
-    console.log(getUrlParameter('tr'))
-    console.log(getUrlParameter('twi'))
+    //         if (sParameterName[0] === sParam) {
+    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    //         }
+    //     }
+    // };
+    console.log(utils.getUrlParameter('tr'))
+    console.log(utils.getUrlParameter('twi'))
     // getUrlParameter('twi');
+
+    // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.getUrlParameter('twi')));
 
 });
