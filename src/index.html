@@ -89,16 +89,17 @@
     <section class="main-banner results-banner container-fluid p-0">
       <div class="container">
         <div class="row">
-          <div class="main-banner_content col-lg-10 container pt-4 pb-3">
+          <div class="main-banner_content col-lg-10 container pt-4 pb-4">
             <h2 class="pb-2">WORKFORCE IDENTITY <b>BUSINESS VALUE EXPLAINED</b></h2>
             <p>This report uses enterprise assumptions and industry averages as a starting point to help you align
               identity and access
               management (IAM) initiatives with business goals.</p>
 
-            <p>We can help tailor this business case to your specific enterprise and equip you to share this report with other stakeholders. Your next step is to meet with Ping
+            <p class="pb-2">We can help tailor this business case to your specific enterprise and equip you to share this report with other stakeholders. Your next step is to meet with Ping
               Identity experts
               so you can internally champion workforce
                   identity transformation.</p>
+                  <a data-target="#launchmeetingform" class="button__schedule results-banner-cta" data-toggle="modal">REQUEST A MEETING</a>
           </div>
           <div class="col-lg-2"></div>
         </div>
@@ -748,16 +749,6 @@
                   //Get the backdrop by ID
                   var modalBackdrops = document.getElementsByClassName('modal-backdrop');
 
-
-                  // var val0 = document.getElementById('range0').value;
-                  // var val1 = document.getElementById('range1').value;
-                  // var val2 = document.getElementById('range2').value;
-                  // var val3 = document.getElementById('range3').value;
-                  // var val4 = document.getElementById('range4').value;
-                  // var val5 = document.getElementById('range5').value;
-                  // var val6 = document.getElementById('range6').value;
-                  // var val7 = document.getElementById('range7').value;
-                  // var val8 = document.getElementById('range8').value;
                   console.log(val0);
                   // Target first item in DOM array and remove
                   document.body.removeChild(modalBackdrops[0]);
@@ -768,7 +759,7 @@
 
                   // window.test();
 
-
+                  form.vals({"FirstName":"test"});
 
                   return false;
                 });
@@ -790,7 +781,23 @@
           <div class="modal-body">
             <script src="//app-sji.marketo.com/js/forms2/js/forms2.min.js"></script>
             <form id="mktoForm_3446"></form>
-            <script>MktoForms2.loadForm("//app-sji.marketo.com", "671-MGJ-570", 3446);</script>
+            <script>MktoForms2.loadForm("//app-sji.marketo.com", "671-MGJ-570", 3446, function(form){
+
+              
+              
+              form.onSuccess(function (values, followUpUrl) {
+
+                // form.getFormElem().hide();
+                // // var modalBackdrops = document.getElementsByClassName('modal-backdrop');
+                var tyPrompt = document.getElementsByClassName('ty-prompt');
+                // // document.getElementsByTagName("body")[0].classList.remove('modal-open');
+                // // document.body.removeChild(modalBackdrops[0]);
+                tyPrompt[0].setAttribute('style', 'display: block');
+                console.log(tyPrompt)
+              });
+              console.log('form 2');
+            });</script>
+            <p class="ty-prompt" style="display: none;">Thank you, a member of our sales team will reach out shortly.</p>
           </div>
         </div>
       </div>

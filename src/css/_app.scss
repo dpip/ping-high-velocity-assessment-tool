@@ -32,30 +32,34 @@ header {
       width: 75px;
       height: 75px;
     }
-    .button__schedule {
-      display: none;
-      font-weight: 400;
-    cursor: pointer;
-    text-transform: uppercase;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0 20px;
-    height: 36px;
-    color: #fff;
-    background-color: #2B80C3;
-    border: 1px solid #2B80C3;
-    font-size: 14px;
-    line-height: 36px;
-    -webkit-font-smoothing: auto;
-    text-decoration: none !important;
-    transition: all 0.15s ease-in-out;
-     border-radius: 2px;
-    &:hover {
-      color: #2B80C3;
-      background-color: #fff;
-    }
-}
   }
+}
+
+.button__schedule {
+  // display: none;
+  font-weight: 400;
+cursor: pointer;
+text-transform: uppercase;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+padding: 0 20px;
+height: 36px;
+color: #fff !important;
+background-color: #2B80C3;
+border: 1px solid #2B80C3;
+font-size: 14px;
+line-height: 36px;
+-webkit-font-smoothing: auto;
+text-decoration: none !important;
+transition: all 0.15s ease-in-out;
+ border-radius: 2px;
+&:hover {
+  color: #2B80C3 !important;
+  background-color: #fff !important;
+}
+&.results-banner-cta {
+  padding: 10px 20px;
+}
 }
 
 main {
@@ -893,4 +897,8 @@ textarea:focus, input:focus{
  .validation-alert {
    display: none;
    color: $red;
+ }
+
+ .ty-prompt {
+   display: none;
  }

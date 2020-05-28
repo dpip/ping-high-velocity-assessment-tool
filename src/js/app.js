@@ -8,6 +8,7 @@ import results from './results.js';
 import "../css/style.scss";
 
 let initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32];
+let autoFill = [];
 let rangeValues = [];
 let activeCurrency = 0;
 
@@ -243,6 +244,7 @@ $(document).ready(function () {
         let value = $(this).prev().attr("value");
         $(this).html(utils.commaSeparateNumber(value));
       });
+      $("#val6, #val7").html(Number(currencies[activeCurrency].hourlyWage));
     setCategories();
     setEachAnnual();
     fillBar();
@@ -291,17 +293,7 @@ $(document).ready(function () {
       console.log('pressed', theEvent, key);
 })
 
-$('.icon-edit-off').on('click', function() {
-    let valID = utils.parseID($(this).attr("id"));
-      $('#amount' + valID).blur();
-      $('#amount' + valID).hide();   
-      $('#val' + valID).show(); 
-      $('#off' + valID).hide();
-      $('#edit' + valID).show();
-      console.log('clicked', '#amount' + valID);
-})
-
-$('.range-slider__value, .icon-edit').on('click', function(e) {
+$('.range-slider__value').on('click', function(e) {
   e.preventDefault();
   let valID = utils.parseID($(this).attr("id"));
   $('#val' + utils.parseID($(this).attr("id"))).hide();
@@ -314,21 +306,21 @@ $('.amount').on('focus click', function() {
   $(this)[0].setSelectionRange(0, $(this).val().length);
 })
     
-  function isNumeric (evt) {
-    evt.preventDefault();
+  // function isNumeric (evt) {
+  //   evt.preventDefault();
 
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode (key);
-    var regex = /[0-9]|\./;
-    if ( !regex.test(key) ) {
-      theEvent.returnValue = false;
-      if(theEvent.preventDefault) theEvent.preventDefault();
-    }
-    console.log('is executing');
-  }
+  //   var theEvent = evt || window.event;
+  //   var key = theEvent.keyCode || theEvent.which;
+  //   key = String.fromCharCode (key);
+  //   var regex = /[0-9]|\./;
+  //   if ( !regex.test(key) ) {
+  //     theEvent.returnValue = false;
+  //     if(theEvent.preventDefault) theEvent.preventDefault();
+  //   }
+  //   console.log('is executing');
+  // }
 
-  $('#assessment-cta, .button__schedule').on('click', function(e) {
+  $('#assessment-cta').on('click', function(e) {
     e.preventDefault();
     let mkfields = [];
     $('input[name^="cL"]').each(function(i, obj){
@@ -336,7 +328,6 @@ $('.amount').on('focus click', function() {
       mkfields.push(obj.name);
 
       $('input[name=' + `${obj.name}`+ ']')
-      console.log($('input[name=' + `${obj.name}`+ ']'))
     });
     for(var i = 0; i < 8; i++) {
       $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
@@ -345,30 +336,33 @@ $('.amount').on('focus click', function() {
     $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
     $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
-
-    initResults();
+    // $('input[name="FirstName"]').val('robert'); here
+    // CHANGE THIS BACK
+    // initResults();
     
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
   
-  // $('.button__schedule').on('click', function(e) {
-  //   e.preventDefault();
-  //   let mkfields = [];
-  //   $('input[name^="cL"]').each(function(i, obj){
-  //     // console.log('btn selected:: inputs', i, obj);
-  //     mkfields.push(obj.name);
+  $(document).on('click', '.button__schedule', function(e) {
+    // e.preventDefault();
+    console.log('clicked')
+    $('input[name="FirstName"]').val(autoFill[0]);    
+    $('input[name="LastName"]').val(autoFill[1]);
+    $('input[name="Email"]').val(autoFill[2]);
+    $('input[name="Phone"]').val(autoFill[3]);
+  });
 
-  //     $('input[name=' + `${obj.name}`+ ']')
-  //     console.log($('input[name=' + `${obj.name}`+ ']'))
-  //   });
-  //   for(var i = 0; i < 8; i++) {
-  //     $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
-  //   }
-  //   $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues)));
-  //   $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
-  //   $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
-  //   $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
-  //     });
+  $(document).on('click', '.mktoButton', function(e) {
+    // e.preventDefault();
+    let assessmentForm = $('#mktoForm_3445');
+    // console.log('clicked assessment btn', $('#mktoForm_3445 input[name="FirstName"]').val());
+    autoFill[0] = $('#mktoForm_3445 input[name="FirstName"]').val();    
+    autoFill[1] = $('input[name="LastName"]').val();
+    autoFill[2] = $('input[name="Email"]').val();
+    autoFill[3] = $('input[name="Phone"]').val();
+
+    console.log('autofill form', autoFill)
+  });
 
 
 
@@ -421,19 +415,21 @@ $('.amount').on('focus click', function() {
             }
        });
 
-       if (window.location.href.indexOf("?results") > -1) {
-        //Initialize results
-        results.init();
-        console.log('getting url vars', utils.getUrlVars())
-        //Show the graph
+      //  if (window.location.href.indexOf("?results") > -1) {
+      //   //Initialize results
+      //   results.init();
+      //   console.log('getting url vars', utils.getUrlVars())
+      //   //Show the graph
 
-        // results.showFinal();
-        // console.log('yes params')
-        console.log('RESULTS DETECTED');
-        } else {
-          console.log('NO RESULTS DETECTED');
+      //   // results.showFinal();
+      //   // console.log('yes params')
+      //   console.log('RESULTS DETECTED');
+      //   } else {
+      //     console.log('NO RESULTS DETECTED');
 
           
-        }
+      //   }
+
+        
 
 });
