@@ -56,7 +56,7 @@ $(".range-slider__range, .amount").on("input change", function() {
 });
 
 let setCategories = function() {
-  let totals = [calcProductivity(rangeValues), calcSecurity(rangeValues), calcAgility(rangeValues)];
+  let totals = [calcProductivity(rangeValues, activeCurrency), calcSecurity(rangeValues, activeCurrency), calcAgility(rangeValues)];
 
   for(var i = 0; i < 3; i++) {
     $("#cat" + i).html(
@@ -69,7 +69,7 @@ let setCategories = function() {
 let setEachAnnual = function(val, currency) {
 
   let categories = ['productivity', 'security', 'agility'];
-  let totals = [calcProductivity(val), calcSecurity(val), calcAgility(val)];
+  let totals = [calcProductivity(val, currency), calcSecurity(val, currency), calcAgility(val)];
   categoryTotals = totals;
   for(var i = 0; i < 3; i++) {
     $(".annual-" + categories[i]).html(
@@ -105,7 +105,7 @@ let setInitialValues = function () {
       fillBar();
 };
 
-let calcProductivity = function (rangeValues) {
+let calcProductivity = function (rangeValues, currency) {
   let r = rangeValues;
   let p0 = utils.productivityBasic(r[0], r[7]);
   let p1 = utils.p1(r[0], r[7]);
@@ -114,13 +114,15 @@ let calcProductivity = function (rangeValues) {
   let p4 = utils.p4(r[6], r[5]);
   let p5 = utils.p5(r[0], r[7]);
 
+  console.log('currency from prod', currency)
+
   let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
 
   productivityResults = [p0, p1, p2, p3, p4, p5];
 
   for(var i = 0; i < 6; i++) {
     $("#r-productivity-" + i).html(
-      `${currencies[activeCurrency].currencySymbol}` +
+      `${currencies[currency].currencySymbol}` +
         `${utils.commaSeparateNumber(productivityResults[i])}`
     );
   }
@@ -128,15 +130,15 @@ let calcProductivity = function (rangeValues) {
   return sumProductivity;
 };
 
-let calcSecurity = function (rangeValues) {
+let calcSecurity = function (rangeValues, currency) {
   let r = rangeValues;
-  let basicRef = currencies[activeCurrency].dataBreach;
+  let basicRef = currencies[currency].dataBreach;
 
   let s0 = Math.round(
-    utils.securityBasic(Number(currencies[activeCurrency].dataBreach))
+    utils.securityBasic(Number(currencies[currency].dataBreach))
   );
   let s1 = Math.round(
-    utils.s1(r[1], Number(currencies[activeCurrency].securityBreach))
+    utils.s1(r[1], Number(currencies[currency].securityBreach))
   );
   let s2 = Math.round(
     utils.s2(r[0], r[3], r[4], r[2], r[5], r[4], Number(basicRef))
@@ -147,7 +149,7 @@ let calcSecurity = function (rangeValues) {
 
   for(var i = 0; i < 3; i++) {
     $("#r-security-" + i).html(
-      `${currencies[activeCurrency].currencySymbol}` +
+      `${currencies[currency].currencySymbol}` +
         `${utils.commaSeparateNumber(securityResults[i])}`
     );
   }
@@ -157,7 +159,7 @@ let calcSecurity = function (rangeValues) {
   return Number(Math.round(sumSecurity));
 };
 
-let calcAgility = function (rangeValues) {
+let calcAgility = function (rangeValues, currency) {
   let r = rangeValues;
   let a0 = utils.agilityBasic(r[2], r[3]);
 
@@ -176,15 +178,15 @@ let calcAgility = function (rangeValues) {
 let calcAll = function (val) {
 
   return (
-    calcProductivity(val) +
-    calcSecurity(val) +
-    calcAgility(val)
+    calcProductivity(val, activeCurrency) +
+    calcSecurity(val, activeCurrency) +
+    calcAgility(val, activeCurrency)
   );
 };
 
 let fillBar = function () {
-  let p = (calcProductivity(rangeValues) / calcAll(rangeValues)) * 100;
-  let r = (calcSecurity(rangeValues) / calcAll(rangeValues)) * 100;
+  let p = (calcProductivity(rangeValues, activeCurrency) / calcAll(rangeValues, activeCurrency)) * 100;
+  let r = (calcSecurity(rangeValues, activeCurrency) / calcAll(rangeValues, activeCurrency)) * 100;
   let a = (calcAgility(rangeValues) / calcAll(rangeValues)) * 100;
   $("#fill-productivity").css({ width: p + "%" });
   $("#fill-security").css({ width: r + "%" });
@@ -328,8 +330,8 @@ $('.amount').on('focus click', function() {
     for(var i = 0; i < 8; i++) {
       $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
     }
-    $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues)));
-    $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues)));
+    $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues, activeCurrency)));
+    $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues, activeCurrency)));
     $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
     // CHANGE THIS BACK
@@ -444,11 +446,11 @@ $('.amount').on('focus click', function() {
 
         let currencyParam = Number(gt()["region"]);
 
-        console.log('curency param', currencyParam)
+        console.log('currencyparam', currencyParam)
 
-        calcProductivity(initialParams);
-        calcSecurity(initialParams);
-        calcAgility(initialParams);
+        calcProductivity(initialParams, activeCurrency);
+        calcSecurity(initialParams, activeCurrency);
+        calcAgility(initialParams, activeCurrency);
         setEachAnnual(initialParams, activeCurrency);
         calcAll(initialParams);
 
@@ -482,7 +484,11 @@ $('.amount').on('focus click', function() {
 
         setEachAnnual(rangeValues, currencyParam);
 
-        console.log('CURRENCY PARAM', currencies[currencyParam].currencySymbol);
+        
+
+        activeCurrency = currencies[currencyParam];
+
+        console.log('CURRENCY ', currencyParam);
         
         } else {
           setCategories();
@@ -503,6 +509,6 @@ $('.amount').on('focus click', function() {
       });
 
 
-    console.log('initial params total', utils.getUrlVars())
+    console.log('currency param on load', activeCurrency)
 
 });
