@@ -4,13 +4,13 @@ import $ from "jquery";
 import "bootstrap";
 import utils from "./utils.js";
 import currencies from "./currencies.js";
-import results from './results.js';
 import "../css/style.scss";
 
-let initialRangeValues = [];
+
 let autoFill = [];
 let rangeValues = [];
 let activeCurrency = 0;
+let initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32];
 
 let productivityResults;
 let securityResults;
@@ -26,10 +26,7 @@ $(".range-slider__range, .amount").on("input change", function() {
       value = $(".range-slider__value");
   
   $('#val' + sliderID).html(utils.commaSeparateNumber(this.value));
-  // $(this).closest(value).html(utils.commaSeparateNumber(this.value));
-  // console.log($(this).closest('.range-slider__value'));
-  // $(this).find('.range-slider__value')
-  // console.log($(this).find('.range-slider__value').html());
+  
   rangeValues[sliderID] = updatedValue;
 
   setCategories();
@@ -56,8 +53,8 @@ $(".range-slider__range, .amount").on("input change", function() {
 });
 
 let setCategories = function() {
-  let totals = [calcProductivity(rangeValues, activeCurrency), calcSecurity(rangeValues, activeCurrency), calcAgility(rangeValues)];
-
+  let totals = [calcProductivity(rangeValues, activeCurrency), calcSecurity(rangeValues, activeCurrency), calcAgility(rangeValues, activeCurrency)];
+  console.log('set category', rangeValues)
   for(var i = 0; i < 3; i++) {
     $("#cat" + i).html(
       `${currencies[activeCurrency].currencySymbol}` +
@@ -80,7 +77,7 @@ let setEachAnnual = function(val, currency) {
 }
 
 
-let setInitialValues = function () {
+let setInitialValues = function (rv) {
 
   //   let activeCurrency = activeCurrency;
   let range = $(".range-slider__range"),
@@ -93,11 +90,11 @@ let setInitialValues = function () {
         rangeValues.push(Number(value));
 
         setCategories();
-        setEachAnnual(rangeValues, activeCurrency);
+        setEachAnnual(rv, activeCurrency);
       
         $("#total-annual-value, .results-total-annual-value").html(
           `${currencies[activeCurrency].currencySymbol}` +
-            utils.commaSeparateNumber(calcAll(rangeValues))
+            utils.commaSeparateNumber(calcAll(rv))
         );
         
       });
@@ -105,16 +102,14 @@ let setInitialValues = function () {
       fillBar();
 };
 
-let calcProductivity = function (rangeValues, currency) {
-  let r = rangeValues;
+let calcProductivity = function (rv, currency) {
+  let r = rv;
   let p0 = utils.productivityBasic(r[0], r[7]);
   let p1 = utils.p1(r[0], r[7]);
   let p2 = utils.p2(r[2], r[3], r[6], r[7]);
   let p3 = utils.p3(r[2], r[6]);
   let p4 = utils.p4(r[6], r[5]);
   let p5 = utils.p5(r[0], r[7]);
-
-  console.log('currency from prod', currency)
 
   let sumProductivity = Number(p0 + p1 + p2 + p3 + p4 + p5);
 
@@ -130,8 +125,8 @@ let calcProductivity = function (rangeValues, currency) {
   return sumProductivity;
 };
 
-let calcSecurity = function (rangeValues, currency) {
-  let r = rangeValues;
+let calcSecurity = function (rv, currency) {
+  let r = rv;
   let basicRef = currencies[currency].dataBreach;
 
   let s0 = Math.round(
@@ -146,7 +141,6 @@ let calcSecurity = function (rangeValues, currency) {
 
   securityResults = [s0, s1, s2];
   
-
   for(var i = 0; i < 3; i++) {
     $("#r-security-" + i).html(
       `${currencies[currency].currencySymbol}` +
@@ -159,8 +153,8 @@ let calcSecurity = function (rangeValues, currency) {
   return Number(Math.round(sumSecurity));
 };
 
-let calcAgility = function (rangeValues, currency) {
-  let r = rangeValues;
+let calcAgility = function (rv, currency) {
+  let r = rv;
   let a0 = utils.agilityBasic(r[2], r[3]);
 
   agilityResults = [a0];  
@@ -196,33 +190,103 @@ let fillBar = function () {
 
 
 let initResults = function() {
-  let catArray = [...productivityResults, ...securityResults, ...agilityResults]
-  let data = window.document.location.hash = utils.encodeData(rangeValues);
-  // console.log('from utils array', utils.encodeData(catArray))
-  window.history.pushState(null, "", window.location.href.replace("#", '?results&' + `${data}`)  + '&tava=' + calcAll(rangeValues) + '&region=' + activeCurrency);
-  // need to set cat array on page
 
-  console.log('category array', calcAll(rangeValues));
+  // set urls params with hash at root
+  window.document.location.hash = utils.encodeData(rangeValues) + '&tava=' + calcAll(rangeValues) + '&region=' + activeCurrency;
+  // replace hash and with results query string
+  window.history.pushState(null, "", window.location.href.replace("#", '?results&'));
 }
 
 $(document).ready(function () {
 
+  setInitialValues(rangeValues);
+  
+  //on load - first::: set initial input values and calculation values 
+  
   utils.tooltip();
   
+
+  // on load check for URL params
+  // if params are found
+  if (window.location.href.indexOf("?results&") > -1) {
+    // let catArray = [...productivityResults, ...securityResults, ...agilityResults, calcAll(rangeValues)]
+    
+    // render results view components
+    let assessmentWrap = $('#assessment-wrap');
+    let mainBanner = $('.main-banner');
+    let resultsBanner = $('.results-banner');
+    let resultsWrap = document.getElementById('results-wrap');
+    let buttonSchedule = document.getElementsByClassName('button__schedule');
+
+    assessmentWrap.hide();
+    mainBanner.hide();
+    resultsBanner.show();
+    resultsWrap.setAttribute('style', 'display: flex');
+    buttonSchedule[0].setAttribute('style', 'display: flex');
+
+    // set category results from url params
+    let initialParams = utils.getUrlVars();
+    let currencyParam = Number(utils.getSpecific()["region"]);
+
+    console.log('get url vars from app.js', initialParams)
+
+    calcProductivity(initialParams, activeCurrency);
+    calcSecurity(initialParams, activeCurrency);
+    calcAgility(initialParams, activeCurrency);
+    setEachAnnual(initialParams, activeCurrency);
+    calcAll(initialParams);
+
+    console.log('testing here', initialParams);
+
   
+    $("#total-annual-value, .results-total-annual-value").html(
+      `${currencies[currencyParam].currencySymbol}` +
+        utils.commaSeparateNumber(utils.getSpecific()["tava"])
+    );
+
+    setEachAnnual(initialParams, currencyParam);
+    activeCurrency = currencies[currencyParam];
+
+    setInitialValues(initialParams);
+    
+    } else {
+      setCategories();
+      // setInitialValues(rangeValues);
+    // setEachAnnual(rangeValues, activeCurrency);
+      
+      
+      console.log('NO RESULTS DETECTED');
+    }
+
+
   $("select").on("input change", function () {
+
+    // Note: selection does not convert currency.
+    // Hourly wages are changed effecting some calculations
+
+    // set new active region currency
     activeCurrency = Number(this.value);
+
+
+    // set currency symbol for assessment view
     $(".currency-symbol").html(`${currencies[activeCurrency].currencySymbol}`);
+
+    // set currency symbol for and commaSeperated val for total values
     $("#total-annual-value, .results-total-annual-value").html(
       `${currencies[activeCurrency].currencySymbol}` +
         utils.commaSeparateNumber(calcAll(rangeValues))
     );
-    
+
+    // set new region selection values for the region ranges
     $("#range6, #range7").attr(
       "value",
       Number(currencies[activeCurrency].hourlyWage)
     );
 
+    // NOTE: attempts to refactor below produced the wrong results
+    // Only specific vanilla selectors gave desired outcomes
+
+    // reset all range values to initial values upon new region selection
     document.getElementById('range0').value = 35000;
     document.getElementById('range1').value = 10000000000;
     document.getElementById('range2').value = 500;
@@ -231,7 +295,8 @@ $(document).ready(function () {
     document.getElementById('range5').value = 8;
     document.getElementById('range6').value = Number(currencies[activeCurrency].hourlyWage);
     document.getElementById('range7').value = Number(currencies[activeCurrency].hourlyWage);
-
+    
+    // reset all display amounts to initial values upon new region selection
     document.getElementById('amount0').value = 35000;
     document.getElementById('amount1').value = 10000000000;
     document.getElementById('amount2').value = 500;
@@ -240,31 +305,32 @@ $(document).ready(function () {
     document.getElementById('amount5').value = 8;
     document.getElementById('amount6').value = Number(currencies[activeCurrency].hourlyWage);
     document.getElementById('amount7').value = Number(currencies[activeCurrency].hourlyWage);
-    for(var i = 0; i < 6; i++) {
-      rangeValues[i] = initialRangeValues[i];
-      console.log(rangeValues[i]);
-    }
+    
+    // set updated wage values and range toggle position
     rangeValues[6] = Number(currencies[activeCurrency].hourlyWage);
     rangeValues[7] = Number(currencies[activeCurrency].hourlyWage);
+    
+    // set range values array for utility calculations to reference
+    
+    for(var i = 0; i < 6; i++) {
+      rangeValues[i] = initialRangeValues[i];
+      console.log('range value arry and initial value arry', rangeValues[i]);
+    }
 
-    // last update that may have affected math below
-    // setInitialValues();
-    // end
-      let value = $(".range-slider__value");
-      value.each(function () {
-        let value = $(this).prev().attr("value");
-        $(this).html(utils.commaSeparateNumber(value));
-      });
-      $("#val6, #val7").html(Number(currencies[activeCurrency].hourlyWage));
+    // set each comma seperated number with updated values
+    let value = $(".range-slider__value");
+    value.each(function () {
+      let value = $(this).prev().attr("value");
+      $(this).html(utils.commaSeparateNumber(value));
+    });
+    $("#val6, #val7").html(Number(currencies[activeCurrency].hourlyWage));
+
+    // set sum for the assessment view visual section and update the bar fill widths
     setCategories();
-    setEachAnnual(rangeValues, activeCurrency);
+    // setEachAnnual(rangeValues, activeCurrency);
     fillBar();
-    // setInitialValues();
-    console.log(rangeValues);
+
   });
-
-  setInitialValues();
-
 
   $('.amount').on('input', function() {
       if (Number($(this).val().length) > Number($(this).attr('max').length)) {
@@ -302,20 +368,20 @@ $(document).ready(function () {
           // $(this).hide();
         }
       console.log('pressed', theEvent, key);
-})
+    })
 
-$('.range-slider__value').on('click', function(e) {
-  e.preventDefault();
-  let valID = utils.parseID($(this).attr("id"));
-  $('#val' + utils.parseID($(this).attr("id"))).hide();
-  $('#amount' + utils.parseID($(this).attr("id"))).show().focus();
-  $('#edit' + valID).hide();
-  $('#off' + valID).show();
-})
+    $('.range-slider__value').on('click', function(e) {
+      e.preventDefault();
+      let valID = utils.parseID($(this).attr("id"));
+      $('#val' + utils.parseID($(this).attr("id"))).hide();
+      $('#amount' + utils.parseID($(this).attr("id"))).show().focus();
+      $('#edit' + valID).hide();
+      $('#off' + valID).show();
+    })
 
-$('.amount').on('focus click', function() {
-  $(this)[0].setSelectionRange(0, $(this).val().length);
-})
+    $('.amount').on('focus click', function() {
+      $(this)[0].setSelectionRange(0, $(this).val().length);
+    })
     
 
   $('#assessment-cta').on('click', function(e) {
@@ -323,9 +389,8 @@ $('.amount').on('focus click', function() {
     let mkfields = [];
     $('input[name^="cL"]').each(function(i, obj){
       // console.log('btn selected:: inputs', i, obj);
-      mkfields.push(obj.name);
-
       $('input[name=' + `${obj.name}`+ ']')
+      mkfields.push(obj.name);
     });
     for(var i = 0; i < 8; i++) {
       $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
@@ -336,34 +401,51 @@ $('.amount').on('focus click', function() {
     $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
     // CHANGE THIS BACK
     // initResults();
+
+    Array.prototype.unique =
+      function() {
+        var a = [];
+        var l = this.length;
+        for(var i=0; i<l; i++) {
+          for(var j=i+1; j<l; j++) {
+            // If this[i] is found later in the array
+            if (this[i] === this[j])
+              j = ++i;
+          }
+          a.push(this[i]);
+        }
+      return a;
+    };
+
+    mkfields = mkfields.unique();
     
     console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
   });
   
-  $(document).on('click', '.button__schedule, .results-banner-schedule-link', function(e) {
-    // e.preventDefault();
-    console.log('clicked')
-    $('input[name="FirstName"]').val(autoFill[0]);    
-    $('input[name="LastName"]').val(autoFill[1]);
-    $('input[name="Email"]').val(autoFill[2]);
-    $('input[name="Phone"]').val(autoFill[3]);
-  });
+      $(document).on('click', '.button__schedule, .results-banner-schedule-link', function(e) {
+        // e.preventDefault();
+        console.log('clicked')
+        $('input[name="FirstName"]').val(autoFill[0]);    
+        $('input[name="LastName"]').val(autoFill[1]);
+        $('input[name="Email"]').val(autoFill[2]);
+        $('input[name="Phone"]').val(autoFill[3]);
+      });
 
-  $(document).on('click', '.mktoButton', function(e) {
-    // e.preventDefault();
-    let assessmentForm = $('#mktoForm_3445');
-    // console.log('clicked assessment btn', $('#mktoForm_3445 input[name="FirstName"]').val());
-    autoFill[0] = $('#mktoForm_3445 input[name="FirstName"]').val();    
-    autoFill[1] = $('#mktoForm_3445 input[name="LastName"]').val();
-    autoFill[2] = $('#mktoForm_3445 input[name="Email"]').val();
-    autoFill[3] = $('#mktoForm_3445 input[name="Phone"]').val();
-    initResults();
-    console.log('autofill form', autoFill)
-  });
+      $(document).on('click', '.mktoButton', function(e) {
+        // e.preventDefault();
+        let assessmentForm = $('#mktoForm_3445');
+        // console.log('clicked assessment btn', $('#mktoForm_3445 input[name="FirstName"]').val());
+        autoFill[0] = $('#mktoForm_3445 input[name="FirstName"]').val();    
+        autoFill[1] = $('#mktoForm_3445 input[name="LastName"]').val();
+        autoFill[2] = $('#mktoForm_3445 input[name="Email"]').val();
+        autoFill[3] = $('#mktoForm_3445 input[name="Phone"]').val();
+        initResults();
+        console.log('autofill form', autoFill)
+      });
 
 
 
-      // Results expand all colapse all functionality
+      // Results expand all colapse all added functionality to bootstrap tab components
 
       // if there are no open tabs display expand all and toggle functionality of button to open all tabs
       // otherwise display collapse all button and closing functionality for all tabs (based on parent wraper ID)
@@ -375,19 +457,16 @@ $('.amount').on('focus click', function() {
           
           $('#' + catId).find('.toggle-all').addClass('active');
           $('#' + catId).find('.toggle-all').html('Collapse all');
-          // $(".toggle-advanced").attr("aria-expanded", "false");
           
           console.log('show class exists', );
         } else {
           console.log('show class does not exist');
           $('#' + catId).find('.toggle-all').removeClass('active');
           $('#' + catId).find('.toggle-all').html('Expand all');
-          // $(".toggle-advanced").attr("aria-expanded", "true");
         }
       });
 
-      // Core toggle (collapse/expand) all functionality
-
+      // Core toggle (collapse/expand) all functionality for results tabs:
       $(".toggle-all").on("click", function () {
 
         let toggleId = $(this).parent().attr("id");
@@ -415,100 +494,15 @@ $('.amount').on('focus click', function() {
             }
        });
 
-       if (window.location.href.indexOf("?results&") > -1) {
-        let catArray = [...productivityResults, ...securityResults, ...agilityResults, calcAll(rangeValues)]
-        // results.init();
-        // initResults();
-        // console.log('RESULTS DETECTED',  utils.commaSeparateNumber(utils.setParams(catArray)[0]))
-        // $('#r-productivity-0').html(utils.commaSeparateNumber(utils.setParams(catArray)[0]));
-        // utils.commaSeparateNumber()
-        // $('.annual-productivity').html(productivityResults())
-        // $('.annual-productivity').html('test')
-
-        let assessmentWrap = document.getElementById('assessment-wrap');
-        let mainBanner = document.getElementsByClassName('main-banner');
-        let resultsBanner = document.getElementsByClassName('results-banner');
-        let resultsWrap = document.getElementById('results-wrap');
-        let buttonSchedule = document.getElementsByClassName('button__schedule');
-
-
-        assessmentWrap.setAttribute('style', 'display: none');
-        mainBanner[0].setAttribute('style', 'display: none');
-        resultsBanner[0].setAttribute('style', 'display: block');
-        resultsWrap.setAttribute('style', 'display: flex');
-        buttonSchedule[0].setAttribute('style', 'display: flex');
-
-        // set category results from url params
-
-        console.log('get url vars from app.js', utils.getUrlVars())
-
-        let initialParams = utils.getUrlVars();
-
-        let currencyParam = Number(gt()["region"]);
-
-        console.log('currencyparam', currencyParam)
-
-        calcProductivity(initialParams, activeCurrency);
-        calcSecurity(initialParams, activeCurrency);
-        calcAgility(initialParams, activeCurrency);
-        setEachAnnual(initialParams, activeCurrency);
-        calcAll(initialParams);
-
-        
-        
-        function gt()
-        {
-            var vars = [], hash;
-            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for(var i = 0; i < hashes.length; i++)
-            {
-                hash = hashes[i].split('=');
-                vars.push(hash[0]);
-                vars[hash[0]] = hash[1];
-            }
-            return vars;
-        }
-
-        
-
-        $("#total-annual-value, .results-total-annual-value").html(
-          `${currencies[currencyParam].currencySymbol}` +
-            utils.commaSeparateNumber(gt()["tava"])
-        );
-        // for(var i = 0; i < 3; i++) {
-        //   $("#cat" + i).html(
-        //     `${currencies[currencyParam].currencySymbol}` +
-        //       `${utils.commaSeparateNumber(totals[i])}`
-        //   );
-        // }
-
-        setEachAnnual(rangeValues, currencyParam);
-
-        
-
-        activeCurrency = currencies[currencyParam];
-
-        console.log('CURRENCY ', currencyParam);
-        
-        } else {
-          setCategories();
-        // setEachAnnual(rangeValues, activeCurrency);
-          initialRangeValues = [35000, 10000000000, 500, 500, 7, 8, 32, 32]
-          
-          console.log('NO RESULTS DETECTED');
-        }
-
+        // if a user clicks outside of a text area, display the amount
+        // with comma seperated number in its place
         $(document).on("focusout",".amount",function(){
           let valID = utils.parseID($(this).attr("id"));
-          // $(this).blur();
           $(this).hide();   
           $('#val' + valID).show(); 
           $('#off' + valID).hide();
           $('#edit' + valID).show();
-          console.log("finally bye", $(this));
+          
       });
-
-
-    console.log('currency param on load', activeCurrency)
 
 });

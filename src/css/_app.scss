@@ -798,6 +798,24 @@ textarea:focus, input:focus{
   #total-annual-value {
     font-size: 32px !important;
   }
+  .modal-dialog {
+    max-width: fit-content !important;
+    margin: 1.75rem auto;
+    .modal-content {
+      // max-width: 250px !important;
+      padding: 0px 0px !important;
+    }
+    .mktoField {
+      width:  250px !important;
+    }
+    .mktoButton {
+      width:  250px !important;
+    }
+    .mktoForm .mktoButtonWrap.mktoSimple {
+      display: flex !important;
+      justify-content: flex-start;
+    }
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -904,3 +922,37 @@ textarea:focus, input:focus{
  .ty-prompt {
    display: none;
  }
+
+ .mktoField {
+   width: 100% !important;
+ }
+
+ #Country::-ms-expand {
+  display: none !important;
+ }
+
+ select.mktoField {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  background-image: none !important;
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: 18px;
+}
+
+.modal-dialog-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// @media (min-width: 576px) {}
+
+.modal-dialog {
+  max-width: fit-content !important;
+  margin: 1.75rem auto;
+  .modal-content {
+    padding: 0px 16px;
+  }
+}
+

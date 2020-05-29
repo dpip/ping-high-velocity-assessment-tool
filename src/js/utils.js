@@ -3,6 +3,8 @@ import $ from "jquery";
 const utils = {
   encodeData: function(data) {
     //Format object items to be query string params
+
+    console.log('paramArray', paramArray);
     let paramArray = ['TWI', 'TR', 'TWA', 'TA', 'SIAT', 'TEIAMT', 'AHWIAMTA', 'AHWO', 'TAVA', 'PVA', 'SVA', 'AVA']
     paramArray.forEach(function(i) {
        i.substr(i.indexOf("=") + 1)
@@ -103,15 +105,11 @@ setParams: function(data) {
         for (let i = 1; i < 9; i++) {
             hash = hashes[i].split("=");
             vars.push(hash[0]);
-            // vals.push(hash[0]);
-            // vals.push(utils.getUrlParameter(hash[0]));
             vars[hash[0]] = hash[1];
-            // vals[hash[0]] = hash[1];
-            vals.push(utils.getUrlParameter(hash[0]));
-            // console.log('hashes', hash)
-            // console.log('from get url vars', utils.getUrlParameter(hash[0].match(/\d/g).join("")));
+            vals.push(Number(utils.getUrlParameter(hash[0])));
+            
+            console.log('vals from get url', vals)
         }
-        console.log('from get url vars', vals);
         return vals;
   },
   getUrlParameter: function getUrlParameter(sParam) {
@@ -127,19 +125,18 @@ setParams: function(data) {
             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]).match(/\d/g).join("");
         }
     }
-},
-  convertNumbertoWords: function(labelValue) {
-    // Nine Zeroes for Billions
-      return Math.abs(Number(labelValue)) >= 1.0e9
-          ? Math.abs(Number(labelValue)) / 1.0e9 + "B"
-          : // Six Zeroes for Millions
-            Math.abs(Number(labelValue)) >= 1.0e6
-            ? Math.abs(Number(labelValue)) / 1.0e6 + "M"
-            : // Three Zeroes for Thousands
-              Math.abs(Number(labelValue)) >= 1.0e3
-              ? Math.abs(Number(labelValue)) / 1.0e3 + "K"
-              : Math.abs(Number(labelValue));
-  }
+  },
+  getSpecific: function() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
 };
 
 export default utils;
