@@ -291,8 +291,8 @@ input::-moz-focus-outer {
 
 #results-wrap {
   // when testing resultss comment out display HERE
-  display: none;
   background: #F5F6F9;
+  transition: all 1s ease-in-out;
   .nav-tabs {
     border-bottom: none;
   }
@@ -923,36 +923,36 @@ textarea:focus, input:focus{
    display: none;
  }
 
- .mktoField {
-   width: 100% !important;
- }
+//  .mktoField {
+//    width: 100% !important;
+//  }
 
- #Country::-ms-expand {
-  display: none !important;
- }
+//  #Country::-ms-expand {
+//   display: none !important;
+//  }
 
- select.mktoField {
-  padding-bottom: 0 !important;
-  padding-top: 0 !important;
-  background-image: none !important;
-  background-repeat: no-repeat;
-  background-position: 100% 50%;
-  background-size: 18px;
-}
+//  select.mktoField {
+//   padding-bottom: 0 !important;
+//   padding-top: 0 !important;
+//   background-image: none !important;
+//   background-repeat: no-repeat;
+//   background-position: 100% 50%;
+//   background-size: 18px;
+// }
 
-.modal-dialog-centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// .modal-dialog-centered {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
-// @media (min-width: 576px) {}
+// // @media (min-width: 576px) {}
 
-.modal-dialog {
-  max-width: fit-content !important;
-  margin: 1.75rem auto;
-  .modal-content {
-    padding: 0px 16px;
-  }
-}
+// .modal-dialog {
+//   max-width: fit-content !important;
+//   margin: 1.75rem auto;
+//   .modal-content {
+//     padding: 0px 16px;
+//   }
+// }
 

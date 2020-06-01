@@ -198,15 +198,14 @@ let initResults = function() {
 }
 
 $(document).ready(function () {
-
+  
+  // on load - first::: set initial input values and calculation values 
   setInitialValues(rangeValues);
   
-  //on load - first::: set initial input values and calculation values 
-  
+  // on load - initialize bootstrap tooltip listeners
   utils.tooltip();
-  
 
-  // on load check for URL params
+  // on load - check for URL params
   // if params are found
   if (window.location.href.indexOf("?results&") > -1) {
     // let catArray = [...productivityResults, ...securityResults, ...agilityResults, calcAll(rangeValues)]
@@ -215,13 +214,13 @@ $(document).ready(function () {
     let assessmentWrap = $('#assessment-wrap');
     let mainBanner = $('.main-banner');
     let resultsBanner = $('.results-banner');
-    let resultsWrap = document.getElementById('results-wrap');
+    let resultsWrap = $('#results-wrap');
     let buttonSchedule = document.getElementsByClassName('button__schedule');
 
     assessmentWrap.hide();
     mainBanner.hide();
     resultsBanner.show();
-    resultsWrap.setAttribute('style', 'display: flex');
+    resultsWrap.show();
     buttonSchedule[0].setAttribute('style', 'display: flex');
 
     // set category results from url params
@@ -250,15 +249,45 @@ $(document).ready(function () {
     setInitialValues(initialParams);
     
     } else {
-      setCategories();
-      // setInitialValues(rangeValues);
-    // setEachAnnual(rangeValues, activeCurrency);
-      
-      
       console.log('NO RESULTS DETECTED');
     }
 
+    // Primary functionality for range and textarea (numbers) components
+    $(".range-slider__range, .amount").on("input change", function() {
+      const sliderID = utils.parseID($(this).attr("id"));
+      // const valID = utils.parseID($(this).attr("id"));
+      let updatedValue = Number(this.value),
+          value = $(".range-slider__value");
+      
+      $('#val' + sliderID).html(utils.commaSeparateNumber(this.value));
+      
+      rangeValues[sliderID] = updatedValue;
+    
+      setCategories();
+      setEachAnnual(rangeValues, activeCurrency);
+    
+      $("#total-annual-value, .results-total-annual-value").html(
+        `${currencies[activeCurrency].currencySymbol}` +
+          utils.commaSeparateNumber(calcAll(rangeValues))
+      );
+      // console.log(sliderID);
+      fillBar();
+    
+      if($(this).val().length === 0 || isNaN(updatedValue) === true) {
+        console.log('please enter value to continue');
+        $('.validation-alert').show();
+        $('#assessment-cta').attr('disabled', true);
+      } else {
+        $('.validation-alert').hide();
+        $('#assessment-cta').attr('disabled', false);
+      }
+    
+      console.log('range values', rangeValues)
+    
+    });
+  
 
+  // set region currency values, recalculate, and reset range positions 
   $("select").on("input change", function () {
 
     // Note: selection does not convert currency.
@@ -332,6 +361,7 @@ $(document).ready(function () {
 
   });
 
+  // limit string length in text areas to max value char length 
   $('.amount').on('input', function() {
       if (Number($(this).val().length) > Number($(this).attr('max').length)) {
         
@@ -345,6 +375,8 @@ $(document).ready(function () {
       }
   })
 
+  // Close input amount and reveal comma seperated number
+  // if a user presses the enter key
   $('.amount').on('keypress', function(evt) {
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
@@ -362,14 +394,11 @@ $(document).ready(function () {
           $('#off' + valID).hide();
           $('#edit' + valID).show();
         }
-        if($(this).is(':focus')) {
-          console.log('focused');
-        } else {
-          // $(this).hide();
-        }
       console.log('pressed', theEvent, key);
     })
 
+
+    // toggle comma seperated numbers and text areas on click
     $('.range-slider__value').on('click', function(e) {
       e.preventDefault();
       let valID = utils.parseID($(this).attr("id"));
@@ -379,92 +408,84 @@ $(document).ready(function () {
       $('#off' + valID).show();
     })
 
-    $('.amount').on('focus click', function() {
-      $(this)[0].setSelectionRange(0, $(this).val().length);
+    // on focus of input amount move cursor to the end of the input value's length
+    $('.amount').on('focus', function() {
+      $(this)[0].setSelectionRange($(this).val().length, $(this).val().length);
     })
     
 
-  $('#assessment-cta').on('click', function(e) {
-    e.preventDefault();
-    let mkfields = [];
-    $('input[name^="cL"]').each(function(i, obj){
-      // console.log('btn selected:: inputs', i, obj);
-      $('input[name=' + `${obj.name}`+ ']')
-      mkfields.push(obj.name);
+    // on submission of the assessment form categoryTotals, set marketo field values
+    $('#assessment-cta').on('click', function(e) {
+
+      let mkfields = [];
+
+      // push each field name starting with the chars 'cL' to the mkfield array
+      $('input[name^="cL"]').each(function(i, obj){
+        $('input[name=' + `${obj.name}`+ ']')
+        mkfields.push(obj.name);
+      });
+
+      // for each hidden form field, set corresponding range values
+      for(var i = 0; i < 8; i++) {
+        $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
+      }
+
+      // set category fields and total sum field
+      $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues, activeCurrency)));
+      $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues, activeCurrency)));
+      $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
+      $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
+
+      // protoype field array and remove duplicate keys
+      mkfields = utils.removeDuplicates(mkfields);
+      
     });
-    for(var i = 0; i < 8; i++) {
-      $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
-    }
-    $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues, activeCurrency)));
-    $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues, activeCurrency)));
-    $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
-    $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
-    // CHANGE THIS BACK
-    // initResults();
 
-    Array.prototype.unique =
-      function() {
-        var a = [];
-        var l = this.length;
-        for(var i=0; i<l; i++) {
-          for(var j=i+1; j<l; j++) {
-            // If this[i] is found later in the array
-            if (this[i] === this[j])
-              j = ++i;
-          }
-          a.push(this[i]);
-        }
-      return a;
-    };
+    // onclick of initial marketo cta set autofil array values
+    $(document).on('click', '.mktoButton', function(e) {
+      autoFill[0] = $('#mktoForm_3445 input[name="FirstName"]').val();    
+      autoFill[1] = $('#mktoForm_3445 input[name="LastName"]').val();
+      autoFill[2] = $('#mktoForm_3445 input[name="Email"]').val();
+      autoFill[3] = $('#mktoForm_3445 input[name="Phone"]').val();
+      // initResults();
+      console.log('autofill form', autoFill)
+    });
 
-    mkfields = mkfields.unique();
-    
-    console.log('btn selected', mkfields, $('input[name="cLTotalAnnualValueAdded"]').val());
-  });
-  
-      $(document).on('click', '.button__schedule, .results-banner-schedule-link', function(e) {
-        // e.preventDefault();
-        console.log('clicked')
-        $('input[name="FirstName"]').val(autoFill[0]);    
-        $('input[name="LastName"]').val(autoFill[1]);
-        $('input[name="Email"]').val(autoFill[2]);
-        $('input[name="Phone"]').val(autoFill[3]);
-      });
+    // on click of marketo submit button set autofill values to generated input fields in results
+    $(document).on('click', '.button__schedule, .results-banner-schedule-link', function(e) {
+      console.log('clicked')
+      $('input[name="FirstName"]').val(autoFill[0]);    
+      $('input[name="LastName"]').val(autoFill[1]);
+      $('input[name="Email"]').val(autoFill[2]);
+      $('input[name="Phone"]').val(autoFill[3]);
+    });
+    // on click of third spe submit button set autofill 
 
-      $(document).on('click', '.mktoButton', function(e) {
-        // e.preventDefault();
-        let assessmentForm = $('#mktoForm_3445');
-        // console.log('clicked assessment btn', $('#mktoForm_3445 input[name="FirstName"]').val());
-        autoFill[0] = $('#mktoForm_3445 input[name="FirstName"]').val();    
-        autoFill[1] = $('#mktoForm_3445 input[name="LastName"]').val();
-        autoFill[2] = $('#mktoForm_3445 input[name="Email"]').val();
-        autoFill[3] = $('#mktoForm_3445 input[name="Phone"]').val();
-        initResults();
-        console.log('autofill form', autoFill)
-      });
+    // on submit initialize function sets results params
+    $('#mktoForm_3445').on('submit', function() {
+      initResults();
+    })
 
+    // Results expand all colapse all added functionality to bootstrap tab components
 
+    // if there are no open tabs display expand all and toggle functionality of button to open all tabs
+    // otherwise display collapse all button and closing functionality for all tabs (based on parent wraper ID)
 
-      // Results expand all colapse all added functionality to bootstrap tab components
+    $('.toggle-advanced').mouseup(function() {
+      let catId = $(this).parent().parent().attr('id');
 
-      // if there are no open tabs display expand all and toggle functionality of button to open all tabs
-      // otherwise display collapse all button and closing functionality for all tabs (based on parent wraper ID)
-
-      $('.toggle-advanced').mouseup(function() {
-        let catId = $(this).parent().parent().attr('id');
-
-        if($('#' + catId).find('.show').length !== 1) {
-          
-          $('#' + catId).find('.toggle-all').addClass('active');
-          $('#' + catId).find('.toggle-all').html('Collapse all');
-          
-          console.log('show class exists', );
-        } else {
-          console.log('show class does not exist');
-          $('#' + catId).find('.toggle-all').removeClass('active');
-          $('#' + catId).find('.toggle-all').html('Expand all');
-        }
-      });
+      if($('#' + catId).find('.show').length !== 1) {
+        
+        $('#' + catId).find('.toggle-all').addClass('active');
+        $('#' + catId).find('.toggle-all').html('Collapse all');
+        
+        console.log('show class exists', );
+      } else {
+        console.log('show class does not exist');
+        $('#' + catId).find('.toggle-all').removeClass('active');
+        $('#' + catId).find('.toggle-all').html('Expand all');
+      }
+    });
 
       // Core toggle (collapse/expand) all functionality for results tabs:
       $(".toggle-all").on("click", function () {
