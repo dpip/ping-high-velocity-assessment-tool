@@ -291,6 +291,7 @@ input::-moz-focus-outer {
 
 #results-wrap {
   // when testing resultss comment out display HERE
+  display: none;
   background: #F5F6F9;
   transition: all 1s ease-in-out;
   .nav-tabs {
@@ -705,7 +706,7 @@ footer {
 .results-banner {
   background-color: $navy !important;
   color: #fff;
-  // display: none;
+  display: none;
   a {
     color: #fff !important;
     cursor: pointer;
