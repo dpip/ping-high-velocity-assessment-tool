@@ -23,6 +23,7 @@ header {
   nav {
     min-height: 100px;
     height: 100px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -956,4 +957,23 @@ textarea:focus, input:focus{
 //     padding: 0px 16px;
 //   }
 // }
+
+.nav_scroll {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: $white !important;
+  z-index: 2000;
+  justify-content: flex-end;
+  padding: 10px 0px;
+  border-bottom: 1px solid $gray;
+  .schedule_scroll {
+    display: flex !important;
+    justify-content: flex-end;
+    width: fit-content;
+    margin-right: 10px;
+  }
+}
 

@@ -415,7 +415,7 @@ $(document).ready(function () {
     
 
     // on submission of the assessment form categoryTotals, set marketo field values
-    $('#assessment-cta').on('click', function(e) {
+    $('#assessment-cta').on('click', function() {
 
       let mkfields = [];
 
@@ -423,21 +423,28 @@ $(document).ready(function () {
       $('input[name^="cL"]').each(function(i, obj){
         $('input[name=' + `${obj.name}`+ ']')
         mkfields.push(obj.name);
+        // console.log('this', this, mkfields)
       });
 
       // for each hidden form field, set corresponding range values
       for(var i = 0; i < 8; i++) {
         $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
+        console.log('from for loop  setting fields:::', mkfields[i], rangeValues[i]);
       }
 
       // set category fields and total sum field
       $('input[name="cLSecurityValueAdded"]').val(Number(calcSecurity(rangeValues, activeCurrency)));
       $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues, activeCurrency)));
-      $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues)));
-      $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues)));
+      $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues, activeCurrency)));
+      $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues, activeCurrency)));
+
+      // cLAverageHourlyWageOrg
+      // cLTotalRevenue
 
       // protoype field array and remove duplicate keys
-      mkfields = utils.removeDuplicates(mkfields);
+      // mkfields = utils.removeDuplicates(mkfields);
+
+      // console.log('mkfields', mkfields);
       
     });
 
@@ -524,6 +531,18 @@ $(document).ready(function () {
           $('#off' + valID).hide();
           $('#edit' + valID).show();
           
+      });
+
+
+      $(document).scroll(function() {
+        var y = $(this).scrollTop();
+        if (y > 100) {
+          $('.nav_scroll').css('display', 'flex');
+          console.log('in view')
+        } else {
+          $('.nav_scroll').fadeOut();
+          console.log('not in view')
+        }
       });
 
 });
