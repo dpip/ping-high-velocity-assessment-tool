@@ -969,16 +969,29 @@ textarea:focus, input:focus{
   justify-content: space-between;
   padding: 10px 0px;
   border-bottom: 1px solid $gray;
+  align-items: center;
+  min-height: 70px;
+  height: 70px;
   .schedule_scroll {
     display: flex !important;
     justify-content: flex-end;
     width: fit-content;
-    margin-right: 10px;
+    margin-left: 20px;
   }
   img {
     height: 35px;
     width: 35px;
-    margin-left: 10px;
+    margin-left: 30px;
   }
 }
+.sticky-nav-container {
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  // padding: 10px 0px;
+  align-items: center;
+}
+
+
 
