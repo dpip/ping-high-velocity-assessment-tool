@@ -966,7 +966,7 @@ textarea:focus, input:focus{
   width: 100vw;
   background-color: $white !important;
   z-index: 2000;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 10px 0px;
   border-bottom: 1px solid $gray;
   .schedule_scroll {
@@ -974,6 +974,11 @@ textarea:focus, input:focus{
     justify-content: flex-end;
     width: fit-content;
     margin-right: 10px;
+  }
+  img {
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
   }
 }
 
