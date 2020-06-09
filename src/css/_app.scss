@@ -965,7 +965,7 @@ textarea:focus, input:focus{
   left: 0;
   width: 100vw;
   background-color: $white !important;
-  z-index: 2000;
+  z-index: 1025;
   justify-content: space-between;
   padding: 10px 0px;
   border-bottom: 1px solid $gray;
@@ -991,6 +991,25 @@ textarea:focus, input:focus{
   justify-content: space-between;
   // padding: 10px 0px;
   align-items: center;
+}
+
+
+main {
+    animation-name: lazy;
+    animation-duration: 0.15s;
+    animation-delay: 1.75s;
+    animation-timing-function: cubic-bezier(.17,.67,.83,.67);
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes lazy {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }
 
 

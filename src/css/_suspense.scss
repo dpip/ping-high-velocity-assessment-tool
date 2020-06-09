@@ -1,0 +1,54 @@
+.suspense {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background-color: #fff;
+    z-index: 1030;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: suspense;
+    animation-duration: 0.15s;
+    animation-delay: 1.5s;
+    animation-timing-function: cubic-bezier(.17,.67,.83,.67);
+    animation-fill-mode: forwards;
+    opacity: 1;
+    .suspense-message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        animation-name: message;
+        animation-duration: .45s;
+        animation-delay: .25;
+        animation-timing-function: cubic-bezier(.17,.67,.83,.67);
+        animation-fill-mode: forwards;
+        transform: scale(1.5);
+        transform-origin: center;
+    }
+}
+
+@keyframes suspense {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+@keyframes message {
+    0% {
+        transform: scale(1.5);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
