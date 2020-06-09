@@ -260,8 +260,9 @@ $(document).ready(function () {
     setInitialValues(initialParams, currencyParam);
 
     // activeCurrency = currencyParam;
-
+    
     $('.if-results').html('Calculating your results');
+    $('.button__schedule').css('display', 'flex');
     
     } else {
       // $('input[name="cLRegion"]').val(activeCurrency);
