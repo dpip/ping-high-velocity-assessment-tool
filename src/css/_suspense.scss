@@ -35,10 +35,14 @@
 @keyframes suspense {
     0% {
         opacity: 1;
+        display: flex;
+        z-index: 1030;
     }
     100% {
         opacity: 0;
+        display: none;
         z-index: 0;
+
     }
 }
 

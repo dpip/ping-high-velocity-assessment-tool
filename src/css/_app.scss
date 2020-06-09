@@ -726,6 +726,7 @@ footer {
   color: #2b80c3;
   font-weight: 400;
   width: fit-content;
+  position: relative;
 }
 
 .bold {
@@ -1000,23 +1001,6 @@ textarea:focus, input:focus{
 }
 
 
-// .main-wrapper {
-//     animation-name: lazy;
-//     animation-duration: 0.15s;
-//     animation-delay: 1.75s;
-//     animation-timing-function: cubic-bezier(.17,.67,.83,.67);
-//     animation-fill-mode: forwards;
-//     opacity: 0;
-// }
-
-// @keyframes lazy {
-//   0% {
-//       opacity: 0;
-//   }
-//   100% {
-//       opacity: 1;
-//   }
-// }
 
 
 
