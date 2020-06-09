@@ -6,6 +6,11 @@ import utils from "./utils.js";
 import currencies from "./currencies.js";
 import "../css/style.scss";
 
+const width  = window.innerWidth || document.documentElement.clientWidth || 
+document.body.clientWidth;
+const height = window.innerHeight|| document.documentElement.clientHeight|| 
+document.body.clientHeight;
+
 
 let autoFill = [];
 let rangeValues = [];
@@ -19,6 +24,7 @@ let agilityResults;
 let categoryTotals;
 
 
+
 $(".range-slider__range, .amount").on("input change", function() {
   const sliderID = utils.parseID($(this).attr("id"));
   // const valID = utils.parseID($(this).attr("id"));
@@ -29,12 +35,12 @@ $(".range-slider__range, .amount").on("input change", function() {
   
   rangeValues[sliderID] = updatedValue;
 
-  setCategories();
+  setCategories(activeCurrency);
   setEachAnnual(rangeValues, activeCurrency);
 
   $("#total-annual-value, .results-total-annual-value").html(
     `${currencies[activeCurrency].currencySymbol}` +
-      utils.commaSeparateNumber(calcAll(rangeValues))
+      utils.commaSeparateNumber(calcAll(rangeValues, activeCurrency))
   );
   // console.log(sliderID);
   fillBar();
@@ -52,12 +58,12 @@ $(".range-slider__range, .amount").on("input change", function() {
 
 });
 
-let setCategories = function() {
-  let totals = [calcProductivity(rangeValues, activeCurrency), calcSecurity(rangeValues, activeCurrency), calcAgility(rangeValues, activeCurrency)];
+let setCategories = function(currency) {
+  let totals = [calcProductivity(rangeValues, currency), calcSecurity(rangeValues, currency), calcAgility(rangeValues, currency)];
   console.log('set category', rangeValues)
   for(var i = 0; i < 3; i++) {
     $("#cat" + i).html(
-      `${currencies[activeCurrency].currencySymbol}` +
+      `${currencies[currency].currencySymbol}` +
         `${utils.commaSeparateNumber(totals[i])}`
     );
   }
@@ -77,9 +83,11 @@ let setEachAnnual = function(val, currency) {
 }
 
 
-let setInitialValues = function (rv) {
+let setInitialValues = function (rv, c) {
 
   //   let activeCurrency = activeCurrency;
+
+  // HERE initial values are not be set for currency or are being overwritten on page load
   let range = $(".range-slider__range"),
       value = $(".range-slider__value");
       value.each(function () {
@@ -89,15 +97,18 @@ let setInitialValues = function (rv) {
         
         rangeValues.push(Number(value));
 
-        setCategories();
-        setEachAnnual(rv, activeCurrency);
+        setCategories(c);
+        setEachAnnual(rv, c);
       
         $("#total-annual-value, .results-total-annual-value").html(
-          `${currencies[activeCurrency].currencySymbol}` +
-            utils.commaSeparateNumber(calcAll(rv))
+          `${currencies[c].currencySymbol}` +
+            utils.commaSeparateNumber(calcAll(rv, c))
         );
         
       });
+      // $('input[name="cLRegion"]').val(Number(c));
+
+      console.log('from initial values', c)
 
       fillBar();
 };
@@ -121,6 +132,8 @@ let calcProductivity = function (rv, currency) {
         `${utils.commaSeparateNumber(productivityResults[i])}`
     );
   }
+
+  console.log('currency from productivity', currency)
 
   return sumProductivity;
 };
@@ -166,22 +179,26 @@ let calcAgility = function (rv, currency) {
       `${utils.commaSeparateNumber(agilityResults[0])}`
   );
 
-  return sumAgility;
+  return Number(Math.round(sumAgility));
 };
 
-let calcAll = function (val) {
+let calcAll = function (val, currency) {
+
+  console.log('val and currency', val, currency)
 
   return (
     calcProductivity(val, activeCurrency) +
     calcSecurity(val, activeCurrency) +
     calcAgility(val, activeCurrency)
   );
+
+
 };
 
 let fillBar = function () {
   let p = (calcProductivity(rangeValues, activeCurrency) / calcAll(rangeValues, activeCurrency)) * 100;
   let r = (calcSecurity(rangeValues, activeCurrency) / calcAll(rangeValues, activeCurrency)) * 100;
-  let a = (calcAgility(rangeValues) / calcAll(rangeValues)) * 100;
+  let a = (calcAgility(rangeValues, activeCurrency) / calcAll(rangeValues, activeCurrency)) * 100;
   $("#fill-productivity").css({ width: p + "%" });
   $("#fill-security").css({ width: r + "%" });
   $("#fill-agility").css({ width: a + "%" });
@@ -192,21 +209,13 @@ let fillBar = function () {
 let initResults = function() {
 
   // set urls params with hash at root
-  window.document.location.hash = utils.encodeData(rangeValues) + '&tava=' + calcAll(rangeValues) + '&region=' + activeCurrency;
+  window.document.location.hash = utils.encodeData(rangeValues) + '&tava=' + calcAll(rangeValues, activeCurrency) + '&region=' + activeCurrency;
   // replace hash and with results query string
   window.history.pushState(null, "", window.location.href.replace("#", '?results&'));
 }
 
 $(document).ready(function () {
-  
-  // on load - first::: set initial input values and calculation values 
-  setInitialValues(rangeValues);
-  
-  // on load - initialize bootstrap tooltip listeners
-  utils.tooltip();
 
-  // on load - check for URL params
-  // if params are found
   if (window.location.href.indexOf("?results&") > -1) {
     // let catArray = [...productivityResults, ...securityResults, ...agilityResults, calcAll(rangeValues)]
     
@@ -227,15 +236,17 @@ $(document).ready(function () {
     let initialParams = utils.getUrlVars();
     let currencyParam = Number(utils.getSpecific()["region"]);
 
-    console.log('get url vars from app.js', initialParams)
+    console.log('get url vars from app.js', initialParams, currencyParam)
+    
+    // here
+    calcProductivity(initialParams, currencyParam);
+    calcSecurity(initialParams, currencyParam);
+    calcAgility(initialParams, currencyParam);
+    setEachAnnual(initialParams, currencyParam);
+    // change back here maybe
+    // calcAll(initialParams, currencyParam);
 
-    calcProductivity(initialParams, activeCurrency);
-    calcSecurity(initialParams, activeCurrency);
-    calcAgility(initialParams, activeCurrency);
-    setEachAnnual(initialParams, activeCurrency);
-    calcAll(initialParams);
-
-    console.log('testing here', initialParams);
+    console.log('testing here', initialParams, currencyParam);
 
   
     $("#total-annual-value, .results-total-annual-value").html(
@@ -244,13 +255,26 @@ $(document).ready(function () {
     );
 
     setEachAnnual(initialParams, currencyParam);
-    activeCurrency = currencies[currencyParam];
+    // activeCurrency = currencies[currencyParam];
 
-    setInitialValues(initialParams);
+    setInitialValues(initialParams, currencyParam);
+
+    // activeCurrency = currencyParam;
     
     } else {
-      console.log('NO RESULTS DETECTED');
+      // $('input[name="cLRegion"]').val(activeCurrency);
+      console.log('NO RESULTS DETECTED', activeCurrency);
     }
+
+  // on load - first::: set initial input values and calculation values 
+  setInitialValues(rangeValues, activeCurrency);
+  
+  // on load - initialize bootstrap tooltip listeners
+  utils.tooltip();
+
+  // on load - check for URL params
+  // if params are found
+  
 
     // Primary functionality for range and textarea (numbers) components
     $(".range-slider__range, .amount").on("input change", function() {
@@ -263,12 +287,12 @@ $(document).ready(function () {
       
       rangeValues[sliderID] = updatedValue;
     
-      setCategories();
+      setCategories(activeCurrency);
       setEachAnnual(rangeValues, activeCurrency);
     
       $("#total-annual-value, .results-total-annual-value").html(
         `${currencies[activeCurrency].currencySymbol}` +
-          utils.commaSeparateNumber(calcAll(rangeValues))
+          utils.commaSeparateNumber(calcAll(rangeValues, activeCurrency))
       );
       // console.log(sliderID);
       fillBar();
@@ -303,7 +327,7 @@ $(document).ready(function () {
     // set currency symbol for and commaSeperated val for total values
     $("#total-annual-value, .results-total-annual-value").html(
       `${currencies[activeCurrency].currencySymbol}` +
-        utils.commaSeparateNumber(calcAll(rangeValues))
+        utils.commaSeparateNumber(calcAll(rangeValues, activeCurrency))
     );
 
     // set new region selection values for the region ranges
@@ -355,9 +379,11 @@ $(document).ready(function () {
     $("#val6, #val7").html(Number(currencies[activeCurrency].hourlyWage));
 
     // set sum for the assessment view visual section and update the bar fill widths
-    setCategories();
+    setCategories(activeCurrency);
     // setEachAnnual(rangeValues, activeCurrency);
     fillBar();
+
+    $('input[name="cLRegion"]').val(activeCurrency);
 
   });
 
@@ -427,7 +453,7 @@ $(document).ready(function () {
       });
 
       // for each hidden form field, set corresponding range values
-      for(var i = 0; i < 8; i++) {
+      for(var i = 0; i < 9; i++) {
         $('input[name=' + `${mkfields[i]}`+ ']').val(rangeValues[i]);
         console.log('from for loop  setting fields:::', mkfields[i], rangeValues[i]);
       }
@@ -437,6 +463,7 @@ $(document).ready(function () {
       $('input[name="cLProductivityValueAdded"]').val(Number(calcProductivity(rangeValues, activeCurrency)));
       $('input[name="cLAgilityValueAdded"]').val(Number(calcAgility(rangeValues, activeCurrency)));
       $('input[name="cLTotalAnnualValueAdded"]').val(Number(calcAll(rangeValues, activeCurrency)));
+      $('input[name="cLRegion"]').val(Number(activeCurrency));
 
       // cLAverageHourlyWageOrg
       // cLTotalRevenue
@@ -533,10 +560,12 @@ $(document).ready(function () {
           
       });
 
-
+      
       $(document).scroll(function() {
+        
+        console.log('width and height HERE', width, height);
         var y = $(this).scrollTop();
-        if (y > 100) {
+        if (y > 100 && width > 576) {
           $('.nav_scroll').css('display', 'flex');
           console.log('in view')
         } else {
