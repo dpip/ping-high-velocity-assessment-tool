@@ -135,7 +135,7 @@ let calcProductivity = function (rv, currency) {
 
   console.log('currency from productivity', currency)
 
-  return sumProductivity;
+  return Number(Math.round(sumProductivity));
 };
 
 let calcSecurity = function (rv, currency) {
