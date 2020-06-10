@@ -215,6 +215,8 @@ let initResults = function() {
 }
 
 $(document).ready(function () {
+  
+  setInitialValues(rangeValues, activeCurrency);
 
   if (window.location.href.indexOf("?results&") > -1) {
     // let catArray = [...productivityResults, ...securityResults, ...agilityResults, calcAll(rangeValues)]
@@ -257,12 +259,12 @@ $(document).ready(function () {
     setEachAnnual(initialParams, currencyParam);
     // activeCurrency = currencies[currencyParam];
 
-    setInitialValues(initialParams, currencyParam);
+    // setInitialValues(initialParams, currencyParam);
 
     // activeCurrency = currencyParam;
     
-    $('.if-results').html('Calculating your results');
-    $('.button__schedule').css('display', 'flex');
+    // $('.if-results').html('Calculating your results');
+    // $('.button__schedule').css('display', 'flex');
     
     } else {
       // $('input[name="cLRegion"]').val(activeCurrency);
@@ -270,7 +272,6 @@ $(document).ready(function () {
     }
 
   // on load - first::: set initial input values and calculation values 
-  setInitialValues(rangeValues, activeCurrency);
   
   // on load - initialize bootstrap tooltip listeners
   utils.tooltip();
