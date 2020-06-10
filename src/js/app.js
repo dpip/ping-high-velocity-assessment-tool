@@ -392,18 +392,18 @@ $(document).ready(function () {
   });
 
   // limit string length in text areas to max value char length 
-  $('.amount').on('input', function() {
-      if (Number($(this).val().length) > Number($(this).attr('max').length)) {
+  // $('.amount').on('input', function() {
+  //     if (Number($(this).val().length) > Number($(this).attr('max').length)) {
         
-        let v = $(this).val();
-        let s = $('.range-slider__value').range;
-        v = Number($(this).val().slice(0, $(this).attr('max').length));
-        $('.range-slider__value').html(utils.commaSeparateNumber(v));
-        console.log("yeap", $(this).attr('max').length, v)
-      } else {
-        console.log("nerp", $(this).val().length, $(this).attr('max').length);
-      }
-  })
+  //       let v = $(this).val();
+  //       let s = $('.range-slider__value').range;
+  //       v = Number($(this).val().slice(0, $(this).attr('max').length));
+  //       $('.range-slider__value').html(utils.commaSeparateNumber(v));
+  //       console.log("yeap", $(this).attr('max').length, v)
+  //     } else {
+  //       console.log("nerp", $(this).val().length, $(this).attr('max').length);
+  //     }
+  // })
 
   // Close input amount and reveal comma seperated number
   // if a user presses the enter key
