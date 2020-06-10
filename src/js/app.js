@@ -263,8 +263,8 @@ $(document).ready(function () {
 
     // activeCurrency = currencyParam;
     
-    // $('.if-results').html('Calculating your results');
-    // $('.button__schedule').css('display', 'flex');
+    $('.if-results').html('Calculating your results');
+    $('.button__schedule').css('display', 'flex');
     
     } else {
       // $('input[name="cLRegion"]').val(activeCurrency);
