@@ -156,10 +156,10 @@ $range-label-width: 60px !default;
     background: $range-handle-color;
     cursor: pointer;
     transition: background .15s ease-in-out;
-
-    &:hover {
-      background: $range-handle-color-hover;
-    }
+    z-index: 500;
+    // &:hover {
+    //   background: $range-handle-color-hover;
+    // }
   }
 
   &:active::-webkit-slider-thumb {
