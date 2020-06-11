@@ -20,6 +20,11 @@ html, body {
 }
 
 header {
+  animation-name: headeranim;
+  animation-duration: .45s;
+  animation-delay: .15;
+  animation-timing-function: cubic-bezier(.17,.67,.83,.67);
+  animation-fill-mode: forwards;
   nav {
     min-height: 100px;
     height: 100px;
@@ -39,6 +44,15 @@ header {
       animation-fill-mode: forwards;
       // opacity: 0;
     }
+  }
+}
+
+@keyframes headeranim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -1000,6 +1014,10 @@ textarea:focus, input:focus{
   align-items: center;
 }
 
+.container__nav {
+  position: relative;
+    z-index: 1030;
+}
 
 
 
