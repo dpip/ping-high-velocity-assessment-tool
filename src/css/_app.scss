@@ -212,8 +212,9 @@ $range-label-width: 60px !default;
 .range-slider__value {
   font-weight: 400;
   cursor: pointer !important;
-  border: 1px solid $navy;
+  border: 1px solid #7094aa;
   padding: 0px 5px;
+  width: 100%;
 }
 
 svg {
@@ -764,6 +765,7 @@ footer {
   cursor: pointer;
   border: 1px solid $slate;
   padding-left: 5px;
+  width: 100%;
 }
 
 .amount-wrapper {
@@ -771,7 +773,8 @@ footer {
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
-  width: fit-content;
+  // width: fit-content;
+  width: calc(100% - 73px);
 }
 .icon-edit {
   height: 100%;
